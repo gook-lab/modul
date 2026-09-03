@@ -1,0 +1,82 @@
+[
+  {
+    "name": "tokens css",
+    "path": "packages/tokens/{styles,components,theme-malt}.css",
+    "gzip": true,
+    "limit": "8 KB"
+  },
+  {
+    "name": "ui core",
+    "path": "packages/ui/dist/index.js",
+    "import": "{ Button, Input, Tag, Card }",
+    "gzip": true,
+    "ignore": [
+      "@hookform/resolvers",
+      "cmdk",
+      "date-fns",
+      "react",
+      "react-day-picker",
+      "react-dom",
+      "react-hook-form",
+      "react/jsx-runtime",
+      "zod"
+    ],
+    "limit": "4 KB"
+  },
+  {
+    "name": "ui all (MODUL \ucf54\ub4dc\ub9cc)",
+    "path": "packages/ui/dist/index.js",
+    "gzip": true,
+    "ignore": [
+      "@hookform/resolvers",
+      "@radix-ui/react-accordion",
+      "@radix-ui/react-checkbox",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-radio-group",
+      "@radix-ui/react-slider",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-tooltip",
+      "cmdk",
+      "date-fns",
+      "react",
+      "react-day-picker",
+      "react-dom",
+      "react-hook-form",
+      "react/jsx-runtime",
+      "zod"
+    ],
+    "limit": "30 KB"
+  },
+  {
+    "name": "ui all (Radix \ud3ec\ud568)",
+    "path": "packages/ui/dist/index.js",
+    "gzip": true,
+    "ignore": [
+      "@hookform/resolvers",
+      "cmdk",
+      "date-fns",
+      "react",
+      "react-day-picker",
+      "react-dom",
+      "react-hook-form",
+      "react/jsx-runtime",
+      "zod"
+    ],
+    "limit": "74 KB"
+  },
+  {
+    "name": "motion",
+    "path": "packages/motion/dist/index.js",
+    "gzip": true,
+    "ignore": [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "@modul/ui"
+    ],
+    "limit": "3 KB",
+    "import": "{ useReducedMotion, useSpring, useCountUp, Marquee, Reveal }"
+  }
+]

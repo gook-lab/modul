@@ -1,0 +1,124 @@
+/* 전부 @layer modul — 레이어 밖의 앱 CSS(Tailwind 포함)가 명시도와 무관하게 이긴다. 소비자 className 이 "상위 룰" 이 되는 CSS 쪽 근거 */
+@layer modul {
+/* MODUL 컴포넌트 상태 클래스 — Radix data-state · 호버 · 포커스처럼 인라인 스타일로 못 쓰는 것만.
+   styles.css(토큰 + Modernist 기본 컴포넌트) 다음에 링크한다. */
+
+/* ── 공통 ── */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.btn-sm{font-size:12px;padding:5px 10px}
+.btn-lg{font-size:17px;padding:14px 22px}
+/* tone=danger — 파괴 동작. primary 는 accent-700 필드, secondary/ghost 는 accent-700 잉크 */
+.btn-primary.btn-danger{background:var(--color-accent-700);color:var(--color-bg)} .btn-primary.btn-danger:hover{background:var(--color-accent-800)}
+.btn-secondary.btn-danger,.btn-ghost.btn-danger{color:var(--color-accent-700)} .btn-secondary.btn-danger{border-color:var(--color-accent-700)}
+.btn-secondary.btn-danger:hover,.btn-ghost.btn-danger:hover{background:color-mix(in srgb,var(--color-accent-700) 10%,transparent)}
+.input-error{border-color:var(--color-accent)}
+.field-error>label{color:var(--color-accent-700)}
+dialog::backdrop{background:color-mix(in srgb,var(--color-neutral-900) 40%,transparent);animation:mdl-dim var(--motion-base) both}
+
+/* ── Tabs (Radix) ── */
+.tabs .tab:hover{color:var(--color-text)}
+.tabs .tab[data-state=active]{color:var(--color-accent-700);font-weight:600;box-shadow:inset 0 -2px 0 var(--color-accent),0 2px 0 var(--color-accent)}
+.tabs[data-variant=contained] .tab[data-state=active]{color:var(--color-text);background:var(--color-bg);box-shadow:var(--shadow-sm)}
+.tabs .tab:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px}
+
+/* ── Accordion (Radix) ── */
+.accordion-trigger:hover{color:var(--color-accent-700)}
+.accordion-content{overflow:hidden}
+.accordion-content[data-state=open]{animation:acc-down var(--motion-slow) var(--ease-decel)}
+.accordion-content[data-state=closed]{animation:acc-up var(--motion-slow) var(--ease-decel)}
+@keyframes acc-down{from{height:0}to{height:var(--radix-accordion-content-height)}}
+@keyframes acc-up{from{height:var(--radix-accordion-content-height)}to{height:0}}
+.accordion-icon{transition:transform var(--motion-slow) var(--ease-decel)}
+.accordion-trigger[data-state=open] .accordion-icon{transform:rotate(180deg)}
+.accordion-trigger[data-state=open] .accordion-plus{opacity:0}
+.accordion-plus{transition:opacity var(--motion-base)}
+
+/* ── Menu · Popover (Radix) ── */
+.menu-item[data-highlighted]{background:var(--color-neutral-200);outline:none}
+.menu-item[data-disabled]{opacity:.45;pointer-events:none}
+.menu[data-side=top],.popover[data-side=top]{animation-name:mdl-fadedown}
+@keyframes mdl-fadedown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+
+/* ── Pagination ── */
+.pagination-cell:hover:not(:disabled):not([aria-current]){background:var(--color-neutral-200)}
+.pagination-cell:disabled{opacity:.45;cursor:default}
+
+/* ── Switch · Checkbox · Radio ── */
+.switch{position:relative}
+.switch::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.checkbox:hover [role=checkbox],.radio-group label:hover [role=radio]{border-color:var(--color-accent)}
+
+/* ── Slider (Radix) ── */
+.slider-thumb:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.slider-thumb:active{cursor:grabbing}
+
+/* ── Select · Combobox ── */
+.select[aria-expanded=true],.combobox[aria-expanded=true]{border-color:var(--color-accent)}
+
+/* ── Command Palette (cmdk) ── */
+.cmd-group [cmdk-group-heading]{padding:10px 14px 4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600)}
+.cmd-item[data-selected=true]{background:var(--color-neutral-200);color:var(--color-accent-700);box-shadow:inset 2px 0 0 var(--color-accent)}
+
+/* ── Breadcrumb ── */
+.breadcrumb-link:hover{color:var(--color-accent-700);text-decoration:underline;text-underline-offset:3px}
+
+/* ── Sidebar ── */
+.sidebar button:hover:not([aria-current]){background:var(--color-neutral-200)}
+
+/* ── Card 클릭형 ── */
+.card[role=link]:hover,.card[href]:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.card{transition:box-shadow var(--motion-base),transform var(--motion-base)}
+
+/* ── Calendar (react-day-picker) — bottling .malt-calendar 규격 ── */
+.calendar{--rdp-accent-color:var(--color-accent);--rdp-day-height:34px;--rdp-day-width:34px;--rdp-day_button-height:34px;--rdp-day_button-width:34px;--rdp-day_button-border-radius:var(--radius-md);--rdp-selected-border:0;--rdp-outside-opacity:.4;font-family:var(--font-body);font-size:13px;color:var(--color-text)}
+.calendar .rdp-month_caption{display:flex;justify-content:center;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:14px;min-height:28px;align-items:center;padding-bottom:6px}
+.calendar .rdp-nav{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;height:28px}
+.calendar .rdp-months{position:relative}
+.calendar .rdp-weekday{font-size:10px;letter-spacing:.08em;color:var(--color-neutral-600);font-weight:400}
+.calendar .rdp-day_button{border:0;background:transparent;font:inherit;color:var(--color-text);cursor:pointer}
+.calendar .rdp-day_button:hover{background:var(--color-accent-100)}
+.calendar .rdp-selected .rdp-day_button{background:var(--color-accent);color:var(--color-bg)}
+.calendar .rdp-range_middle .rdp-day_button{background:var(--color-accent-100);color:var(--color-text)}
+.calendar .rdp-today:not(.rdp-selected) .rdp-day_button{color:var(--color-accent-700);font-weight:700;box-shadow:inset 0 0 0 1px var(--color-accent)}
+.calendar .rdp-disabled .rdp-day_button{color:var(--color-neutral-400);cursor:default}
+.calendar .rdp-button_previous,.calendar .rdp-button_next{border:0;background:transparent;color:var(--color-neutral-700);cursor:pointer;width:28px;height:28px}
+[data-theme=malt] .calendar{--rdp-day_button-border-radius:999px}
+
+/* ── reduced motion ── */
+@media (prefers-reduced-motion:reduce){.tabs .tab,.accordion-content,.accordion-icon,.card,.menu,.popover,dialog,[class*=mdl-]{animation-duration:1ms!important;transition-duration:1ms!important}}
+
+/* ── 모바일 셸 ── */
+.bottom-actions > .btn{min-height:44px} .bottom-actions > .btn:first-child{flex:1}
+.scroll-tabs [role=tablist]::-webkit-scrollbar{display:none}
+.appbar .btn-icon{min-height:44px;width:44px}
+
+/* ── FileDrop 모션 ── */
+@keyframes mdl-dash{to{background-position:24px 0,-24px 100%,0 -24px,100% 24px}}
+@keyframes mdl-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes mdl-pop{0%{transform:scale(.96);opacity:0}60%{transform:scale(1.01)}100%{transform:scale(1);opacity:1}}
+@keyframes mdl-check{from{stroke-dashoffset:24}to{stroke-dashoffset:0}}
+@keyframes mdl-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.filedrop{position:relative;transition:background var(--motion-base) var(--ease-decel),border-color var(--motion-base),transform var(--motion-base) var(--ease-decel),box-shadow var(--motion-base)}
+.filedrop:hover{background:var(--color-neutral-200);border-color:var(--color-neutral-500)}
+.filedrop[data-drag]{background:var(--color-accent-100);border-color:transparent;transform:scale(1.015);box-shadow:var(--shadow-md)}
+.filedrop[data-drag]::before{content:'';position:absolute;inset:-2px;pointer-events:none;background:linear-gradient(90deg,var(--color-accent) 50%,transparent 50%) top/24px 2px repeat-x,linear-gradient(90deg,var(--color-accent) 50%,transparent 50%) bottom/24px 2px repeat-x,linear-gradient(0deg,var(--color-accent) 50%,transparent 50%) left/2px 24px repeat-y,linear-gradient(0deg,var(--color-accent) 50%,transparent 50%) right/2px 24px repeat-y;animation:mdl-dash 1.2s linear infinite}
+.filedrop[data-drag] .filedrop-icon{color:var(--color-accent);animation:mdl-bounce .9s ease-in-out infinite}
+.filedrop[data-drag] .filedrop-title{color:var(--color-accent-700)}
+.filedrop[data-reject]{animation:mdl-shake .3s both;border-color:var(--color-accent-700)}
+.filedrop-item{animation:mdl-fadeup var(--motion-base) both}
+.filedrop-item[data-done]{animation:mdl-pop .35s var(--ease-decel) both}
+.filedrop-item[data-done] .filedrop-check{stroke-dasharray:24;animation:mdl-check .35s var(--ease-decel) both}
+.filedrop-item[data-failed]{border-color:var(--color-accent)}
+
+/* ── RichText — toHtml() 출력과 React 렌더 공용 ── */
+.richtext{line-height:1.6;overflow-wrap:anywhere}
+.richtext p{margin:0 0 .8em} .richtext p:last-child{margin-bottom:0}
+.richtext a{color:var(--color-accent-700);text-decoration:underline;text-underline-offset:3px}
+/* ── Chart ── */
+.chart text{font-family:var(--font-body)}
+.chart-spark{shape-rendering:geometricPrecision}
+/* ── motion v2 ── */
+@keyframes mdl-grow{from{width:0}to{width:1ch}}
+@keyframes mdl-reveal{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.marquee>*{animation:none!important}.scroll-progress{display:none}}
+}

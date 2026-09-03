@@ -1,0 +1,35 @@
+{
+  "name": "@modul/tokens",
+  "version": "0.1.0",
+  "main": "styles.css",
+  "files": [
+    "styles.css",
+    "components.css",
+    "theme-malt.css",
+    "generated.css",
+    "theme.json",
+    "tokens.ts"
+  ],
+  "scripts": {
+    "build": "tsx src/build-tokens.ts"
+  },
+  "devDependencies": {
+    "@types/culori": "^4.0.1",
+    "culori": "^4.0.1",
+    "tsx": "^4.16.0",
+    "zod": "^4.5.4"
+  },
+  "exports": {
+    "./styles.css": "./styles.css",
+    "./components.css": "./components.css",
+    "./theme-malt.css": "./theme-malt.css",
+    "./generated.css": "./generated.css",
+    ".": "./tokens.ts"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gook-lab/modul.git",
+    "directory": "packages/tokens"
+  }
+}

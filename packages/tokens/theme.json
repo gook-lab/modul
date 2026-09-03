@@ -1,0 +1,63 @@
+{
+  "name": "Modernist",
+  "themes": {
+    "light": {
+      "bg": "#f3f2f2",
+      "surface": "#eae9e9",
+      "text": "#201e1d",
+      "accent": "#ec3013",
+      "dividerAlpha": 0.4
+    },
+    "dark": {
+      "bg": "#161413",
+      "surface": "#201e1d",
+      "text": "#f3f2f2",
+      "accent": "#ff563c",
+      "dividerAlpha": 0.32
+    },
+    "malt": {
+      "bg": "#F7F3EA",
+      "surface": "#FFFDF8",
+      "text": "#2B2622",
+      "accent": "#B5731F",
+      "divider": "#E4DDD1",
+      "fonts": {
+        "heading": "'Instrument Serif', ui-serif, Georgia, serif",
+        "headingWeight": 400,
+        "body": "'IBM Plex Sans KR', system-ui, sans-serif",
+        "mono": "'IBM Plex Mono', ui-monospace, monospace"
+      },
+      "radius": 2,
+      "extra": {
+        "malt-clay": "#A33B2E",
+        "malt-stock-in": "#2F7D52",
+        "malt-stock-low": "#D8A33F"
+      }
+    }
+  },
+  "fonts": {
+    "heading": "\"Archivo\", system-ui, sans-serif",
+    "headingWeight": 800,
+    "body": "\"Archivo\", system-ui, sans-serif"
+  },
+  "radius": 0,
+  "space": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32
+  ],
+  "motion": {
+    "fast": 120,
+    "base": 200,
+    "slow": 320,
+    "page": 720
+  },
+  "easing": {
+    "out": "cubic-bezier(0,0,.2,1)",
+    "decel": "cubic-bezier(.2,.8,.2,1)",
+    "inout": "cubic-bezier(.76,0,.24,1)"
+  }
+}

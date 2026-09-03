@@ -1,0 +1,10 @@
+node_modules/
+dist/
+storybook-static/
+*.tsbuildinfo
+.DS_Store
+*.log
+
+# 생성물 — theme.json 이 SSOT 이고 pnpm --filter @modul/tokens build 로 만듭니다.
+packages/tokens/generated.css
+packages/tokens/tokens.ts

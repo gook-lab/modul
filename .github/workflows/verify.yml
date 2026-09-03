@@ -1,0 +1,20 @@
+name: verify
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @modul/tokens build
+      - run: pnpm gen:stories && git diff --exit-code -- 'packages/ui/src/**/*.stories.tsx'
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm --filter @modul/ui test
+      - run: pnpm -r build && npx size-limit
+      - run: pnpm --filter @modul/storybook build
+      - run: pnpm --filter @modul/storybook test:a11y   # storybook test-runner + axe (color-contrast 포함)

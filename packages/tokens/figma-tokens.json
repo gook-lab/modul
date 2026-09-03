@@ -1,0 +1,188 @@
+{
+  "global": {
+    "space": {
+      "1": {
+        "value": "4px",
+        "type": "spacing"
+      },
+      "2": {
+        "value": "8px",
+        "type": "spacing"
+      },
+      "3": {
+        "value": "12px",
+        "type": "spacing"
+      },
+      "4": {
+        "value": "16px",
+        "type": "spacing"
+      },
+      "6": {
+        "value": "24px",
+        "type": "spacing"
+      },
+      "8": {
+        "value": "32px",
+        "type": "spacing"
+      }
+    },
+    "radius": {
+      "md": {
+        "value": "0px",
+        "type": "borderRadius"
+      }
+    },
+    "motion": {
+      "fast": {
+        "value": "120ms",
+        "type": "other"
+      },
+      "base": {
+        "value": "200ms",
+        "type": "other"
+      },
+      "slow": {
+        "value": "320ms",
+        "type": "other"
+      },
+      "page": {
+        "value": "720ms",
+        "type": "other"
+      }
+    },
+    "font": {
+      "heading": {
+        "value": "Archivo",
+        "type": "fontFamilies"
+      },
+      "body": {
+        "value": "Archivo",
+        "type": "fontFamilies"
+      },
+      "headingWeight": {
+        "value": "800",
+        "type": "fontWeights"
+      }
+    }
+  },
+  "light": {
+    "color": {
+      "bg": {
+        "value": "#f3f2f2",
+        "type": "color"
+      },
+      "surface": {
+        "value": "#eae9e9",
+        "type": "color"
+      },
+      "text": {
+        "value": "#201e1d",
+        "type": "color"
+      },
+      "accent": {
+        "value": "#ec3013",
+        "type": "color"
+      }
+    }
+  },
+  "dark": {
+    "color": {
+      "bg": {
+        "value": "#161413",
+        "type": "color"
+      },
+      "surface": {
+        "value": "#201e1d",
+        "type": "color"
+      },
+      "text": {
+        "value": "#f3f2f2",
+        "type": "color"
+      },
+      "accent": {
+        "value": "#ff563c",
+        "type": "color"
+      }
+    }
+  },
+  "malt": {
+    "color": {
+      "bg": {
+        "value": "#F7F3EA",
+        "type": "color"
+      },
+      "surface": {
+        "value": "#FFFDF8",
+        "type": "color"
+      },
+      "text": {
+        "value": "#2B2622",
+        "type": "color"
+      },
+      "accent": {
+        "value": "#B5731F",
+        "type": "color"
+      },
+      "divider": {
+        "value": "#E4DDD1",
+        "type": "color"
+      },
+      "malt-clay": {
+        "value": "#A33B2E",
+        "type": "color"
+      },
+      "malt-stock-in": {
+        "value": "#2F7D52",
+        "type": "color"
+      },
+      "malt-stock-low": {
+        "value": "#D8A33F",
+        "type": "color"
+      }
+    },
+    "font": {
+      "heading": {
+        "value": "Instrument Serif",
+        "type": "fontFamilies"
+      },
+      "body": {
+        "value": "IBM Plex Sans KR",
+        "type": "fontFamilies"
+      }
+    }
+  },
+  "$themes": [
+    {
+      "id": "light",
+      "name": "light",
+      "selectedTokenSets": {
+        "global": "enabled",
+        "light": "enabled"
+      }
+    },
+    {
+      "id": "dark",
+      "name": "dark",
+      "selectedTokenSets": {
+        "global": "enabled",
+        "dark": "enabled"
+      }
+    },
+    {
+      "id": "malt",
+      "name": "malt",
+      "selectedTokenSets": {
+        "global": "enabled",
+        "malt": "enabled"
+      }
+    }
+  ],
+  "$metadata": {
+    "tokenSetOrder": [
+      "global",
+      "light",
+      "dark",
+      "malt"
+    ]
+  }
+}
