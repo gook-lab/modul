@@ -10,11 +10,14 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: pnpm }
       - run: pnpm install --frozen-lockfile
+      # test:a11y 는 storybook test-runner(playwright)로 실제 브라우저를 띄웁니다.
+      - run: pnpm --filter @modul/storybook exec playwright install --with-deps chromium
       - run: pnpm --filter @modul/tokens build
       - run: pnpm gen:stories && git diff --exit-code -- 'packages/ui/src/**/*.stories.tsx'
       - run: pnpm lint
       - run: pnpm typecheck
-      - run: pnpm --filter @modul/ui test
+      # -r 이어야 @modul/motion 의 presets.test.ts 까지 돕니다.
+      - run: pnpm -r test
       - run: pnpm -r build && npx size-limit
       - run: pnpm --filter @modul/storybook build
       - run: pnpm --filter @modul/storybook test:a11y   # storybook test-runner + axe (color-contrast 포함)
