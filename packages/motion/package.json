@@ -15,7 +15,9 @@
   "scripts": {
     "test": "vitest run",
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
+    "prepack": "node ../../scripts/assert-pnpm-publish.mjs"
   },
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -50,5 +52,8 @@
     "type": "git",
     "url": "git+https://github.com/gook-lab/modul.git",
     "directory": "packages/motion"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

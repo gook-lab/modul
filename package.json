@@ -12,7 +12,7 @@
     "lint": "eslint packages apps",
     "verify": "pnpm lint && pnpm typecheck && pnpm -r test",
     "changeset": "changeset",
-    "release": "changeset version && pnpm -r build",
+    "release": "changeset version && pnpm install --lockfile-only && pnpm -r build && changeset publish",
     "gen:stories": "tsx scripts/gen-stories.ts",
     "codemod": "jscodeshift -t scripts/codemods/$0 --extensions=tsx,ts --parser=tsx",
     "size": "size-limit"

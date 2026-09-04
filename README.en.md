@@ -104,14 +104,36 @@ pnpm --filter @modul/storybook dev         # localhost:6006, three-theme toggle
 ```bash
 pnpm typecheck                             # 0 errors
 pnpm lint                                  # 0 errors
-pnpm -r test                               # 57 passed
+pnpm -r test                               # 134 passed (ui 121 · tokens 9 · motion 4)
 pnpm -r build                              # 4 packages
 npx size-limit                             # within budget
 pnpm --filter @modul/storybook build
 pnpm --filter @modul/storybook test:a11y   # 92 stories, 0 axe violations
 ```
 
-Last measured 2026-09-04, all green. `pnpm gen:stories` generates stories from the RADIO docs and prop types, skipping the 16 written by hand. CI runs the same sequence in [`.github/workflows/verify.yml`](./.github/workflows/verify.yml).
+```bash
+pnpm --filter @modul/storybook test:visual # 92 screenshot comparisons (baselines are per-OS)
+```
+
+Last measured 2026-09-04, all green. Visual regression is not a required CI gate — font rasterization differs per OS, so macOS baselines cannot be reused on a Linux runner; it is a pre-release local check. The evidence that axe alone is not enough: changing `--space-4` from 16px to 40px still passes a11y 92/92, and only the screenshot snapshot catches it. Visual regression is not a required CI gate — font rasterization differs per OS, so macOS baselines cannot be reused on a Linux runner; it is a pre-release local check. The evidence that axe alone is not enough: changing `--space-4` from 16px to 40px still passes a11y 92/92, and only the screenshot snapshot catches it. `pnpm gen:stories` generates stories from the RADIO docs and prop types, skipping the 16 written by hand. CI runs the same sequence in [`.github/workflows/verify.yml`](./.github/workflows/verify.yml).
+
+## Publishing — pnpm only
+
+```bash
+pnpm changeset      # change summary and version bump
+pnpm release        # version, build, publish
+```
+
+`npm publish` is blocked by a `prepack` guard. Only pnpm rewrites the `workspace:*` in peerDependencies into a real version; published through npm, consumers fail to install with `EUNSUPPORTEDPROTOCOL` (measured). Publishing without a build is blocked by each package's `prepublishOnly` — without it, deleting `dist` and packing shipped a 1-file, 1.8 KB package.
+
+## Publishing — pnpm only
+
+```bash
+pnpm changeset      # change summary and version bump
+pnpm release        # version, build, publish
+```
+
+`npm publish` is blocked by a `prepack` guard. Only pnpm rewrites the `workspace:*` in peerDependencies into a real version; published through npm, consumers fail to install with `EUNSUPPORTEDPROTOCOL` (measured). Publishing without a build is blocked by each package's `prepublishOnly` — without it, deleting `dist` and packing shipped a 1-file, 1.8 KB package.
 
 ## Status
 

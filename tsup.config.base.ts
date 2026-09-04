@@ -36,7 +36,7 @@ export const pkg = (entry: string | string[], overrides: Options = {}) =>
     entry: Array.isArray(entry) ? entry : [entry],
     format: ['esm', 'cjs'],
     dts: true,
-    sourcemap: true,
+    sourcemap: false, // 배포 tarball 에서 소스맵 제외 — @modul/ui 1.1MB 중 631KB 가 .map 이었습니다
     clean: true,
     treeshake: true,
     target: 'es2022',

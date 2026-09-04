@@ -10,12 +10,16 @@
     "tokens.ts"
   ],
   "scripts": {
-    "build": "tsx src/build-tokens.ts"
+    "build": "tsx src/build-tokens.ts",
+    "prepublishOnly": "pnpm build",
+    "prepack": "node ../../scripts/assert-pnpm-publish.mjs",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@types/culori": "^4.0.1",
     "tsx": "^4.16.0",
-    "zod": "^4.5.4"
+    "zod": "^4.5.4",
+    "vitest": "^2.0.0"
   },
   "exports": {
     "./styles.css": "./styles.css",
@@ -28,5 +32,8 @@
     "type": "git",
     "url": "git+https://github.com/gook-lab/modul.git",
     "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

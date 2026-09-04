@@ -29,7 +29,7 @@ export default defineConfig({
   entry: entries(),
   format: ['esm', 'cjs'],
   dts: true,
-  sourcemap: true,
+  sourcemap: false, // 배포 tarball 에서 소스맵 제외 — @modul/ui 1.1MB 중 631KB 가 .map 이었습니다
   clean: true,
   splitting: true,
   treeshake: true,

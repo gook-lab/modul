@@ -6,7 +6,8 @@
     "dev": "storybook dev -p 6006 --disable-telemetry",
     "build": "storybook build --disable-telemetry",
     "serve": "http-server storybook-static -p 6008 --silent",
-    "test:a11y": "concurrently -k -s first -n SB,A11Y \"pnpm serve\" \"wait-on -t 60000 tcp:127.0.0.1:6008 && test-storybook --url http://127.0.0.1:6008 --maxWorkers=2\""
+    "test:a11y": "concurrently -k -s first -n SB,A11Y \"pnpm serve\" \"wait-on -t 60000 tcp:127.0.0.1:6008 && test-storybook --url http://127.0.0.1:6008 --maxWorkers=2\"",
+    "test:visual": "concurrently -k -s first -n SB,A11Y \"pnpm serve\" \"wait-on -t 60000 tcp:127.0.0.1:6008 && cross-env VISUAL=1 test-storybook --url http://127.0.0.1:6008 --maxWorkers=2\""
   },
   "devDependencies": {
     "@storybook/addon-a11y": "8.6.18",
@@ -15,9 +16,12 @@
     "@storybook/react": "8.6.18",
     "@storybook/react-vite": "8.6.18",
     "@storybook/test-runner": "^0.22.0",
+    "@types/jest-image-snapshot": "^6.4.1",
     "axe-playwright": "^2.0.3",
     "concurrently": "^9.1.2",
+    "cross-env": "^10.1.0",
     "http-server": "^14.1.1",
+    "jest-image-snapshot": "^6.5.2",
     "playwright": "1.62.1",
     "storybook": "8.6.18",
     "vite": "^5.4.0",

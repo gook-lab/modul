@@ -18,7 +18,9 @@ export function RouteTransition({ routeKey, duration = 720, children, style, ...
     const swap = setTimeout(() => setShown({ key: routeKey, node: latest.current }), duration * 0.47);
     const done = setTimeout(() => setWiping(false), duration + 40);
     return () => { clearTimeout(swap); clearTimeout(done); };
-    // routeKey 만 의존한다 — children 이 바뀔 때마다 전환을 다시 시작하면 안 됩니다(최신 children 은 latest ref 로 읽음).
+    // routeKey 만 의존합니다 — children 이 바뀔 때마다 전환을 다시 시작하면 화면이 계속 덮입니다.
+    // 최신 children 은 latest ref 로 읽으므로 값이 낡지도 않습니다.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeKey]);
   return (
     <div style={{ position: 'relative', overflow: 'hidden', ...style }} {...rest}>

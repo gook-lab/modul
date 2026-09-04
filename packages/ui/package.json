@@ -28,7 +28,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
+    "prepack": "node ../../scripts/assert-pnpm-publish.mjs"
   },
   "devDependencies": {
     "@hookform/resolvers": "^5.9.1",
@@ -66,5 +68,8 @@
     "type": "git",
     "url": "git+https://github.com/gook-lab/modul.git",
     "directory": "packages/ui"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

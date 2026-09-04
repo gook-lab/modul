@@ -9,6 +9,6 @@
       "@modul/tokens"
     ]
   ],
-  "access": "restricted",
+  "access": "public",
   "baseBranch": "main"
 }

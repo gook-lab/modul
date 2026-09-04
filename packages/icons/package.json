@@ -29,7 +29,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
+    "prepack": "node ../../scripts/assert-pnpm-publish.mjs"
   },
   "devDependencies": {
     "tsup": "^8.3.0"
@@ -39,5 +41,8 @@
     "type": "git",
     "url": "git+https://github.com/gook-lab/modul.git",
     "directory": "packages/icons"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

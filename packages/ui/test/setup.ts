@@ -29,3 +29,12 @@ if (!Blob.prototype.arrayBuffer) {
 if (!globalThis.crypto?.subtle) {
   Object.defineProperty(globalThis, 'crypto', { value: webcrypto, configurable: true });
 }
+
+// Radix Slider 가 요구하지만 jsdom 에는 없습니다.
+if (!('ResizeObserver' in globalThis)) {
+  (globalThis as { ResizeObserver?: unknown }).ResizeObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+}

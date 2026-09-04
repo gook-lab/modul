@@ -104,14 +104,37 @@ pnpm --filter @modul/storybook dev         # localhost:6006, 3 테마 토글
 ```bash
 pnpm typecheck                             # 0 errors
 pnpm lint                                  # 0 errors
-pnpm -r test                               # 57 passed
+pnpm -r test                               # 134 passed (ui 121 · tokens 9 · motion 4)
 pnpm -r build                              # 4 패키지
 npx size-limit                             # 예산 내
 pnpm --filter @modul/storybook build
 pnpm --filter @modul/storybook test:a11y   # 92 stories, axe 위반 0
+pnpm --filter @modul/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
 ```
 
-마지막 실측은 2026-09-04 이고 전 항목 통과입니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 16개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.
+```bash
+pnpm --filter @modul/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
+```
+
+마지막 실측은 2026-09-04 이고 전 항목 통과입니다. 시각 회귀는 CI 필수 게이트에 넣지 않았습니다 — 폰트 래스터라이즈가 OS 마다 달라 macOS 기준선을 리눅스 러너에 그대로 쓸 수 없어서, 배포 전 로컬 확인용입니다. axe 만으로 부족하다는 근거는 실측에 있습니다: `--space-4` 를 16px → 40px 로 바꿔도 a11y 92/92 는 그대로 통과하고 시각 스냅샷만 잡았습니다. 시각 회귀는 CI 필수 게이트에 넣지 않았습니다 — 폰트 래스터라이즈가 OS 마다 달라 macOS 기준선을 리눅스 러너에 그대로 쓸 수 없어서, 배포 전 로컬 확인용입니다. axe 만으로는 부족하다는 근거는 실측에 있습니다: `--space-4` 를 16px → 40px 로 바꿔도 a11y 92/92 는 그대로 통과하고 시각 스냅샷만 잡았습니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 16개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.
+
+## 배포 — pnpm 으로만
+
+```bash
+pnpm changeset      # 변경 요약과 버전 폭
+pnpm release        # 버전 + 빌드 + publish
+```
+
+`npm publish` 는 쓸 수 없고 `prepack` 가드가 막습니다. peerDependencies 의 `workspace:*` 를 실제 버전으로 치환하는 것이 pnpm 뿐이라, npm 으로 내보내면 소비자가 `EUNSUPPORTEDPROTOCOL` 로 설치에 실패합니다(실측). 빌드를 잊고 배포하는 것은 각 패키지의 `prepublishOnly` 가 막습니다 — 없을 때는 `dist` 를 지우고 pack 하면 1파일 1.8 KB 가 나갔습니다.
+
+## 배포 — pnpm 으로만
+
+```bash
+pnpm changeset      # 변경 요약과 버전 폭
+pnpm release        # 버전 + 빌드 + publish
+```
+
+`npm publish` 는 쓸 수 없고 `prepack` 가드가 막습니다. peerDependencies 의 `workspace:*` 를 실제 버전으로 치환하는 것이 pnpm 뿐이라, npm 으로 내보내면 소비자가 `EUNSUPPORTEDPROTOCOL` 로 설치에 실패합니다(실측). 빌드를 잊고 배포하는 것은 각 패키지의 `prepublishOnly` 가 막습니다 — 없을 때는 `dist` 를 지우고 pack 하면 1파일 1.8 KB 가 나갔습니다.
 
 ## 상태
 

@@ -29,7 +29,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
+    "prepack": "node ../../scripts/assert-pnpm-publish.mjs"
   },
   "devDependencies": {
     "@radix-ui/react-tabs": "^1.1.21",
@@ -41,5 +43,8 @@
     "type": "git",
     "url": "git+https://github.com/gook-lab/modul.git",
     "directory": "packages/malt-ui"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -79,5 +79,8 @@ function Stat({ value, suffix, label, decimals = 0 }: { value: number; suffix?: 
   return <div style={{ borderTop: '2px solid var(--color-divider)', paddingTop: 16 }}><div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1, color: 'var(--color-accent)', fontVariantNumeric: 'tabular-nums' }}>{n.toLocaleString('ko-KR', { minimumFractionDigits: decimals })}<span style={{ fontSize: '.5em', color: 'var(--color-text)' }}>{suffix}</span></div><div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '.08em', marginTop: 14 }}>{label}</div></div>;
 }
 export const CountUp: StoryObj = {
+  // rAF 로 숫자를 세는 동안 값이 계속 바뀌어 스크린샷이 실행마다 다릅니다(실측 2.16% 차이).
+  // 애니메이션을 CSS 로 끄는 것으로는 막을 수 없어 시각 스냅샷에서 뺍니다.
+  parameters: { visual: { skip: true } },
   render: () => <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 48 }}><Stat value={1280} suffix="+" label="완료한 화면" /><Stat value={42} label="프로젝트" /><Stat value={98.6} suffix="%" label="토큰 커버리지" decimals={1} /></div>,
 };
