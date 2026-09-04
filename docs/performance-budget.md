@@ -42,8 +42,8 @@
 | --- | --- | --- | --- |
 | tokens css | 8 KB | 6.70 KB | 통과 |
 | ui core (Button+Input+Tag+Card) | 4 KB | 1.83 KB | 통과 |
-| ui all — MODUL 코드만 | 30 KB | 26.63 KB | 통과 |
-| ui all — Radix 포함 | 74 KB | 70.74 KB | 통과 |
+| ui all — MODUL 코드만 | 30 KB | 27.40 KB | 통과 |
+| ui all — Radix 포함 | 74 KB | 71.42 KB | 통과 |
 | motion (훅 + Marquee/Reveal) | 3 KB | 1.54 KB | 통과 |
 
 ### 배럴 번들 — 엔트리 분할로 교체

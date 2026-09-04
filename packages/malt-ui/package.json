@@ -5,9 +5,9 @@
   "main": "./dist/index.cjs",
   "description": "bottling ui-web 프리미티브의 headless 개정안 — 기존 계약 유지 + ...rest",
   "peerDependencies": {
-    "react": ">=18",
+    "@modul/tokens": "workspace:*",
     "@modul/ui": "workspace:*",
-    "@modul/tokens": "workspace:*"
+    "react": ">=18"
   },
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -32,6 +32,7 @@
     "dev": "tsup --watch"
   },
   "devDependencies": {
+    "@storybook/react": "^8.6.18",
     "tsup": "^8.3.0"
   },
   "license": "MIT",

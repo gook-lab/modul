@@ -43,6 +43,8 @@ for (const [name, block] of Object.entries(theme.themes)) {
     expected['font-body'] = block.fonts.body;
     if (block.fonts.mono) expected['font-mono'] = block.fonts.mono;
   }
+  // extra 는 테마 전용 변수(키가 곧 --변수명)라 여기서 같이 대조합니다.
+  for (const [k, val] of Object.entries(block.extra ?? {})) expected[k] = val;
   problems.push(...compare(`${target.file} [${name}]`, expected, target.vars));
 }
 

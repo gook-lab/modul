@@ -41,5 +41,11 @@
    - Modal 스토리는 트리거 버튼만 렌더해서 axe 가 모달 내용을 한 번도 검사하지 않고 있었다. `Open` 스토리를 추가해 실제로 검사한다.
    - 진입 애니메이션(`mdl-fadeup`) 도중에 axe 가 샘플링하면 opacity 가 0 에 가까워 그 안의 텍스트가 전부 color-contrast 위반으로 잡힌다. 타이밍 문제라 로컬은 통과하고 CI 만 실패한다. `test-runner.ts` 의 `postVisit` 에서 애니메이션을 끄고 잰다 — 끝나기를 기다리는 방법은 Marquee · Skeleton 처럼 무한 반복하는 것 때문에 쓸 수 없다.
 
+9. **Malt 도메인 프리미티브 — 첫 검수 (2026-09-04).** `@malt/ui-web-next` 는 스토리가 없어 axe 가 한 번도 본 적이 없었다. 스토리를 붙이자 넷이 나왔다.
+   - `.malt-index-row__no`(12px) · `.malt-numberfield__suffix`(10.5px) 가 `--color-neutral-600`(2.75 · 2.99) — 규칙 1 그대로라 `--color-neutral-700`(5.15 · 5.61)로 올렸다.
+   - `.malt-stock--low` 가 `--malt-stock-low`(#D8A33F, 2.05). 이 토큰은 배지 텍스트에만 쓰이므로 `#7A5610`(5.99)으로 어둡게 했다. `theme.json` 과 `theme-malt.css` 를 같이 고쳤고, 이참에 빌드 검증기가 `extra` 토큰까지 대조하도록 넓혔다 — base 색만 보고 있어 이 불일치를 못 잡았다.
+   - `StepBar` 의 `role=progressbar` 에 접근성 이름이 없어 `aria-label` 과 `aria-valuetext` 를 붙였다.
+   - `IndexRow` 의 `opacity` 로 행을 흐리게 한 예시가 그 안의 텍스트를 전부 4.5:1 아래로 떨어뜨렸다. 이 행은 전부 텍스트라 행 단위 투명도가 곧 대비 저하다 — 실측으로 neutral-700 은 94%, text 는 65%, clay 는 86% 아래에서 깨진다. 예시를 배지로 바꾸고 `docs/radio/IndexRow.md` 에 제약을 적었다.
+
 ## 검수 방법
 sRGB 상대 휘도(WCAG 2.1 §1.4.3) 계산. 이후엔 스토리북 a11y 애드온(axe) color-contrast 규칙이 CI 에서 검사.

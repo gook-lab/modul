@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { cx } from '../utils/cx';
 import { Skeleton } from '@modul/motion';
 import type { NativeProps } from '../utils/polymorphic';
+import { useLabels } from '../utils/labels';
 
 /** bottling @malt/core 의 ViewState 와 같은 형태 */
 export type ViewState<T> = { kind: 'loading' } | { kind: 'empty' } | { kind: 'error'; message: string; retry: () => void } | { kind: 'offline'; cached?: T } | { kind: 'ready'; data: T };
@@ -12,11 +13,12 @@ const MARK: Record<string, string> = { empty: 'var(--color-accent)', error: 'var
 
 /** ViewState 5종을 한 컴포넌트로. 빈 상태에 부정형 문구 금지 — 다음 행동 버튼을 준다. 오류는 인라인 재시도. */
 export function EmptyState<T>({ view, children, empty, error, offline, skeleton, size = 'md', className, ...rest }: EmptyStateProps<T>) {
+  const t = useLabels();
   if (view.kind === 'ready') return <>{children(view.data)}</>;
   if (view.kind === 'loading') return <div className={cx('view-loading', className)} aria-busy {...rest}>{skeleton ?? <Skeleton.Card lines={3} />}</div>;
-  const slot: Slot = view.kind === 'empty' ? { title: '아직 항목이 없습니다', ...empty }
-    : view.kind === 'error' ? { title: '불러오지 못했습니다', body: view.message, action: { label: '다시 시도', onClick: view.retry }, ...error }
-    : { title: '오프라인입니다', body: '마지막으로 받은 목록을 보여 드립니다.', ...offline };
+  const slot: Slot = view.kind === 'empty' ? { title: t('emptystate.empty'), ...empty }
+    : view.kind === 'error' ? { title: t('emptystate.error'), body: view.message, action: { label: t('common.retry'), onClick: view.retry }, ...error }
+    : { title: t('emptystate.offline'), body: t('emptystate.offlineBody'), ...offline };
   return (
     <div role={view.kind === 'error' ? 'alert' : undefined} className={cx('view-' + view.kind, className)} style={{ display: 'grid', gap: 12, justifyItems: 'start', padding: size === 'sm' ? 20 : 32, animation: 'mdl-fadeup var(--motion-slow) var(--ease-decel) both' }} {...rest}>
       <span aria-hidden style={{ width: 12, height: 12, background: MARK[view.kind] }} />

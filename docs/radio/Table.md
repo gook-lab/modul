@@ -16,7 +16,8 @@
 - type Column<T> = { key; header; sortable?; align?; width?; render? } · type Sort = { key; dir: 'asc'|'desc' }
 
 ## I — Interface
-- sort/onSortChange · selected/onSelectedChange(Set) · onRowClick · rowKey · stickyHeader
+- sort/onSortChange · selected/onSelectedChange(Set) · onRowClick · rowKey(컬럼 키 문자열 또는 함수) · stickyHeader · virtual({ rowHeight, height, overscan })
+- 인라인 편집은 컬럼에 editable + onCommit — Table 이 render 대신 EditableCell 을 그리고, 편집 셀 클릭은 onRowClick 으로 새지 않습니다
 - GET /items?sort=date:desc&cursor= — 정렬은 서버
 
 ## O — Optimization & Observability

@@ -22,7 +22,7 @@ import '@modul/tokens/styles.css';
 | 패키지 | 무엇 | 규모 |
 | --- | --- | --- |
 | `@modul/tokens` | `theme.json` 에서 생성되는 CSS 변수. light · dark · malt 3 테마 | css 6.7 KB (gzip) |
-| `@modul/ui` | 헤드리스 컴포넌트. export 51개 | 26.6 KB (gzip, 전부) |
+| `@modul/ui` | 헤드리스 컴포넌트. export 51개 | 27.4 KB (gzip, 전부) |
 | `@modul/motion` | 모션 훅·컴포넌트 19종 + 프리셋 8종 | 1.54 KB (gzip, 훅 + Marquee/Reveal) |
 | `@modul/icons` | Lucide 재export + 크기 규격 | — |
 | `@malt/ui-web-next` | 위스키 앱 전용 프리미티브 7종. 코어로 승격하지 않습니다 | — |
@@ -59,18 +59,18 @@ cx('btn', 'btn-primary', 'btn-sm', '!btn-ghost')  → 'btn btn-sm btn-ghost'
 | 측정 | 예산 | 실측 |
 | --- | --- | --- |
 | `{ Button, Input, Tag, Card }` | 4 KB | 1.83 KB |
-| `@modul/ui` 전부 (MODUL 코드) | 30 KB | 26.6 KB |
-| `@modul/ui` 전부 (Radix 포함) | 74 KB | 70.72 KB |
+| `@modul/ui` 전부 (MODUL 코드) | 30 KB | 27.4 KB |
+| `@modul/ui` 전부 (Radix 포함) | 74 KB | 71.42 KB |
 
 배럴 하나로 번들하면 `dist/index.js` 최상단에 `import * as RTabs from '@radix-ui/react-tabs'` 같은 문장이 전부 모입니다. Radix · cmdk · react-day-picker 는 `sideEffects: false` 를 선언하지 않아 번들러가 이 문장을 지우지 못하고, 그러면 `Button` 만 써도 47 KB 가 딸려옵니다. 그래서 `tsup` 엔트리를 컴포넌트별로 나눠 배럴이 재수출만 하게 했습니다.
 
-## 문서 — RADIO 43종이 컴포넌트마다 붙습니다
+## 문서 — RADIO 44종이 컴포넌트마다 붙습니다
 
 컴포넌트를 고치기 전에 그 컴포넌트의 RADIO 를 읽습니다. R(요구사항·수치) A(구조·상태 분류) D(데이터 모델) I(인터페이스) O(성능·관측) 순서입니다.
 
 | 문서 | 무엇 |
 | --- | --- |
-| [`docs/radio/`](./docs/radio/) | 컴포넌트별 설계 문서 43종. 새 컴포넌트는 [`TEMPLATE.md`](./docs/radio/TEMPLATE.md) 로 먼저 씁니다 |
+| [`docs/radio/`](./docs/radio/) | 컴포넌트별 설계 문서 44종. 새 컴포넌트는 [`TEMPLATE.md`](./docs/radio/TEMPLATE.md) 로 먼저 씁니다 |
 | [`docs/cx-audit.md`](./docs/cx-audit.md) | `!` 규칙과 예외 |
 | [`docs/contrast-audit.md`](./docs/contrast-audit.md) | 색 사용 제약(실측 대비값) |
 | [`docs/performance-budget.md`](./docs/performance-budget.md) | 번들 · DOM 노드 · INP 예산 |
@@ -91,11 +91,11 @@ pnpm --filter @modul/storybook dev         # localhost:6006, 3 테마 토글
 ```bash
 pnpm typecheck                             # 0 errors
 pnpm lint                                  # 0 errors
-pnpm -r test                               # 42 passed
+pnpm -r test                               # 57 passed
 pnpm -r build                              # 4 패키지
 npx size-limit                             # 예산 내
 pnpm --filter @modul/storybook build
-pnpm --filter @modul/storybook test:a11y   # axe 위반 0
+pnpm --filter @modul/storybook test:a11y   # 90 stories, axe 위반 0
 ```
 
 마지막 실측은 2026-09-04 이고 전 항목 통과입니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 13개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.

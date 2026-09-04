@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { cx, cssVar } from '../utils/cx';
 import type { NativeProps } from '../utils/polymorphic';
+import { useLabels } from '../utils/labels';
 
 const SIZE = { xs: 24, sm: 32, md: 40, lg: 56 };
 export type AvatarProps = NativeProps<'span', { name: string; src?: string | null; size?: keyof typeof SIZE | number; /** 기본 circle(rounded-full). square 는 로고·팀 마크용 */ shape?: 'square' | 'circle'; status?: 'online' | 'busy' }>;
@@ -19,11 +20,12 @@ Avatar.displayName = 'Avatar';
 
 export type AvatarGroupProps = NativeProps<'div', { people: { name: string; src?: string | null }[]; max?: number; size?: AvatarProps['size']; shape?: AvatarProps['shape'] }>;
 export function AvatarGroup({ people, max = 4, size = 'sm', shape = 'circle', className, ...rest }: AvatarGroupProps) {
+  const t = useLabels();
   const shown = people.slice(0, max), rest_ = people.length - shown.length; const px = typeof size === 'number' ? size : SIZE[size];
   return (
-    <div role="group" aria-label={`${people.length}명`} className={cx('avatar-group', className)} style={{ display: 'flex', alignItems: 'center' }} {...rest}>
+    <div role="group" aria-label={t('avatar.group', { n: people.length })} className={cx('avatar-group', className)} style={{ display: 'flex', alignItems: 'center' }} {...rest}>
       {shown.map((p, k) => <Avatar key={p.name + k} {...p} size={size} shape={shape} style={{ border: '2px solid var(--color-bg)', marginLeft: k ? -px * .25 : 0 }} />)}
-      {rest_ > 0 && <span aria-label={`외 ${rest_}명`} style={{ width: px, height: px, display: 'grid', placeItems: 'center', background: 'var(--color-text)', color: 'var(--color-bg)', fontSize: px * .36, fontWeight: 600, border: '2px solid var(--color-bg)', marginLeft: -px * .25, borderRadius: shape === 'square' ? 0 : 'var(--radius-avatar)', fontVariantNumeric: 'tabular-nums' }}>+{rest_}</span>}
+      {rest_ > 0 && <span aria-label={t('avatar.more', { n: rest_ })} style={{ width: px, height: px, display: 'grid', placeItems: 'center', background: 'var(--color-text)', color: 'var(--color-bg)', fontSize: px * .36, fontWeight: 600, border: '2px solid var(--color-bg)', marginLeft: -px * .25, borderRadius: shape === 'square' ? 0 : 'var(--radius-avatar)', fontVariantNumeric: 'tabular-nums' }}>+{rest_}</span>}
     </div>
   );
 }

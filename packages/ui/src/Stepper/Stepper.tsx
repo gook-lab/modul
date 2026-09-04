@@ -13,7 +13,7 @@ export const Stepper = forwardRef<HTMLElement, StepperProps>(({ steps, current, 
   if (variant === 'bar') return (
     <nav ref={ref} className={cx('stepper', className)} style={{ display: 'grid', gap: 10 }} {...rest}>
       <div role="progressbar" aria-label={t('stepper.progress')} aria-valuenow={current + 1} aria-valuemin={1} aria-valuemax={total} aria-valuetext={steps[current]?.label} style={{ height: 2, background: 'var(--color-neutral-300)' }}><span style={{ display: 'block', height: 2, width: `${((current + 1) / total) * 100}%`, background: 'var(--color-accent)', transition: 'width 180ms ease' }} /></div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-neutral-700)', fontVariantNumeric: 'tabular-nums' }}><span>{current + 1} / {total} · {steps[current]?.label}</span><span>{steps[current + 1] ? `다음: ${steps[current + 1].label}` : '마지막 단계'}</span></div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-neutral-700)', fontVariantNumeric: 'tabular-nums' }}><span>{current + 1} / {total} · {steps[current]?.label}</span><span>{steps[current + 1] ? t('stepper.next', { label: steps[current + 1].label }) : t('stepper.last')}</span></div>
     </nav>
   );
   return (

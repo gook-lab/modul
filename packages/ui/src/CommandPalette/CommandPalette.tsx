@@ -1,13 +1,15 @@
 import { Command } from 'cmdk';
 import * as RDialog from '@radix-ui/react-dialog';
 import { useEffect, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { useLabels } from '../utils/labels';
 
 export type CommandItem = { label: string; icon?: ReactNode; kbd?: string; keywords?: string[]; run: () => void };
 export type CommandGroup = { name: string; items: CommandItem[] };
 export type CommandPaletteProps = { open: boolean; onOpenChange: (o: boolean) => void; groups: CommandGroup[]; placeholder?: string; hotkey?: boolean } & ComponentPropsWithoutRef<typeof Command>;
 
 /** cmdk (필터·키보드·그룹) + Radix Dialog (모달·포커스 트랩). ⌘K / Ctrl+K */
-export function CommandPalette({ open, onOpenChange, groups, placeholder = '명령 또는 페이지 검색…', hotkey = true, ...rest }: CommandPaletteProps) {
+export function CommandPalette({ open, onOpenChange, groups, placeholder, hotkey = true, ...rest }: CommandPaletteProps) {
+  const t = useLabels();
   useEffect(() => {
     if (!hotkey) return;
     const h = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); onOpenChange(!open); } };
@@ -23,7 +25,7 @@ export function CommandPalette({ open, onOpenChange, groups, placeholder = '명�
                 {/* eslint-disable-next-line jsx-a11y/no-autofocus --
                     커맨드 팔레트는 열리는 즉시 입력을 받는 것이 유일한 용도라 autoFocus 가 곧 기능입니다.
                     팔레트는 사용자가 명시적으로 연 오버레이이므로 포커스가 예고 없이 이동하지 않습니다. */}
-                <Command.Input autoFocus placeholder={placeholder} style={{ flex: 1, border: 0, background: 'transparent', outline: 'none', font: 'inherit', fontSize: 16, minHeight: 52, color: 'var(--color-text)' }} />
+                <Command.Input autoFocus placeholder={placeholder ?? t('cmdk.placeholder')} style={{ flex: 1, border: 0, background: 'transparent', outline: 'none', font: 'inherit', fontSize: 16, minHeight: 52, color: 'var(--color-text)' }} />
                 <kbd style={{ fontSize: 11, padding: '2px 6px', border: '1px solid var(--color-divider)', color: 'var(--color-neutral-700)' }}>esc</kbd>
               </div>
               <Command.List style={{ maxHeight: 320, overflow: 'auto', padding: '6px 0' }}>
