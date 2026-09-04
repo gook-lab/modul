@@ -82,6 +82,17 @@ cx('btn', 'btn-primary', 'btn-sm', '!btn-ghost')  → 'btn btn-sm btn-ghost'
 
 소비하는 쪽 규칙은 [guk-lab-docs 의 플레이북](https://github.com/gook-lab/guk-lab-docs/blob/main/playbooks/modul-design-system.md) 에 있고, 이 저장소에서 에이전트가 지킬 것은 [`.claude/rules/modul-ui.md`](./.claude/rules/modul-ui.md) 에 있습니다.
 
+## 예시 앱 — 조립해 보는 두 화면
+
+라이브러리를 실제로 붙였을 때 무엇이 비는지 보는 용도입니다. 워크스페이스 소스를 바로 참조하므로 라이브러리를 고치면 새로고침만 하면 됩니다.
+
+```bash
+pnpm --filter @modul/app-admin dev        # 폼 11종 조립 · Table · 서버 오류 흐름
+pnpm --filter @modul/app-portfolio dev    # 모션 래퍼 · Reveal · Marquee
+```
+
+Malt 앱의 두 화면(F4 피드 · F5 매장 상세)은 스토리북의 `Domain/Malt 화면` 에 있습니다. 새 컴포넌트 없이 코어와 도메인 프리미티브만으로 조립한 것이고, 이 조립에서 `.card-body` 의 투명도 문제가 드러났습니다.
+
 ## 개발 — 검증 게이트 7개
 
 ```bash
@@ -97,7 +108,7 @@ pnpm -r test                               # 57 passed
 pnpm -r build                              # 4 패키지
 npx size-limit                             # 예산 내
 pnpm --filter @modul/storybook build
-pnpm --filter @modul/storybook test:a11y   # 90 stories, axe 위반 0
+pnpm --filter @modul/storybook test:a11y   # 92 stories, axe 위반 0
 ```
 
 마지막 실측은 2026-09-04 이고 전 항목 통과입니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 16개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.

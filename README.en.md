@@ -82,6 +82,17 @@ Read a component's RADIO before changing it: R (requirements with numbers), A (s
 
 Consumer-side rules live in the [guk-lab-docs playbook](https://github.com/gook-lab/guk-lab-docs/blob/main/playbooks/modul-design-system.md), and the rules agents follow inside this repository are in [`.claude/rules/modul-ui.md`](./.claude/rules/modul-ui.md).
 
+## Example apps — two screens to assemble against
+
+These exist to show what is missing once the library is actually wired into a screen. They reference workspace sources directly, so a library edit only needs a refresh.
+
+```bash
+pnpm --filter @modul/app-admin dev        # 11 form components assembled, Table, server error flow
+pnpm --filter @modul/app-portfolio dev    # motion wrappers, Reveal, Marquee
+```
+
+The two Malt screens (F4 feed, F5 shop detail) live under `Domain/Malt 화면` in Storybook. They are assembled from core and domain primitives with no new components, and that assembly is what surfaced the `.card-body` opacity problem.
+
 ## Development — seven verification gates
 
 ```bash
@@ -97,7 +108,7 @@ pnpm -r test                               # 57 passed
 pnpm -r build                              # 4 packages
 npx size-limit                             # within budget
 pnpm --filter @modul/storybook build
-pnpm --filter @modul/storybook test:a11y   # 90 stories, 0 axe violations
+pnpm --filter @modul/storybook test:a11y   # 92 stories, 0 axe violations
 ```
 
 Last measured 2026-09-04, all green. `pnpm gen:stories` generates stories from the RADIO docs and prop types, skipping the 16 written by hand. CI runs the same sequence in [`.github/workflows/verify.yml`](./.github/workflows/verify.yml).

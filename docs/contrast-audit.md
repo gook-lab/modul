@@ -47,5 +47,10 @@
    - `StepBar` 의 `role=progressbar` 에 접근성 이름이 없어 `aria-label` 과 `aria-valuetext` 를 붙였습니다.
    - `IndexRow` 의 `opacity` 로 행을 흐리게 한 예시가 그 안의 텍스트를 전부 4.5:1 아래로 떨어뜨렸습니다. 이 행은 전부 텍스트라 행 단위 투명도가 곧 대비 저하입니다. 실측으로 neutral-700 은 94%, text 는 65%, clay 는 86% 아래에서 깨집니다. 예시를 배지로 바꾸고 `docs/radio/IndexRow.md` 에 제약을 적었습니다.
 
+10. **투명도로 본문을 흐리게 하던 규칙 두 개 (2026-09-04).** 시안의 F4 · F5 화면을 스토리로 조립하자 카드 안 텍스트 15개가 한꺼번에 걸렸습니다. axe 가 보고한 전경색이 `#8b837c` 처럼 블렌딩된 값이라 원인을 좁힐 수 있었습니다.
+   - `styles.css` 의 `.card-body { opacity: 0.8 }` 이 카드 안 모든 텍스트의 대비를 같이 떨어뜨리고 있었습니다. `.dialog-body { opacity: 0.85 }` 도 같습니다. 둘 다 투명도를 빼고 `color: var(--color-neutral-700)` 로 같은 의도를 냅니다 — light bg 5.83 · light surface 5.38 · malt surface 5.61 입니다. `IndexRow` 의 `opacity`(수정 9)와 같은 계열이고, 이번에는 라이브러리 CSS 쪽이었습니다.
+   - `.btn:disabled` 같은 비활성 상태의 `opacity: .45` 는 그대로 둡니다. WCAG 는 비활성 컨트롤을 대비 요구에서 제외합니다.
+   - 화면 조립에서 하나 더 나왔습니다. 자리표시자 이미지의 11px 라벨이 `--color-neutral-300` 배경 위 `--color-neutral-700` 로 4.22 였습니다. 수정 7 의 FileDrop 뱃지와 같은 사례라 `--color-neutral-800`(6.85)을 씁니다.
+
 ## 검수 방법
 sRGB 상대 휘도(WCAG 2.1 §1.4.3) 계산. 이후엔 스토리북 a11y 애드온(axe) color-contrast 규칙이 CI 에서 검사.

@@ -32,6 +32,7 @@
     "dev": "tsup --watch"
   },
   "devDependencies": {
+    "@radix-ui/react-tabs": "^1.1.21",
     "@storybook/react": "^8.6.18",
     "tsup": "^8.3.0"
   },
