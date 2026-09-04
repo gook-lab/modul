@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';

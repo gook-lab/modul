@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 import { StockBadge, type StockStatus } from './StockBadge';
 import { AmountBar } from './AmountBar';
 import { StepBar } from './StepBar';

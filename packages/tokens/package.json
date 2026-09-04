@@ -18,8 +18,9 @@
   "devDependencies": {
     "@types/culori": "^4.0.1",
     "tsx": "^4.16.0",
-    "zod": "^4.5.4",
-    "vitest": "^2.0.0"
+    "vite": "^7.3.6",
+    "vitest": "^4.1.11",
+    "zod": "^4.5.4"
   },
   "exports": {
     "./styles.css": "./styles.css",

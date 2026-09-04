@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Tag } from './Tag';
 const meta: Meta<typeof Tag> = { title: 'Components/Tag', component: Tag, args: { children: '진행중', variant: 'accent' }, argTypes: { variant: { control: 'inline-radio', options: ['accent', 'neutral', 'outline'] } } };
 export default meta;

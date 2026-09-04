@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Drawer } from './Drawer/Drawer';
 import { Sheet } from './Sheet/Sheet';
 import { ToastProvider, useToast } from './Toast/Toast';

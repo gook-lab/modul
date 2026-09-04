@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 // bottling 의 규칙을 그대로 가져온다 — 색 리터럴 · 폰트 직접 지정 · 판매 문구 금지. 통과 못 하면 코드를 고친다.
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
@@ -8,7 +11,9 @@ export default ts.config(
   // 빌드 산출물과 생성 파일은 검사 대상이 아니다. tokens.ts · generated.css 의 SSOT 는 theme.json 이므로
   // 거기 든 색 리터럴은 규칙 위반이 아니라 규칙의 출력이다.
   { ignores: ['**/dist/**', '**/node_modules/**', '**/storybook-static/**', 'packages/tokens/tokens.ts'] },
-  js.configs.recommended, ...ts.configs.recommended, jsxA11y.flatConfigs.recommended,
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  jsxA11y.flatConfigs.recommended,
   // 훅 규칙. 컴파일러 계열(refs·set-state-in-effect·immutability·purity)은 이 코드베이스에서
   // 실제 문제와 의도된 패턴이 섞여 나와 지금은 켜지 않았습니다 — 켤 때는 한 건씩 판단해야 합니다.
   { plugins: { 'react-hooks': reactHooks }, rules: {
@@ -32,4 +37,5 @@ export default ts.config(
   { files: ['**/*.test.{ts,tsx}'], rules: { 'no-restricted-syntax': 'off' } },
   // 예시 앱은 레이아웃 px 허용 (컴포넌트 패키지엔 적용 안 함)
   { files: ['apps/**'], rules: { 'no-restricted-syntax': 'off' } },
+  storybook.configs["flat/recommended"]
 );
