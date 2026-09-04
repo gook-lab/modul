@@ -1,3 +1,4 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import { createRequire } from "node:module";
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -18,7 +19,8 @@ const config: StorybookConfig = {
   addons: [
     getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("@storybook/addon-themes"),
-    getAbsolutePath("@storybook/addon-docs")
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-mcp")
   ],
   framework: getAbsolutePath("@storybook/react-vite"),
   /**
@@ -47,6 +49,10 @@ const config: StorybookConfig = {
 };
 export default config;
 
-function getAbsolutePath(value: string): any {
+/**
+ * Storybook 업그레이드가 넣어준 헬퍼입니다. pnpm 처럼 중첩 node_modules 를 쓰는 환경에서
+ * addon 이름을 실제 설치 경로로 풀어 줍니다(faux-ESM require 대응).
+ */
+function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, "package.json")));
 }

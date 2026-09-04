@@ -8,5 +8,8 @@ storybook-static/
 # 생성물 — theme.json 에서 pnpm --filter @modul/tokens build 로 만듭니다.
 packages/tokens/tokens.ts
 
-# 스냅샷 비교 실패 시 생기는 diff 이미지 — 기준선(__snapshots__/<platform>/)만 커밋합니다.
-__snapshots__/**/__diff_output__/
+# 시각 회귀. 기준선(__screenshots__/**/<name>-chromium-<os>.png)만 커밋하고
+# 실패 시 생기는 actual · diff 는 넣지 않습니다.
+**/__screenshots__/**/*-actual-*.png
+**/__screenshots__/**/*-diff-*.png
+.vitest-attachments/
