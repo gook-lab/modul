@@ -9,12 +9,12 @@
 
 ## A — Architecture
 - files(UploadItem[]) 부모 소유, onFiles 로 File[] 만 넘김
-- 업로드·재시도는 부모 훅. 컴포넌트는 fetch 를 모른다
+- 업로드·재시도는 부모 훅이 맡습니다. 컴포넌트는 fetch 를 모릅니다
 
 ## D — Data Model
 ```ts
 type UploadItem = { id; name; size; progress; error? };
-// File 객체는 상태에 두지 않는다
+// File 객체는 상태에 두지 않습니다
 ```
 
 ## I — Interface

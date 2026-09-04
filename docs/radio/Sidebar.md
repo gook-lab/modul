@@ -11,7 +11,7 @@
 ## A — Architecture
 - items 는 라우트 매니페스트에서 생성, activeId 는 현재 라우트에서 파생
 - collapsed 는 앱 셸 local + 영속
-- renderItem 으로 라우터 Link 주입 — 컴포넌트는 라우터를 모른다
+- renderItem 으로 라우터 Link 를 주입합니다 — 컴포넌트는 라우터를 모릅니다
 
 ## D — Data Model
 ```ts

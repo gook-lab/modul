@@ -1,6 +1,6 @@
 # cx `!` 관통 검수
 
-규칙: variant 는 **항상 클래스**(`btn-primary`, `tabs-underline`)로도 표현한다. Radix 의 `data-state` 는 상태(열림/활성)라 컴포넌트 소유 — `!` 로 덮지 않는다. 우리가 정하는 variant 를 `data-variant` 로만 두면 `!` 가 못 덮는다 → Tabs 에 `tabs-${variant}` 클래스 추가.
+규칙은 이렇습니다. variant 는 **항상 클래스**로도 표현합니다(`btn-primary`, `tabs-underline`). Radix 의 `data-state` 는 상태(열림/활성)라 컴포넌트가 소유하고 `!` 로 덮지 않습니다. 우리가 정하는 variant 를 `data-variant` 로만 두면 `!` 가 덮을 수 없어서, Tabs 에 `tabs-${variant}` 클래스를 추가했습니다.
 
 ## 결과 (37 파일)
 - CommandPalette/CommandPalette.tsx: cx 미사용
@@ -8,7 +8,7 @@
 - Tooltip/Tooltip.tsx: cx 미사용
 
 ## 소비자 규칙
-- 그룹 = 마지막 `-` 앞 접두(`btn-*` · `tag-*` · `elev-*`). 축 = 그룹 안에서 서로 배타인 값의 묶음 — 크기(`xs`·`sm`·`md`·`lg`·`xl`·`2xl`·`3xl`)가 size 축, 나머지 variant·tone 이 look 축이다. `!` 는 **같은 그룹 + 같은 축**만 지운다: `cx('btn','btn-primary','btn-sm','!btn-ghost')` → `btn btn-sm btn-ghost` (variant 를 덮어도 크기는 남는다). 근거: `packages/ui/src/utils/cx.ts` · `cx.test.ts` 5번
+- 그룹 = 마지막 `-` 앞 접두(`btn-*` · `tag-*` · `elev-*`). 축 = 그룹 안에서 서로 배타인 값의 묶음 — 크기(`xs`·`sm`·`md`·`lg`·`xl`·`2xl`·`3xl`)가 size 축, 나머지 variant·tone 이 look 축입니다. `!` 는 **같은 그룹 + 같은 축**만 지웁니다 — `cx('btn','btn-primary','btn-sm','!btn-ghost')` → `btn btn-sm btn-ghost` 처럼 variant 를 덮어도 크기는 남습니다. 근거: `packages/ui/src/utils/cx.ts` · `cx.test.ts` 5번
 - `className="!btn-ghost"` — variant 덮기 (그룹 `btn-*`) · `"!elev-lg"` — elevation 덮기
 - 상태 색을 바꾸려면 앱 CSS 에서 `.my-tabs .tab[data-state=active]{…}` — components.css 가 `@layer modul` 이라 레이어 밖 규칙이 이김
 - style 은 `sx()` — 소비자가 마지막

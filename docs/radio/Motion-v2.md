@@ -14,7 +14,7 @@
 
 ## A
 - 상태 없는 것(Stagger, NumberRoller) / 스크롤 구독(ScrollStory, ImageReveal, ScrollGuide) / 물리 rAF(useSpring, Magnetic) / 레이아웃 측정(SharedLayout, LoadingSwap)
-- 전부 컴포넌트 밖으로 값 노출 (progress · x · step) — 소비자가 그린다
+- 전부 컴포넌트 밖으로 값을 노출합니다 (progress · x · step) — 그리는 것은 소비자 몫입니다
 
 ## D
 `Preset = { duration; easing; properties; reduced }` — 테스트가 토큰 집합을 강제

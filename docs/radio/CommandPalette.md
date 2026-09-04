@@ -11,7 +11,7 @@
 ## A — Architecture
 - groups 는 정적 설정(라우트 매니페스트에서 생성) — bottling 은 routes/manifest.ts
 - local: open · query · selected. 최근 항목은 Storage 어댑터(core) 경유
-- run() 은 부모가 준 콜백 — 라우터·액션 디스패치는 여기서 하지 않는다
+- run() 은 부모가 준 콜백입니다 — 라우터·액션 디스패치는 여기서 하지 않습니다
 
 ## D — Data Model
 ```ts

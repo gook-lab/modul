@@ -1,6 +1,6 @@
 # 버저닝
 
-`pnpm changeset` → 변경 요약 + patch/minor/major. `pnpm release` 가 CHANGELOG 와 버전을 올린다. ui·motion·tokens 는 fixed 그룹(같은 버전).
+`pnpm changeset` 으로 변경 요약과 patch/minor/major 를 적습니다. `pnpm release` 가 CHANGELOG 와 버전을 올립니다. ui·motion·tokens 는 fixed 그룹이라 같은 버전으로 나갑니다.
 
 ## 컴포넌트 상태
 | 상태 | 뜻 |

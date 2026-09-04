@@ -3,7 +3,7 @@
 > 렌더 실패를 데이터 실패와 같은 얼굴로. EmptyState error 뷰 재사용.
 
 ## R — Requirements
-- 위젯 단위로 감싼다 — 하나가 죽어도 나머지는 산다. 라우트 · 카드 · 사이드 패널
+- 위젯 단위로 감쌉니다 — 하나가 실패해도 나머지는 남습니다. 라우트 · 카드 · 사이드 패널
 - 리셋: 버튼(retry) 또는 resetKeys(라우트 param) 변경
 - DEV 에서만 err.message 노출, PROD 는 고정 문구 + onError 로 Sentry
 - Suspense 스켈레톤은 실제 레이아웃과 같은 높이 (CLS 0)

@@ -1,5 +1,7 @@
 # MODUL
 
+**한국어** | [English](README.en.md)
+
 헤드리스 React 컴포넌트 라이브러리입니다. 값은 전부 CSS 변수로 나가고, 컴포넌트는 네이티브 속성을 막지 않으며, 앱 CSS 가 항상 이깁니다.
 
 ```bash
@@ -98,7 +100,7 @@ pnpm --filter @modul/storybook build
 pnpm --filter @modul/storybook test:a11y   # 90 stories, axe 위반 0
 ```
 
-마지막 실측은 2026-09-04 이고 전 항목 통과입니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 13개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.
+마지막 실측은 2026-09-04 이고 전 항목 통과입니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 16개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.
 
 ## 상태
 

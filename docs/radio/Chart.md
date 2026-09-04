@@ -6,7 +6,7 @@
 - 시리즈 1개(≤ 60 포인트), 라이브러리 0, SVG 인라인 — 번들 +0KB
 - 축 라벨은 시작·끝·최대(·강조) 만. 툴팁 없음 — 값은 sr-only 표에
 - 대비: accent 막대/선 위 텍스트 없음. 라벨은 neutral-700
-- 그 이상은 visx 로. 토큰(색·폰트)만 공유하고 이 컴포넌트를 확장하지 않는다
+- 그 이상은 visx 로 갑니다. 토큰(색·폰트)만 공유하고 이 컴포넌트는 확장하지 않습니다
 
 ## A — Architecture
 - 순수 함수: data → SVG. 상태 없음. 크기는 props(width/height), 반응형은 부모가 ResizeObserver 로 width 를 넘김

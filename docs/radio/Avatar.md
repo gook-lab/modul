@@ -17,7 +17,7 @@ type AvatarGroupProps = { people: { name; src? }[]; max? };
 ```
 
 ## 결정 — 모양
-기본 `circle`(rounded-full). 얼굴은 관례상 원이고 Modernist 의 radius 0 은 컨테이너 규칙이라 아바타는 예외로 둔다. 값은 `--radius-avatar`(50%) 한 토큰 — 브랜드가 사각을 원하면 토큰만 0. `shape="square"` 는 로고·팀 마크 같은 비인물용.
+기본 `circle`(rounded-full). 얼굴은 관례상 원이고 Modernist 의 radius 0 은 컨테이너 규칙이라 아바타는 예외로 둡니다. 값은 `--radius-avatar`(50%) 한 토큰 — 브랜드가 사각을 원하면 토큰만 0. `shape="square"` 는 로고·팀 마크 같은 비인물용.
 
 ## I — Interface
 | prop | type | 비고 |
