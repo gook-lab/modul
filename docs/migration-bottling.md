@@ -4,7 +4,7 @@
 
 ## 0. 준비
 - `@modul/tokens` 설치, `theme-malt.css` 링크, `<html data-theme="malt">`
-- bottling `build-css.ts` 출력 → `generated.css` 로 대체(값 동일, 이름만 MODUL). 하루 동안 두 스타일시트 병행 후 옛 것 제거
+- bottling `build-css.ts` 출력 → `styles.css` · `theme-malt.css` 로 대체(값 동일, 이름만 MODUL). 하루 동안 두 스타일시트 병행 후 옛 것 제거
 
 ## 1. codemod 목록 (jscodeshift, `scripts/codemods/`)
 | # | 대상 | 변환 | 자동화 |

@@ -44,7 +44,7 @@ cx('btn', 'btn-primary', 'btn-sm', '!btn-ghost')  → 'btn btn-sm btn-ghost'
 
 같은 그룹이라도 축이 다르면 남습니다. variant 를 덮었다고 크기까지 사라지면 소비자가 크기를 다시 지정해야 하기 때문입니다. `components.css` 전체가 `@layer modul` 안에 있어서 레이어 밖 앱 CSS 는 명시도와 무관하게 이깁니다.
 
-**3. 토큰만 씁니다.** 색 · 폰트 · 간격 · 반경 · 모션은 전부 `var(--*)` 입니다. hex · px · 폰트명 리터럴은 ESLint 가 막습니다. 값의 단일 출처는 [`packages/tokens/theme.json`](./packages/tokens/theme.json) 하나이고, `generated.css` 와 `tokens.ts` 는 거기서 생성됩니다. 빌드 첫 줄에서 zod 스키마로 검증하므로 오타는 CSS 가 아니라 빌드에서 잡힙니다.
+**3. 토큰만 씁니다.** 색 · 폰트 · 간격 · 반경 · 모션은 전부 `var(--*)` 입니다. hex · px · 폰트명 리터럴은 ESLint 가 막습니다. [`theme.json`](./packages/tokens/theme.json) 이 base 값(테마별 bg · surface · text · accent, 폰트, 반경, 간격, 모션, 이징)의 단일 출처이고, 빌드가 zod 스키마로 검증한 뒤 배포 CSS 와 대조해 어긋나면 실패합니다. 램프(neutral-100..900 · accent-100..900)는 생성하지 않습니다 — 손으로 튜닝한 값이고 대비 검수와 axe 통과가 그 값에 걸려 있어서, 알고리즘으로 다시 뽑으면 검수가 무효가 됩니다.
 
 **4. 모션은 프리셋에서만.** `tap` · `reveal` · `move` · `page` · `spring` · `loop` · `count` · `scrub` 8종 밖의 duration/easing 을 쓰지 않습니다. 움직이는 속성은 `transform` · `opacity` · `clip-path` 뿐입니다. `prefers-reduced-motion` 대체 동작은 프리셋의 `reduced` 가 담당하고 컴포넌트는 분기하지 않습니다.
 
@@ -84,7 +84,7 @@ cx('btn', 'btn-primary', 'btn-sm', '!btn-ghost')  → 'btn btn-sm btn-ghost'
 
 ```bash
 pnpm install
-pnpm --filter @modul/tokens build          # generated.css + tokens.ts
+pnpm --filter @modul/tokens build          # theme.json ↔ CSS 대조 + tokens.ts
 pnpm --filter @modul/storybook dev         # localhost:6006, 3 테마 토글
 ```
 

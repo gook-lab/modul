@@ -7,7 +7,9 @@
 - `className` 조립은 `cx()` 로만. 템플릿 문자열(`` className={`btn ${className}`} ``)로 잇지 않는다 — `!` 접두 규칙이 깨진다.
 - variant 는 클래스로도 표현한다(`tabs-underline`). `data-variant` 만 쓰면 `!` 로 덮을 수 없다. `data-state` 는 컴포넌트 소유라 덮지 않는다.
 - `components.css` 의 `@layer modul` 래핑을 풀지 않는다. 레이어 밖 앱 CSS 가 이기는 구조가 이 라이브러리의 덮어쓰기 경로다.
-- 색·폰트·간격·반경·모션은 `var(--*)` 만 쓴다. hex·px·폰트명 리터럴 금지. 값 변경은 `packages/tokens/theme.json` 을 고치고 `pnpm --filter @modul/tokens build` 로 재생성한다. `styles.css` 의 `:root` 를 손으로 고치지 않는다.
+- 색·폰트·간격·반경·모션은 `var(--*)` 만 쓴다. hex·px·폰트명 리터럴 금지.
+- base 값(테마별 bg·surface·text·accent, 폰트, 반경, 간격, 모션, 이징)의 SSOT 는 `packages/tokens/theme.json` 이다. 바꿀 때는 theme.json 과 배포 CSS 를 같이 고친다 — `pnpm --filter @modul/tokens build` 가 둘을 대조해 어긋나면 실패한다.
+- 램프(neutral-100..900 · accent-100..900)는 생성물이 아니라 손으로 튜닝한 값이다. 바꾸면 `docs/contrast-audit.md` 를 다시 실측하고 axe 를 다시 돌린다.
 - duration·easing 은 `packages/motion/src/presets.ts` 의 8종(tap · reveal · move · page · spring · loop · count · scrub) 안에서만 고른다. 움직이는 속성은 `transform` · `opacity` · `clip-path`. `prefers-reduced-motion` 분기는 프리셋의 `reduced` 가 담당하므로 컴포넌트에서 따로 분기하지 않는다.
 - fetch · 업로드 · 라우팅 · 검증을 컴포넌트 안에서 하지 않는다. 경계는 콜백(`onUpload` · `onCommit` · `onChange` · `renderItem`)으로 받는다.
 - 터치 타깃 44px, 포커스는 `:focus-visible` 2px accent 링. 11–12px 텍스트에 `--color-neutral-600` 을 쓰지 않는다(`--color-neutral-700`).

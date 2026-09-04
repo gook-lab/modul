@@ -6,7 +6,6 @@
     "styles.css",
     "components.css",
     "theme-malt.css",
-    "generated.css",
     "theme.json",
     "tokens.ts"
   ],
@@ -15,7 +14,6 @@
   },
   "devDependencies": {
     "@types/culori": "^4.0.1",
-    "culori": "^4.0.1",
     "tsx": "^4.16.0",
     "zod": "^4.5.4"
   },
@@ -23,7 +21,6 @@
     "./styles.css": "./styles.css",
     "./components.css": "./components.css",
     "./theme-malt.css": "./theme-malt.css",
-    "./generated.css": "./generated.css",
     ".": "./tokens.ts"
   },
   "license": "MIT",

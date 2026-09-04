@@ -60,7 +60,10 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 - 색·폰트·간격·반경·모션은 전부 `var(--*)`. hex, px 리터럴, 폰트명 직접 지정 금지.
 - `eslint.config.js` 가 `no-restricted-syntax` 로 이를 강제합니다(색 리터럴 · fontFamily 리터럴 · `dangerouslySetInnerHTML` · 판매/구매/배송/결제 문구). **lint 를 끄지 말고 코드를 고치세요.**
 - 예외: `apps/**` 는 레이아웃 px 허용(이미 설정됨).
-- 토큰 SSOT 는 `packages/tokens/theme.json`. `pnpm --filter @modul/tokens build` 가 `generated.css` + `tokens.ts` 를 만듭니다(OKLCH 램프 생성). **`styles.css` 의 `:root` 를 손으로 고치지 말고 theme.json 을 고치세요.**
+- 토큰 SSOT 는 `packages/tokens/theme.json` — 단, **base 값의 SSOT** 입니다. 테마별 bg · surface · text · accent · divider, 폰트, 반경, 간격, 모션, 이징이 여기서 정해집니다.
+- `pnpm --filter @modul/tokens build` 는 theme.json 과 배포 CSS(`styles.css` · `theme-malt.css`)를 대조하고 어긋나면 실패합니다. `tokens.ts`(RN/JS 소비용)도 여기서 나옵니다.
+- **램프(neutral-100..900 · accent-100..900)는 생성하지 않습니다.** 손으로 튜닝한 값이고 `docs/contrast-audit.md` 의 실측 대비값과 스토리북 axe 통과가 그 값에 걸려 있습니다. 알고리즘으로 다시 뽑으면 테마당 18개 값이 달라져 검수가 무효가 됩니다.
+- base 값을 바꿀 때는 theme.json 과 CSS 를 같이 고칩니다. 램프를 바꿀 때는 CSS 를 고치고 대비 검수를 다시 하세요.
 
 ### 1.4 모션은 프리셋에서만
 - `packages/motion/src/presets.ts` 의 8종(tap · reveal · move · page · spring · loop · count · scrub) 밖의 duration/easing 을 쓰지 않습니다.
@@ -88,7 +91,7 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 2. 각 패키지에 빌드 설정 추가 — **tsup 권장**(ESM + CJS + d.ts, `external: ['react', 'react-dom', '@radix-ui/*']`). `package.json` 의 `exports`/`main`/`module`/`types` 를 실제 산출물에 맞게 정리.
 3. `tsconfig.json` 확인: `jsx: react-jsx`, `strict: true`, `moduleResolution: bundler`, `paths` 로 워크스페이스 참조.
 4. Radix 의존성 실제 버전 설치 후 **API 차이 수정**: 이 코드는 `@radix-ui/react-*` 1.x 기준으로 작성되었습니다. `Tabs` · `Accordion` · `Popover` · `DropdownMenu` · `Tooltip` · `Checkbox` · `RadioGroup` · `Switch` · `Slider` · `Dialog`. `cmdk` · `react-day-picker`(v9 API) 도 확인.
-5. `pnpm --filter @modul/tokens build` → `generated.css` 생성 확인. `culori` 로 OKLCH 램프가 나오는지, 3 테마 블록이 모두 있는지.
+5. `pnpm --filter @modul/tokens build` → theme.json 과 배포 CSS 가 3 테마 모두 일치하는지 확인. 어긋나면 어느 변수가 왜 다른지 찍고 실패합니다.
 6. `pnpm typecheck` → 오류 0. **타입을 `any` 로 덮지 말고** 실제 시그니처를 맞추세요.
 
 ### 단계 2 — 테스트 통과
@@ -157,7 +160,7 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 
 ```
 pnpm install
-pnpm --filter @modul/tokens build     # generated.css + tokens.ts
+pnpm --filter @modul/tokens build     # theme.json ↔ CSS 대조 + tokens.ts
 pnpm typecheck                        # 0 errors
 pnpm lint                             # 0 errors (규칙 유지)
 pnpm -r test                          # 전부 통과
