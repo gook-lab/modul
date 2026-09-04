@@ -25,6 +25,12 @@ function propsOf(file: string, typeName: string) {
           out.push({ name: m.name.text, kind, options, optional: !!m.questionToken });
         }
         if (ts.isIntersectionTypeNode(t)) t.types.forEach(collect);
+        if (ts.isParenthesizedTypeNode(t)) collect(t.type);
+        // NativeProps<'div', Own> · PolymorphicProps<C, Own> 처럼 Own 을 마지막 타입 인자로 받는 래퍼는
+        // 그 인자 안에 실제 props 가 있습니다. 이걸 따라가지 않으면 props 를 0개로 보고 조용히 건너뜁니다.
+        if (ts.isTypeReferenceNode(t) && /^(NativeProps|PolymorphicProps)$/.test(t.typeName.getText()) && t.typeArguments?.length) {
+          collect(t.typeArguments[t.typeArguments.length - 1]);
+        }
       };
       collect(n.type);
     }
@@ -48,6 +54,16 @@ for (const dir of readdirSync(UI, { withFileTypes: true }).filter(d => d.isDirec
   // "Cannot read properties of undefined (reading 'map')" 로 스토리북 a11y 러너를 깨뜨렸습니다.
   const unfillable = props.filter(p => !p.optional && p.kind === 'none').map(p => p.name);
   if (unfillable.length) { console.log('skip:', name, '— 필수 props 를 생성할 수 없음(손으로 스토리 작성):', unfillable.join(', ')); continue; }
+  // 접근성 이름을 만드는 props 는 반드시 채웁니다 — 비워 두면 라벨 없는 입력이 되어 axe 가 critical 로 잡습니다.
+  const SAMPLE: Record<string, string> = {
+    label: '라벨', title: '제목', alt: '설명', name: '이름',
+    placeholder: '입력하세요', helper: '도움말', hint: '설명',
+  };
+  const args = props
+    // label · title 은 보통 ReactNode(kind 'none') 지만 문자열을 그대로 받습니다.
+    .filter(p => SAMPLE[p.name] && (p.kind === 'text' || p.kind === 'none'))
+    .map(p => `    ${p.name}: '${SAMPLE[p.name]}',`)
+    .join('\n');
   const argTypes = props.map(p => p.kind === 'enum' ? `    ${p.name}: { control: 'inline-radio', options: ${JSON.stringify(p.options)} },` : p.kind === 'none' ? `    ${p.name}: { control: false },` : `    ${p.name}: { control: '${p.kind}' },`).join('\n');
   const variant = props.find(p => p.kind === 'enum' && /variant|tone|size|kind|layout/.test(p.name));
   const extra = variant ? variant.options!.map(o => `export const ${o[0].toUpperCase() + o.slice(1).replace(/-/g, '')}: S = { args: { ${variant.name}: '${o}' } };`).join('\n') : '';
@@ -58,7 +74,7 @@ import { ${name} } from './${name}';
 const meta: Meta<typeof ${name}> = {
   title: 'Components/${name}',
   component: ${name},
-  tags: ['autodocs'],
+  tags: ['autodocs'],${args ? `\n  args: {\n${args}\n  },` : ''}
   argTypes: {
 ${argTypes}
   },

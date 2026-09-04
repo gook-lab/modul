@@ -35,10 +35,10 @@ export const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(({ onFiles, 
       </label>
       {files.map(f => (
         <div key={f.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 12px', border: '1px solid var(--color-divider)', background: 'var(--color-surface)', animation: 'mdl-fadeup var(--motion-base) both' }}>
-          <span style={{ width: 32, height: 32, background: 'var(--color-neutral-300)', display: 'grid', placeItems: 'center', fontSize: 9, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--color-neutral-700)', flex: 'none' }}>{f.name.split('.').pop()?.slice(0, 4)}</span>
+          <span style={{ width: 32, height: 32, background: 'var(--color-neutral-300)', display: 'grid', placeItems: 'center', fontSize: 9, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--color-neutral-800)', flex: 'none' }}>{f.name.split('.').pop()?.slice(0, 4)}</span>
           <span style={{ flex: 1, display: 'grid', gap: 4, minWidth: 0 }}>
             <span style={{ fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: f.error ? 'var(--color-accent-700)' : undefined }}>{f.error ?? f.name}</span>
-            <span role="progressbar" aria-valuenow={f.progress} aria-valuemin={0} aria-valuemax={100} style={{ height: 2, background: 'var(--color-neutral-300)' }}><span style={{ display: 'block', height: 2, width: `${f.progress}%`, background: f.error ? 'var(--color-accent-700)' : 'var(--color-accent)', transition: 'width var(--motion-slow)' }} /></span>
+            <span role="progressbar" aria-label={`${f.name} 업로드 진행률`} aria-valuenow={f.progress} aria-valuemin={0} aria-valuemax={100} style={{ height: 2, background: 'var(--color-neutral-300)' }}><span style={{ display: 'block', height: 2, width: `${f.progress}%`, background: f.error ? 'var(--color-accent-700)' : 'var(--color-accent)', transition: 'width var(--motion-slow)' }} /></span>
           </span>
           <span style={{ fontSize: 11, color: 'var(--color-neutral-700)', fontVariantNumeric: 'tabular-nums' }}>{fmt(f.size)}</span>
           {onRemove && <button type="button" aria-label={`${f.name} 제거`} onClick={() => onRemove(f.id)} style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'var(--color-neutral-700)', padding: 6 }}>×</button>}

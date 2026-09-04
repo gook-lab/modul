@@ -39,7 +39,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>((props,
           <RPop.Trigger asChild>
             <button ref={ref} type="button" className={cx('input', className)} style={{ display: 'flex', alignItems: 'center', gap: 8, textAlign: 'left', cursor: 'pointer', flex: 1 }} {...rest}>
               <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ color: 'var(--color-neutral-700)' }}><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4"/><path d="M3 10h18"/></svg>
-              <span style={{ flex: 1, fontVariantNumeric: 'tabular-nums', color: text ? undefined : 'var(--color-neutral-500)' }}>{text || placeholder || (isRange ? '기간 선택' : '날짜 선택')}</span>
+              <span style={{ flex: 1, fontVariantNumeric: 'tabular-nums', color: text ? undefined : 'var(--color-neutral-700)' }}>{text || placeholder || (isRange ? '기간 선택' : '날짜 선택')}</span>
             </button>
           </RPop.Trigger>
           <RPop.Portal>

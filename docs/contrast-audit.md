@@ -30,5 +30,11 @@
 
 6. **2차 실측에서 나온 나머지 (2026-09-03).** `.text-muted`(12px, `color-mix(text 55%)` → 3.66) · `.btn-ghost`(14px, accent → 3.75) · Select 플레이스홀더와 Accordion 번호와 ImageUpload 카운터(neutral-500 → 2.38~2.58) · Marquee `tone="accent"`(13px bg-on-accent → 3.75) 를 각각 `--color-neutral-700` · `--color-accent-700` 으로 올렸다. Marquee 는 배경을 `--color-accent-700` 으로 바꿔 규칙 2 의 "본문 크기 텍스트를 accent 위에 얹지 않는다" 를 지켰다. 규칙 1 이 placeholder 에 neutral-600 을 허용하지만 axe 는 플레이스홀더도 4.5:1 로 재기 때문에, 값이 없을 때 보이는 텍스트는 neutral-700 을 쓴다.
 
+7. **3차 실측 — 스토리 커버리지를 넓히면서 나온 것 (2026-09-04).** 스토리가 없던 6개 영역(Chart · FileDrop · Boundary · RichText · Mobile · Form)에 스토리를 붙이자 axe 가 세 곳을 새로 잡았다.
+   - **전역 링크 3.76.** `styles.css` 의 `a { color: var(--color-accent) }` 가 본문 크기(15px) 링크라 4.5:1 에 미달. `--color-accent-700`(6.41)로 올렸다. `components.css` 의 `.richtext a` 는 이미 accent-700 이었지만 `@layer modul` 안이라 레이어 밖의 이 규칙을 이길 수 없었다 — 레이어 전략의 대가이고, 그래서 기본값 쪽을 고쳤다.
+   - **FileDrop 확장자 뱃지 4.39.** 9px 텍스트가 `--color-neutral-300` 배경 위라 규칙 1 의 neutral-700 으로는 부족했다(4.39). 배경이 bg 가 아닐 때는 한 단계 더 필요해서 `--color-neutral-800`(6.81). 규칙 1 은 "bg 위" 기준임을 여기서 확인했다.
+   - **DatePicker 플레이스홀더 2.38.** 규칙 6 이 정한 "값이 없을 때 보이는 텍스트는 neutral-700" 을 빠뜨린 자리. `--color-neutral-500` → `--color-neutral-700`(5.38).
+   - a11y 는 대비 밖에서도 둘 나왔다. FileDrop 의 `role=progressbar` 에 접근성 이름이 없어 `aria-label` 을 붙였고, `scripts/gen-stories.ts` 가 args 없이 `Default` 를 만들어 Textarea 가 라벨 없는 입력으로 렌더되던 것을 label · title · alt · name · placeholder · helper · hint 를 채우도록 고쳤다.
+
 ## 검수 방법
 sRGB 상대 휘도(WCAG 2.1 §1.4.3) 계산. 이후엔 스토리북 a11y 애드온(axe) color-contrast 규칙이 CI 에서 검사.
