@@ -1,6 +1,9 @@
-import { dirname, resolve } from 'node:path';
+import { createRequire } from "node:module";
+import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StorybookConfig } from '@storybook/react-vite';
+
+const require = createRequire(import.meta.url);
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '../../..');
@@ -12,8 +15,12 @@ const config: StorybookConfig = {
    * 워크스페이스 소스만 봅니다.
    */
   stories: ['../../../packages/*/src/**/*.stories.@(ts|tsx)'],
-  addons: ['@storybook/addon-essentials', '@storybook/addon-a11y', '@storybook/addon-themes'],
-  framework: '@storybook/react-vite',
+  addons: [
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-themes"),
+    getAbsolutePath("@storybook/addon-docs")
+  ],
+  framework: getAbsolutePath("@storybook/react-vite"),
   /**
    * 워크스페이스 패키지를 dist 대신 src 로 알리아스합니다.
    * @modul/ui 와 @modul/motion 은 서로를 import 하는 순환이라(EmptyState → motion, Reveal → ui)
@@ -39,3 +46,7 @@ const config: StorybookConfig = {
   },
 };
 export default config;
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}

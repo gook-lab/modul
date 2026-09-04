@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 import {
   AppBar, Alert, Avatar, AvatarGroup, Breadcrumb, Button, Card, EmptyState,
   Input, Sheet, Tag, ToastProvider, useToast, type ViewState,

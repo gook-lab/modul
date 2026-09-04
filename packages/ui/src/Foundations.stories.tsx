@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 import * as Icons from '@modul/icons';
 import { presets, DURATIONS, EASINGS, transition, type PresetName } from '@modul/motion';
 import { Button } from './Button/Button';
