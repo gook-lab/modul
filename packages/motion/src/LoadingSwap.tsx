@@ -3,6 +3,8 @@ import { useReducedMotion } from './useReducedMotion';
 /** 스켈레톤 → 콘텐츠 크로스페이드 + 높이 보간. minShow(400) 안에 오면 스켈레톤 생략(깜빡임 방지). reduced: 즉시 교체 */
 export function LoadingSwap({ loading, skeleton, children, minShow = 400 }: { loading: boolean; skeleton: ReactNode; children: ReactNode; minShow?: number }) {
   const rm = useReducedMotion(); const [showSk, setShowSk] = useState(false); const [h, setH] = useState<number | undefined>(); const sk = useRef<HTMLDivElement>(null), ct = useRef<HTMLDivElement>(null);
+  // 최소 노출 시간을 타이머로 지키는 자리라 이펙트가 맞습니다 — 파생 상태가 아닙니다.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { if (!loading) { setShowSk(false); return; } const t = setTimeout(() => setShowSk(true), minShow); return () => clearTimeout(t); }, [loading, minShow]);
   useEffect(() => { const el = loading ? sk.current : ct.current; if (el) setH(el.offsetHeight); }, [loading, showSk, children]);
   const tr = rm ? 'none' : 'opacity var(--motion-slow) var(--ease-decel), height var(--motion-slow) var(--ease-decel)';

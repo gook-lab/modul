@@ -8,7 +8,9 @@ export function EditableCell({ value, onCommit, type = 'text', align }: { value:
   const [edit, setEdit] = useState(false); const [draft, setDraft] = useState(value); const [busy, setBusy] = useState(false); const [err, setErr] = useState<string | null>(null);
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => { if (edit) { ref.current?.focus(); ref.current?.select(); } }, [edit]);
-  useEffect(() => { if (!edit) setDraft(value); }, [value, edit]);
+  // 편집 중이 아니면 바깥 값이 곧 draft 입니다. 이펙트로 맞추면 한 프레임 동안 옛 값이 보입니다.
+  const [lastValue, setLastValue] = useState(value);
+  if (!edit && value !== lastValue) { setLastValue(value); setDraft(value); }
   const commit = async () => { if (draft === value) return setEdit(false); setBusy(true); setErr(null); try { await onCommit(draft); setEdit(false); } catch (e) { setErr(e instanceof Error ? e.message : '저장 실패'); ref.current?.focus(); } finally { setBusy(false); } };
   if (!edit) return (
     <button type="button" className="cell-edit" onClick={() => setEdit(true)} onKeyDown={e => { if (e.key === 'Enter' || e.key === 'F2') setEdit(true); }} title="Enter 로 편집"
@@ -17,6 +19,8 @@ export function EditableCell({ value, onCommit, type = 'text', align }: { value:
   return (
     <span style={{ display: 'block', position: 'relative' }}>
       <input ref={ref} type={type} value={draft} disabled={busy} aria-invalid={!!err || undefined} aria-describedby={err ? 'cell-err' : undefined} onChange={e => setDraft(e.target.value)} onBlur={commit}
+        // guardIme 래퍼 안은 이벤트에서만 돕니다(Select 와 같은 사유).
+        // eslint-disable-next-line react-hooks/refs
         onKeyDown={guardIme(e => { if (e.key === 'Enter') { e.preventDefault(); commit(); } else if (e.key === 'Escape') { setDraft(value); setEdit(false); } else if (e.key === 'Tab') { commit(); } })}
         style={{ all: 'unset', display: 'block', width: '100%', minHeight: 32, padding: '0 6px', margin: '0 -6px', boxSizing: 'content-box', textAlign: align, background: 'var(--color-bg)', boxShadow: `inset 0 -2px 0 ${err ? 'var(--color-accent-700)' : 'var(--color-accent)'}`, fontVariantNumeric: type === 'number' ? 'tabular-nums' : undefined }} />
       {err && <span id="cell-err" role="alert" style={{ position: 'absolute', left: 0, top: '100%', fontSize: 11, color: 'var(--color-accent-700)', background: 'var(--color-surface)', padding: '2px 6px', zIndex: 2 }}>{err}</span>}

@@ -11,7 +11,12 @@ export type RouteTransitionProps = {
 export function RouteTransition({ routeKey, duration = 720, children, style, ...rest }: RouteTransitionProps) {
   const [shown, setShown] = useState({ key: routeKey, node: children });
   const [wiping, setWiping] = useState(false);
-  const latest = useRef(children); latest.current = children;
+  // 렌더 중에 ref 를 쓰면 StrictMode 의 두 번째 렌더에서 값이 어긋납니다.
+  // 커밋 뒤에 갱신해도 전환 타이머(duration*0.47)보다 훨씬 먼저라 최신 children 을 읽는 데 문제가 없습니다.
+  const latest = useRef(children);
+  useEffect(() => { latest.current = children; });
+  // 전환은 타이머로 진행합니다(덮기 → 교체 → 걷기). 렌더 중에 계산할 수 있는 값이 아닙니다.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (routeKey === shown.key) { setShown(s => ({ ...s, node: children })); return; }
     setWiping(true);
@@ -22,6 +27,7 @@ export function RouteTransition({ routeKey, duration = 720, children, style, ...
     // 최신 children 은 latest ref 로 읽으므로 값이 낡지도 않습니다.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeKey]);
+  /* eslint-enable react-hooks/set-state-in-effect */
   return (
     <div style={{ position: 'relative', overflow: 'hidden', ...style }} {...rest}>
       {shown.node}

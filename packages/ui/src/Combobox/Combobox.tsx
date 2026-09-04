@@ -59,19 +59,25 @@ function ComboboxInner<V extends string>(props: ComboboxProps<V>, ref: React.Ref
   // stale 응답 폐기 — 요청 순번을 붙이고 최신 순번만 채택 (RADIO/R: 이전 요청이 늦게 도착해도 덮어쓰지 않음)
   const seq = useRef(0);
   // RADIO/O: 최소 1글자. 빈 입력으로는 요청하지 않고 로컬 options 로 되돌린다.
+  // 원격 검색 결과를 받는 비동기 이펙트입니다. 빈 입력으로 되돌릴 때도 같은 자리에서 정리합니다.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (!async) return;
     if (!q) { setRemote(null); return; }
     const my = ++seq.current;
     async(q).then(r => { if (my === seq.current) setRemote(r); });
   }, [q, async]);
+  /* eslint-enable react-hooks/set-state-in-effect */
   useEffect(() => { if (!open) return; const close = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) setOpen(false); }; document.addEventListener('mousedown', close); return () => document.removeEventListener('mousedown', close); }, [open]);
 
   const source = remote ?? options;
   const matched = useMemo(() => (async ? source : source.filter((o: ComboOption<V>) => !q || filter(q, o))), [source, q, filter, async]);
   const groups = useMemo(() => { const m = new Map<string, ComboOption<V>[]>(); for (const o of matched) { const g = o.group ?? ''; if (!m.has(g)) m.set(g, []); m.get(g)!.push(o); } return [...m.entries()]; }, [matched]);
   const flat: ComboOption<V>[] = groups.flatMap(([, xs]) => xs);
-  useEffect(() => setActive(0), [q]);
+  // 검색어가 바뀌면 활성 인덱스를 0 으로 되돌립니다. 이펙트로 하면 한 프레임 동안
+  // 이전 인덱스가 하이라이트된 채로 그려집니다 — React 가 권하는 렌더 중 조정을 씁니다.
+  const [lastQ, setLastQ] = useState(q);
+  if (q !== lastQ) { setLastQ(q); setActive(0); }
 
   const pick = (o: ComboOption<V>) => {
     if (multiple) { onChange(selected.includes(o.value) ? selected.filter(v => v !== o.value) : [...selected, o.value]); setQ(''); }

@@ -12,7 +12,7 @@ export default ts.config(
   // 훅 규칙. 컴파일러 계열(refs·set-state-in-effect·immutability·purity)은 이 코드베이스에서
   // 실제 문제와 의도된 패턴이 섞여 나와 지금은 켜지 않았습니다 — 켤 때는 한 건씩 판단해야 합니다.
   { plugins: { 'react-hooks': reactHooks }, rules: {
-    'react-hooks/rules-of-hooks': 'error',
+    ...reactHooks.configs.recommended.rules,
     'react-hooks/exhaustive-deps': 'warn',
   } },
   // Storybook CSF 의 render 는 컴포넌트로 렌더되지만 린트는 일반 함수로 봅니다 — 오탐이라 제외합니다.

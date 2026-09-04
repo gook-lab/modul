@@ -91,6 +91,8 @@ function TableInner<T>(
 
   if (!virtual) return table;
   // sticky thead 는 overflow:auto 부모에서만 동작합니다 — 가상화 컨테이너가 그 부모입니다.
+  // ref 객체를 넘길 뿐 렌더에서 .current 를 읽지 않습니다.
+  // eslint-disable-next-line react-hooks/refs
   return <div ref={v.ref} style={v.style}>{table}</div>;
 }
 

@@ -46,6 +46,9 @@ function SelectInner<V extends string>(
 
   const commit = (i: number) => { const o = options[i]; if (!o || o.disabled) return; onChange(o.value); setOpen(false); btn.current?.focus(); };
   const move = (d: number) => { let i = active; for (let k = 0; k < options.length; k++) { i = (i + d + options.length) % options.length; if (!options[i].disabled) break; } setActive(i); };
+  // guardIme 가 돌려주는 함수는 onKeyDown 에서만 실행됩니다. 린터는 감싼 함수 안을
+  // 렌더 코드로 보기 때문에 ref 접근과 Date.now 를 렌더 중 호출로 잘못 읽습니다.
+  /* eslint-disable react-hooks/refs, react-hooks/purity */
   const onKey = guardIme((e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') { e.preventDefault(); if (open) move(1); else setOpen(true); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); if (open) move(-1); else setOpen(true); }
