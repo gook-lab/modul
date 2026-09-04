@@ -24,6 +24,14 @@ const config: TestRunnerConfig = {
     await injectAxe(page);
   },
   async postVisit(page) {
+    // 애니메이션을 끄고 잽니다. mdl-fadeup 같은 opacity 진입 애니메이션 도중에 axe 가
+    // 샘플링하면 그 안의 텍스트가 전부 color-contrast 위반으로 잡혀, 로컬은 통과하고
+    // CI 만 실패하는 플레이크가 됩니다(2026-09-04 Modal Open).
+    // 끝나기를 기다리는 방법은 Marquee · Skeleton 처럼 무한 반복하는 것 때문에 못 씁니다.
+    await page.addStyleTag({
+      content: '*,*::before,*::after{animation:none!important;transition:none!important}',
+    });
+    await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     await configureAxe(page, { rules: [{ id: 'color-contrast', enabled: true }] });
     await checkA11y(
       page,

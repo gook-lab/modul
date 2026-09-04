@@ -36,5 +36,10 @@
    - **DatePicker 플레이스홀더 2.38.** 규칙 6 이 정한 "값이 없을 때 보이는 텍스트는 neutral-700" 을 빠뜨린 자리. `--color-neutral-500` → `--color-neutral-700`(5.38).
    - a11y 는 대비 밖에서도 둘 나왔다. FileDrop 의 `role=progressbar` 에 접근성 이름이 없어 `aria-label` 을 붙였고, `scripts/gen-stories.ts` 가 args 없이 `Default` 를 만들어 Textarea 가 라벨 없는 입력으로 렌더되던 것을 label · title · alt · name · placeholder · helper · hint 를 채우도록 고쳤다.
 
+8. **닫힌 모달이 보이던 버그와 a11y 플레이크 (2026-09-04).** CI 만 실패하고 로컬은 통과하던 `Components/Modal › Danger` 를 따라가서 둘을 찾았다.
+   - `styles.css` 의 `.dialog { display: flex }` 는 `@layer` 밖 author CSS 라 브라우저 기본값 `dialog:not([open]) { display: none }` 을 이긴다. 그래서 `open={false}` 인 모달이 440×143px 로 화면에 그대로 남아 있었다(실측). `dialog.dialog:not([open]) { display: none }` 을 추가해 되돌렸다. Drawer · Sheet 는 같은 문제가 없었다.
+   - Modal 스토리는 트리거 버튼만 렌더해서 axe 가 모달 내용을 한 번도 검사하지 않고 있었다. `Open` 스토리를 추가해 실제로 검사한다.
+   - 진입 애니메이션(`mdl-fadeup`) 도중에 axe 가 샘플링하면 opacity 가 0 에 가까워 그 안의 텍스트가 전부 color-contrast 위반으로 잡힌다. 타이밍 문제라 로컬은 통과하고 CI 만 실패한다. `test-runner.ts` 의 `postVisit` 에서 애니메이션을 끄고 잰다 — 끝나기를 기다리는 방법은 Marquee · Skeleton 처럼 무한 반복하는 것 때문에 쓸 수 없다.
+
 ## 검수 방법
 sRGB 상대 휘도(WCAG 2.1 §1.4.3) 계산. 이후엔 스토리북 a11y 애드온(axe) color-contrast 규칙이 CI 에서 검사.
