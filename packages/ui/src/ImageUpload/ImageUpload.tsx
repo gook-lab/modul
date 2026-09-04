@@ -58,11 +58,13 @@ export function ImageGallery({ value, onChange, max = 5, reorder = true, maxSize
     const dir = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : 0;
     if (!dir || !reorder) return;
     e.preventDefault();
+    // currentTarget 은 핸들러가 끝나면 React 가 null 로 만듭니다 — 비동기 콜백 전에 읽어 둡니다.
+    const root = e.currentTarget.closest('.image-gallery');
     const id = move(k, k + dir);
     if (!id) return;
     setMoved(t('upload.moved', { i: k + dir + 1 }));
     requestAnimationFrame(() => {
-      (e.currentTarget.closest('.image-gallery')?.querySelector(`[data-photo="${id}"]`) as HTMLElement | null)?.focus();
+      (root?.querySelector(`[data-photo="${id}"]`) as HTMLElement | null)?.focus();
     });
   };
   return (
