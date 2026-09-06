@@ -28,6 +28,7 @@ export const MAP: Record<string, string> = {
   // 도메인 색 — @malt/ui-web-next 가 쓰는 이름으로
   '--color-clay': '--malt-clay',
   '--stock-in-stock': '--malt-stock-in',
+  '--stock-low': '--malt-stock-low',
   '--stock-sold-out': '--malt-clay',
   // 타이포와 반경
   '--font-display': '--font-heading',
@@ -42,7 +43,6 @@ export const KEPT: Record<string, string> = {
   '--color-surface': 'MODUL 에도 같은 이름이 있습니다 — 바꿀 필요가 없습니다',
   '--font-body': 'MODUL 에도 같은 이름이 있습니다',
   '--font-mono': 'MODUL 에도 같은 이름이 있습니다',
-  '--stock-low': '값이 다릅니다. bottling #D8A33F 는 cream 위 2.05 로 4.5:1 미달이고 MODUL 은 #7A5610(5.99) 입니다. 색을 먼저 정한 뒤 옮기세요 (docs/contrast-audit.md 수정 11)',
   '--color-button-disabled': 'MODUL 에 대응 역할이 없습니다. 비활성 버튼은 .btn:disabled 의 opacity 로 처리합니다',
   '--radius-pill': 'MODUL 은 rounded="pill" prop 으로 처리합니다',
   '--size-touch-target': 'MODUL 은 Malt 테마의 .btn min-height 로 강제합니다',

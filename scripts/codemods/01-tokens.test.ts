@@ -52,8 +52,10 @@ describe('01-tokens — 변환 자체', () => {
   });
 });
 
+// describe 본문은 파일을 읽을 때 바로 실행됩니다 — runIf 로 감싸도 이 줄은 돕니다.
+// CI 에는 bottling 이 없으므로 읽기를 안쪽으로 미룹니다.
 describe.runIf(hasBottling)('01-tokens — bottling 실제 값과 대조', () => {
-  const BOT = vars(readFileSync(BOTTLING, 'utf8'));
+  const BOT = hasBottling ? vars(readFileSync(BOTTLING, 'utf8')) : {};
 
   it('매핑의 출발 이름이 bottling 에 실제로 있다', () => {
     for (const from of Object.keys(MAP)) {
@@ -75,9 +77,16 @@ describe.runIf(hasBottling)('01-tokens — bottling 실제 값과 대조', () =>
     expect(unexplained, '새 변수가 생겼습니다 — MAP 에 넣거나 KEPT 에 이유를 적어 주세요').toEqual([]);
   });
 
-  it('남기기로 한 것 중 값이 다른 것은 이유에 그 사실이 적혀 있다', () => {
-    // --stock-low 는 값이 달라서 남깁니다. 이유 문구가 사라지면 왜 남았는지 알 수 없습니다.
-    expect(KEPT['--stock-low']).toMatch(/값이 다릅니다/);
-    expect(norm(BOT['--stock-low'])).not.toBe(norm(MODUL['--malt-stock-low']));
+  it('재고 상태색 셋이 양쪽에서 같은 값이다', () => {
+    // 2026-09-06: bottling 이 대비 실측을 받아 stock-in 과 stock-low 를 바꿨고,
+    // MODUL 도 같은 값으로 맞췄습니다. 한쪽만 바뀌면 이 테스트가 잡습니다.
+    for (const [from, to] of [
+      ['--stock-in-stock', '--malt-stock-in'],
+      ['--stock-low', '--malt-stock-low'],
+      ['--stock-sold-out', '--malt-clay'],
+    ] as const) {
+      expect(norm(MODUL[to]), `${from}(${BOT[from]}) 와 ${to}(${MODUL[to]}) 가 갈라졌습니다`)
+        .toBe(norm(BOT[from]));
+    }
   });
 });

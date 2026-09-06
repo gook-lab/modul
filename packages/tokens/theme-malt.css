@@ -8,7 +8,7 @@
   --font-heading:'Instrument Serif',ui-serif,Georgia,serif;--font-heading-weight:400;--font-body:'IBM Plex Sans KR',system-ui,sans-serif;--font-mono:'IBM Plex Mono',ui-monospace,monospace;
   --radius-sm:2px;--radius-md:2px;--radius-lg:2px;
   /* bottling 전용 — MODUL 에는 없는 역할 */
-  --malt-clay:#A33B2E;--malt-stock-in:#2F7D52;--malt-stock-low:#7A5610;
+  --malt-clay:#A33B2E;--malt-stock-in:#2A7049;--malt-stock-low:#7A5610;
   --motion-page:180ms; /* 목록→상세 밀어넣기. 와이프 전환은 쓰지 않는다 */
   --shadow-sm:0 1px 2px rgba(43,38,34,.08);--shadow-md:0 6px 20px rgba(0,0,0,.12);--shadow-lg:0 12px 32px rgba(43,38,34,.18);
 }
