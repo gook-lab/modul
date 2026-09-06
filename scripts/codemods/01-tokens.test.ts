@@ -41,6 +41,13 @@ describe('01-tokens — 변환 자체', () => {
     expect(out).not.toContain('accent-hover');
   });
 
+  it('MAP 에 없는 더 긴 이름을 잘라먹지 않는다', () => {
+    // bottling 에 정의 없이 참조만 있던 --color-ink-soft 가 --color-ink 치환에 걸려
+    // --color-text-soft 가 됐던 실제 사고입니다(2026-09-06). 경계 정규식이 막습니다.
+    expect(transform('color: var(--color-ink-soft);')).toBe('color: var(--color-ink-soft);');
+    expect(transform('color: var(--color-ink);')).toBe('color: var(--color-text);');
+  });
+
   it('매핑에 없는 변수는 그대로 둔다', () => {
     expect(transform('gap: var(--size-pull-haptic);')).toBe('gap: var(--size-pull-haptic);');
   });

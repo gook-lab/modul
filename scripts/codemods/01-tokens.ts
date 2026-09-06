@@ -56,9 +56,17 @@ export const KEPT: Record<string, string> = {
   '--duration-step-slide': '위와 같습니다',
 };
 
-/** 긴 이름을 먼저 바꿔야 `--color-amber` 가 `--color-amber-hover` 를 잘라먹지 않습니다. */
-const ORDERED = Object.entries(MAP).sort((a, b) => b[0].length - a[0].length);
+/**
+ * 이름 끝을 경계로 잡습니다. 단순 문자열 치환은 MAP 밖의 더 긴 이름을 잘라먹습니다 —
+ * 실제로 bottling 에 정의 없이 참조만 남아 있던 `--color-ink-soft` 가
+ * `--color-ink` 치환에 걸려 `--color-text-soft` 가 됐습니다(2026-09-06).
+ * MAP 키끼리 정렬해도 MAP 에 없는 이름은 못 지키므로 정규식 경계가 정답입니다.
+ */
+const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 export default function transform(src: string) {
-  return ORDERED.reduce((s, [from, to]) => s.split(from).join(to), src);
+  return Object.entries(MAP).reduce(
+    (s, [from, to]) => s.replace(new RegExp(`${escape(from)}(?![a-z0-9-])`, 'g'), to),
+    src,
+  );
 }
