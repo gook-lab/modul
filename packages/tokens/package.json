@@ -1,6 +1,6 @@
 {
   "name": "@gook-lab/tokens",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "styles.css",
   "files": [
     "styles.css",
@@ -8,7 +8,8 @@
     "theme-malt.css",
     "theme.json",
     "tokens.ts",
-    "theme-malt-vars.css"
+    "theme-malt-vars.css",
+    "theme-malt-components.css"
   ],
   "scripts": {
     "build": "tsx src/build-tokens.ts",
@@ -28,6 +29,7 @@
     "./components.css": "./components.css",
     "./theme-malt.css": "./theme-malt.css",
     "./theme-malt-vars.css": "./theme-malt-vars.css",
+    "./theme-malt-components.css": "./theme-malt-components.css",
     ".": "./tokens.ts"
   },
   "license": "MIT",

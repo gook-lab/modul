@@ -1,35 +1,11 @@
 /* Malt 테마 — bottling/packages/tokens 의 값을 MODUL 토큰 이름에 매핑.
    SSOT 는 @malt/tokens. 값이 바뀌면 build-css 가 이 파일을 다시 생성하도록 연결한다. */
-/* 변수·폰트는 theme-malt-vars.css 에 있습니다. 이 파일은 그 위에 MODUL 클래스와
-   요소 수준의 malt 조정(제목 weight, .btn 터치 타깃, .tag pill)을 더합니다. */
+/* 변수·폰트는 theme-malt-vars.css, 클래스 조정과 malt 프리미티브는
+   theme-malt-components.css(@layer modul)에 있습니다. 이 파일에 남는 것은
+   요소 수준 규칙(bare h1-h3)뿐 — 기존 앱은 이 파일 대신 vars + components 를
+   골라 들입니다(bare 요소 규칙이 앱 타이포를 밀어냄, 2026-09-06 실측). */
 @import './theme-malt-vars.css';
+@import './theme-malt-components.css';
 
-[data-theme=malt] h1,[data-theme=malt] h2,[data-theme=malt] h3,[data-theme=malt] .card-title,[data-theme=malt] .dialog-title,[data-theme=malt] .nav-brand{font-weight:400;letter-spacing:0}
-[data-theme=malt] .btn{font-weight:400;min-height:44px}   /* 터치 타깃 */
-[data-theme=malt] .tag{border-radius:999px}                 /* 칩·배지만 pill */
+[data-theme=malt] h1,[data-theme=malt] h2,[data-theme=malt] h3{font-weight:400;letter-spacing:0}
 
-/* ── malt 프리미티브 클래스 (bottling styles.css 에서 그대로, 토큰만 MODUL 이름) ── */
-[data-theme=malt] .malt-mono{font-family:var(--font-mono)}
-[data-theme=malt] .malt-stock{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:10.5px;color:var(--color-neutral-700)}
-[data-theme=malt] .malt-stock__dot{width:6px;height:6px;border-radius:50%;flex:none;background:currentColor}
-[data-theme=malt] .malt-stock--in{color:var(--malt-stock-in)} [data-theme=malt] .malt-stock--low{color:var(--malt-stock-low)} [data-theme=malt] .malt-stock--out{color:var(--malt-clay)} [data-theme=malt] .malt-stock--price{color:var(--color-neutral-700)}
-[data-theme=malt] .malt-amount-bar{display:flex;align-items:center;gap:10px}
-[data-theme=malt] .malt-amount-bar__track{flex:1;height:4px;background:var(--color-neutral-300);border-radius:2px;overflow:hidden;display:block}
-[data-theme=malt] .malt-amount-bar__fill{display:block;height:100%;background:var(--color-neutral-700)} [data-theme=malt] .malt-amount-bar__fill--low{background:var(--malt-clay)}
-[data-theme=malt] .malt-amount-bar__label{font-family:var(--font-mono);font-size:10.5px;color:var(--color-neutral-700)}
-[data-theme=malt] .malt-index-row{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:10px 0;border:0;background:none;text-align:left;font-family:var(--font-body);font-size:15px;color:var(--color-neutral-800)}
-[data-theme=malt] .malt-index-row--tappable{cursor:pointer}
-[data-theme=malt] .malt-index-row__no{font-family:var(--font-mono);font-size:12px;color:var(--color-neutral-700)} [data-theme=malt] .malt-index-row__title{flex:1;color:var(--color-text)} [data-theme=malt] .malt-index-row__meta{font-family:var(--font-mono);font-size:12px;color:var(--color-neutral-700)}
-[data-theme=malt] .malt-stepbar{height:2px;background:var(--color-divider);overflow:hidden} [data-theme=malt] .malt-stepbar__fill{display:block;height:100%;background:var(--color-accent);transition:width 180ms ease}
-[data-theme=malt] .malt-toggle{position:relative;width:44px;height:24px;flex:none;border:1px solid var(--color-divider);border-radius:999px;background:var(--color-surface);cursor:pointer;padding:0}
-[data-theme=malt] .malt-toggle::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
-[data-theme=malt] .malt-toggle--on{background:var(--color-accent);border-color:var(--color-accent)}
-[data-theme=malt] .malt-toggle__knob{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--color-surface);transition:transform 150ms ease} [data-theme=malt] .malt-toggle--on .malt-toggle__knob{transform:translateX(20px)}
-[data-theme=malt] .malt-numberfield{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 6px;background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md)}
-[data-theme=malt] .malt-numberfield__step{flex:none;width:44px;height:44px;border:0;background:transparent;font:inherit;font-size:17px;color:var(--color-text);cursor:pointer} [data-theme=malt] .malt-numberfield__step:disabled{color:var(--color-neutral-500);cursor:default}
-[data-theme=malt] .malt-numberfield__input{flex:1;min-width:0;border:0;background:transparent;outline:none;font:inherit;font-size:14px;color:var(--color-text);text-align:center;min-height:44px;appearance:textfield}
-[data-theme=malt] .malt-numberfield__input::-webkit-inner-spin-button,[data-theme=malt] .malt-numberfield__input::-webkit-outer-spin-button{appearance:none;margin:0}
-[data-theme=malt] .malt-numberfield__suffix{flex:none;font-size:10.5px;color:var(--color-neutral-700)}
-[data-theme=malt] .malt-chip-group{display:flex;flex-wrap:wrap;gap:8px}
-[data-theme=malt] .malt-chip{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--color-divider);border-radius:999px;background:var(--color-surface);color:var(--color-neutral-800);font:inherit;font-size:13px;cursor:pointer}
-[data-theme=malt] .malt-chip--selected{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-700)}
