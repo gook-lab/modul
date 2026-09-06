@@ -15,7 +15,8 @@
     "release": "changeset version && pnpm install --lockfile-only && pnpm -r build && changeset publish",
     "gen:stories": "tsx scripts/gen-stories.ts",
     "codemod": "jscodeshift -t scripts/codemods/$0 --extensions=tsx,ts --parser=tsx",
-    "size": "size-limit"
+    "size": "size-limit",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
@@ -39,8 +40,9 @@
     "tsx": "^4.16.0",
     "typescript": "^5.5.0",
     "typescript-eslint": "^8.0.0",
-    "vite": "^7.3.6",
-    "zod": "^4.5.4"
+    "vite": "^7",
+    "zod": "^4.5.4",
+    "vitest": "^4"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
