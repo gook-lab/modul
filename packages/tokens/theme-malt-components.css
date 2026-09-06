@@ -30,4 +30,6 @@
 [data-theme=malt] .malt-chip-group{display:flex;flex-wrap:wrap;gap:8px}
 [data-theme=malt] .malt-chip{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--color-divider);border-radius:999px;background:var(--color-surface);color:var(--color-neutral-800);font:inherit;font-size:13px;cursor:pointer}
 [data-theme=malt] .malt-chip--selected{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-700)}
+/* Radix ToggleGroup 이 붙이는 선택 상태 — ChipGroup 은 이걸 씁니다. --selected 는 손으로 조립하는 자리용 */
+[data-theme=malt] .malt-chip[data-state=on]{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-700)}
 }

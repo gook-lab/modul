@@ -42,4 +42,6 @@
 | AppBar.md | AppBar |
 | BottomActions.md | BottomActions |
 | ScrollTabs.md | ScrollTabs |
+| IndexRow.md | IndexRow (malt-ui) |
+| ChipGroup.md | ChipGroup (malt-ui) |
 | Input.md · Combobox.md · Toast.md · Table.md | 이관 완료 — md 가 원본, 스토리북 RADIO 탭은 사본 |
