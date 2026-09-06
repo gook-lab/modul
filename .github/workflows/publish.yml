@@ -1,0 +1,31 @@
+# GitHub Packages 배포 — CI 의 GITHUB_TOKEN(packages:write)으로 배포합니다.
+# 개인 토큰에 write:packages 를 늘리지 않기 위한 구조입니다. 수동 트리거 전용:
+# 버전 올림(changeset)과 배포 시점은 사람이 정합니다.
+name: publish
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # 버전은 package.json 의 packageManager 하나가 정합니다 — 여기 version 을 같이 주면 충돌합니다.
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm -r build
+      # 이미 있는 버전은 건너뜁니다 — 재실행이 실패로 끝나지 않게.
+      - run: |
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+          pnpm -r publish --no-git-checks --tag latest || true
+          for p in tokens motion icons ui malt-ui; do
+            name="@gook-lab/$p"; ver=$(node -p "require('./packages/$p/package.json').version")
+            npm view "$name@$ver" version --registry=https://npm.pkg.github.com > /dev/null 2>&1 \
+              && echo "OK  $name@$ver" || { echo "FAIL $name@$ver 이 레지스트리에 없습니다"; exit 1; }
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
