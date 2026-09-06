@@ -1,6 +1,6 @@
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
-import { cx } from '@modul/ui';
-import type { NativeProps } from '@modul/ui';
+import { cx } from '@gook-lab/ui';
+import type { NativeProps } from '@gook-lab/ui';
 
 export type IndexRowProps = NativeProps<'button', { index: number; title: ReactNode; meta?: ReactNode; /** title 아래 두 번째 줄 — StockBadge 등 */ sub?: ReactNode; opacity?: number; onClick?: () => void }>;
 /** 번호 붙은 도감 행. onClick 이 있으면 <button>, 없으면 <div>. */

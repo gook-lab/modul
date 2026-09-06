@@ -3,17 +3,17 @@
 순서: 토큰 → 프리미티브 → 셸 → 앱 화면. 각 단계는 독립 PR, 화면은 F 번호 순서.
 
 ## 0. 준비
-- `@modul/tokens` 설치, `theme-malt.css` 링크, `<html data-theme="malt">`
+- `@gook-lab/tokens` 설치, `theme-malt.css` 링크, `<html data-theme="malt">`
 - bottling `build-css.ts` 출력 → `styles.css` · `theme-malt.css` 로 대체(값 동일, 이름만 MODUL). 하루 동안 두 스타일시트 병행 후 옛 것 제거
 
 ## 1. codemod 목록 (jscodeshift, `scripts/codemods/`)
 | # | 대상 | 변환 | 자동화 |
 | --- | --- | --- | --- |
 | 1 | `var(--malt-cream)` 등 색 변수 | → `var(--color-bg)` … 매핑표(tmalt 페이지) | sed 급, 100% |
-| 2 | `import { Button } from '@malt/ui-web'` | → `@modul/ui`. props 동일(variant 이름 amber→primary, ghost 유지) | 100% |
+| 2 | `import { Button } from '@malt/ui-web'` | → `@gook-lab/ui`. props 동일(variant 이름 amber→primary, ghost 유지) | 100% |
 | 3 | `<Sheet>` (Radix Dialog 래퍼) | → MODUL Sheet. `title` 필수 유지, `onOpenChange(false)` → `onClose` | 95% (onOpenChange 에 로직 있으면 수동) |
 | 4 | `ToastProvider` + `useToast().show(msg, { undo })` | → `{ action: { label: '되돌리기', run: undo } }` | 100% |
-| 5 | `ChipGroup type="single"` | 그대로(`@malt/ui-web-next`) — import 경로만 | 100% |
+| 5 | `ChipGroup type="single"` | 그대로(`@gook-lab/malt-ui`) — import 경로만 | 100% |
 | 6 | `NumberField` | 그대로 + `...rest` 통과. `aria-label` 필수는 타입이 잡음 | 100% |
 | 7 | `Toggle` | → MODUL `Switch` (role=switch 동일, `on`→`checked`, `onChange`→`onCheckedChange`) | 100% |
 | 8 | `StepBar` | 그대로 | — |

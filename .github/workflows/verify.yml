@@ -11,15 +11,15 @@ jobs:
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       # test:a11y 는 vitest 브라우저 모드(playwright)로 스토리를 실제로 렌더합니다.
-      - run: pnpm --filter @modul/storybook exec playwright install --with-deps chromium
-      - run: pnpm --filter @modul/tokens build
+      - run: pnpm --filter @gook-lab/storybook exec playwright install --with-deps chromium
+      - run: pnpm --filter @gook-lab/tokens build
       - run: pnpm gen:stories && git diff --exit-code -- 'packages/ui/src/**/*.stories.tsx'
       - run: pnpm lint
       - run: pnpm typecheck
-      # -r 이어야 @modul/motion 의 presets.test.ts 까지 돕니다.
+      # -r 이어야 @gook-lab/motion 의 presets.test.ts 까지 돕니다.
       - run: pnpm -r test
       # 루트의 코드모드 테스트는 -r 에 잡히지 않습니다.
       - run: pnpm test
       - run: pnpm -r build && npx size-limit
-      - run: pnpm --filter @modul/storybook build
-      - run: pnpm --filter @modul/storybook test:a11y   # addon-a11y + axe (color-contrast 포함)
+      - run: pnpm --filter @gook-lab/storybook build
+      - run: pnpm --filter @gook-lab/storybook test:a11y   # addon-a11y + axe (color-contrast 포함)

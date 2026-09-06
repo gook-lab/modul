@@ -10,12 +10,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@modul/ui': resolve(__dirname, '../../packages/ui/src/index.ts'),
-      '@modul/motion': resolve(__dirname, '../../packages/motion/src/index.ts'),
-      '@modul/icons': resolve(__dirname, '../../packages/icons/src/index.tsx'),
-      '@modul/tokens/styles.css': resolve(__dirname, '../../packages/tokens/styles.css'),
-      '@modul/tokens/components.css': resolve(__dirname, '../../packages/tokens/components.css'),
-      '@modul/tokens/theme-malt.css': resolve(__dirname, '../../packages/tokens/theme-malt.css'),
+      '@gook-lab/ui': resolve(__dirname, '../../packages/ui/src/index.ts'),
+      '@gook-lab/motion': resolve(__dirname, '../../packages/motion/src/index.ts'),
+      '@gook-lab/icons': resolve(__dirname, '../../packages/icons/src/index.tsx'),
+      '@gook-lab/tokens/styles.css': resolve(__dirname, '../../packages/tokens/styles.css'),
+      '@gook-lab/tokens/components.css': resolve(__dirname, '../../packages/tokens/components.css'),
+      '@gook-lab/tokens/theme-malt.css': resolve(__dirname, '../../packages/tokens/theme-malt.css'),
     },
   },
 });

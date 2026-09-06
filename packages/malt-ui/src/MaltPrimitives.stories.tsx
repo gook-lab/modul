@@ -9,7 +9,7 @@ import { NumberField } from './NumberField';
 import { IndexRow } from './IndexRow';
 
 /**
- * 위스키 앱 전용 프리미티브 7종. 코어(@modul/ui)로 승격하지 않습니다 — 도메인 어휘가
+ * 위스키 앱 전용 프리미티브 7종. 코어(@gook-lab/ui)로 승격하지 않습니다 — 도메인 어휘가
  * 들어가 있어서 다른 앱에서는 이름이 맞지 않습니다(PROMPT 4장).
  * Malt 테마에서 보는 것이 기준이라 스토리 전체를 data-theme=malt 로 감쌉니다.
  */

@@ -5,12 +5,16 @@
 A headless React component library. Every value ships as a CSS variable, components never block native attributes, and your app CSS always wins.
 
 ```bash
-pnpm add @modul/ui @modul/tokens
+# @gook-lab/* lives on GitHub Packages. Consumers need one line in .npmrc.
+echo '@gook-lab:registry=https://npm.pkg.github.com' >> .npmrc
+pnpm add @gook-lab/ui @gook-lab/tokens
 ```
 
+The `@modul` scope belongs to another organization (ModulBank), so the packages cannot be published under that name. Installing needs a GitHub token with `read:packages`.
+
 ```tsx
-import { Button } from '@modul/ui';
-import '@modul/tokens/styles.css';
+import { Button } from '@gook-lab/ui';
+import '@gook-lab/tokens/styles.css';
 
 <Button variant="primary" type="submit" form="contact" data-testid="cta">
   Send
@@ -23,11 +27,11 @@ import '@modul/tokens/styles.css';
 
 | Package | What | Size |
 | --- | --- | --- |
-| `@modul/tokens` | CSS variables. light · dark · malt, three themes | 6.7 KB css (gzip) |
-| `@modul/ui` | Headless components, 51 exports | 27.4 KB (gzip, all) |
-| `@modul/motion` | 19 motion hooks and components, 8 presets | 1.54 KB (gzip, hooks + Marquee/Reveal) |
-| `@modul/icons` | Lucide re-exports with a size scale | — |
-| `@malt/ui-web-next` | Seven primitives for the whisky app. Not promoted into core | — |
+| `@gook-lab/tokens` | CSS variables. light · dark · malt, three themes | 6.7 KB css (gzip) |
+| `@gook-lab/ui` | Headless components, 51 exports | 27.4 KB (gzip, all) |
+| `@gook-lab/motion` | 19 motion hooks and components, 8 presets | 1.54 KB (gzip, hooks + Marquee/Reveal) |
+| `@gook-lab/icons` | Lucide re-exports with a size scale | — |
+| `@gook-lab/malt-ui` | Seven primitives for the whisky app. Not promoted into core | — |
 
 Sizes come from `npx size-limit`; the budgets live in [`.size-limit.json`](./.size-limit.json).
 
@@ -61,8 +65,8 @@ Importing `Button` alone does not pull in Radix.
 | Measured | Budget | Actual |
 | --- | --- | --- |
 | `{ Button, Input, Tag, Card }` | 4 KB | 1.83 KB |
-| `@modul/ui`, everything (MODUL code) | 30 KB | 27.4 KB |
-| `@modul/ui`, everything (with Radix) | 74 KB | 71.42 KB |
+| `@gook-lab/ui`, everything (MODUL code) | 30 KB | 27.4 KB |
+| `@gook-lab/ui`, everything (with Radix) | 74 KB | 71.42 KB |
 
 Bundling through a single barrel collects every `import * as RTabs from '@radix-ui/react-tabs'` at the top of `dist/index.js`. Radix, cmdk, and react-day-picker do not declare `sideEffects: false`, so a bundler cannot drop those statements and `Button` alone costs 47 KB. Splitting the `tsup` entries per component leaves the barrel as re-exports only.
 
@@ -87,8 +91,8 @@ Consumer-side rules live in the [guk-lab-docs playbook](https://github.com/gook-
 These exist to show what is missing once the library is actually wired into a screen. They reference workspace sources directly, so a library edit only needs a refresh.
 
 ```bash
-pnpm --filter @modul/app-admin dev        # 11 form components assembled, Table, server error flow
-pnpm --filter @modul/app-portfolio dev    # motion wrappers, Reveal, Marquee
+pnpm --filter @gook-lab/app-admin dev        # 11 form components assembled, Table, server error flow
+pnpm --filter @gook-lab/app-portfolio dev    # motion wrappers, Reveal, Marquee
 ```
 
 The two Malt screens (F4 feed, F5 shop detail) live under `Domain/Malt 화면` in Storybook. They are assembled from core and domain primitives with no new components, and that assembly is what surfaced the `.card-body` opacity problem.
@@ -97,8 +101,8 @@ The two Malt screens (F4 feed, F5 shop detail) live under `Domain/Malt 화면` i
 
 ```bash
 pnpm install
-pnpm --filter @modul/tokens build          # theme.json ↔ CSS check + tokens.ts
-pnpm --filter @modul/storybook dev         # localhost:6006, three-theme toggle
+pnpm --filter @gook-lab/tokens build          # theme.json ↔ CSS check + tokens.ts
+pnpm --filter @gook-lab/storybook dev         # localhost:6006, three-theme toggle
 ```
 
 ```bash
@@ -107,12 +111,12 @@ pnpm lint                                  # 0 errors
 pnpm -r test                               # 148 passed (ui 121 · tokens 23 · motion 4)
 pnpm -r build                              # 4 packages
 npx size-limit                             # within budget
-pnpm --filter @modul/storybook build
-pnpm --filter @modul/storybook test:a11y   # 92 stories, 0 axe violations
+pnpm --filter @gook-lab/storybook build
+pnpm --filter @gook-lab/storybook test:a11y   # 92 stories, 0 axe violations
 ```
 
 ```bash
-pnpm --filter @modul/storybook test:visual # 92 screenshot comparisons (baselines are per-OS)
+pnpm --filter @gook-lab/storybook test:visual # 92 screenshot comparisons (baselines are per-OS)
 ```
 
 Last measured 2026-09-04, all green. Both gates render the stories for real in Storybook 10's vitest browser mode. Visual regression is not a required CI gate — font rasterization differs per OS, so macOS baselines cannot be reused on a Linux runner; it is a pre-release local check. The evidence that axe alone is not enough: changing `--space-4` from 16px to 40px still passes a11y 92/92, and only the screenshot snapshot catches it. Both gates render the stories for real in Storybook 10's vitest browser mode. Visual regression is not a required CI gate — font rasterization differs per OS, so macOS baselines cannot be reused on a Linux runner; it is a pre-release local check. The evidence that axe alone is not enough: changing `--space-4` from 16px to 40px still passes a11y 92/92, and only the screenshot snapshot catches it. `pnpm gen:stories` generates stories from the RADIO docs and prop types, skipping the 16 written by hand. CI runs the same sequence in [`.github/workflows/verify.yml`](./.github/workflows/verify.yml).

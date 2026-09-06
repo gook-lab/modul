@@ -1,5 +1,5 @@
 {
-  "name": "@modul/app-admin",
+  "name": "@gook-lab/app-admin",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,10 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@modul/icons": "workspace:*",
-    "@modul/motion": "workspace:*",
-    "@modul/tokens": "workspace:*",
-    "@modul/ui": "workspace:*",
+    "@gook-lab/icons": "workspace:*",
+    "@gook-lab/motion": "workspace:*",
+    "@gook-lab/tokens": "workspace:*",
+    "@gook-lab/ui": "workspace:*",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

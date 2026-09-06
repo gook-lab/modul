@@ -1,5 +1,5 @@
 {
-  "name": "@modul/tokens",
+  "name": "@gook-lab/tokens",
   "version": "0.1.0",
   "main": "styles.css",
   "files": [
@@ -35,6 +35,7 @@
     "directory": "packages/tokens"
   },
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
   }
 }

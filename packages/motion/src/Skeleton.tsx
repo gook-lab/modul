@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef, CSSProperties } from 'react';
-import { useLabels } from '@modul/ui';
+import { useLabels } from '@gook-lab/ui';
 
 const shimmer: CSSProperties = {
   background: 'linear-gradient(90deg, var(--color-neutral-200) 25%, var(--color-neutral-300) 50%, var(--color-neutral-200) 75%)',

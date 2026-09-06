@@ -25,7 +25,7 @@ const config: StorybookConfig = {
   framework: getAbsolutePath("@storybook/react-vite"),
   /**
    * 워크스페이스 패키지를 dist 대신 src 로 알리아스합니다.
-   * @modul/ui 와 @modul/motion 은 서로를 import 하는 순환이라(EmptyState → motion, Reveal → ui)
+   * @gook-lab/ui 와 @gook-lab/motion 은 서로를 import 하는 순환이라(EmptyState → motion, Reveal → ui)
    * node_modules 링크로 풀면 pnpm 이 순환 워크스페이스 의존을 경고하고 dist 가 낡을 수 있습니다.
    * 소스 알리아스는 그 둘을 같은 그래프 안에서 해석하고 HMR 도 그대로 동작합니다.
    */
@@ -33,16 +33,16 @@ const config: StorybookConfig = {
     cfg.resolve = cfg.resolve ?? {};
     cfg.resolve.alias = [
       ...(Array.isArray(cfg.resolve.alias) ? cfg.resolve.alias : []),
-      { find: /^@modul\/tokens\/(.*)$/, replacement: resolve(root, 'packages/tokens/$1') },
-      { find: '@modul/tokens', replacement: resolve(root, 'packages/tokens/tokens.ts') },
-      // 서브패스(@modul/ui/Button)도 소스로 받습니다. 레포 규칙이 src/<Name>/<Name>.tsx 라
+      { find: /^@gook-lab\/tokens\/(.*)$/, replacement: resolve(root, 'packages/tokens/$1') },
+      { find: '@gook-lab/tokens', replacement: resolve(root, 'packages/tokens/tokens.ts') },
+      // 서브패스(@gook-lab/ui/Button)도 소스로 받습니다. 레포 규칙이 src/<Name>/<Name>.tsx 라
       // $1/$1 로 펼칩니다 — 정규식 규칙이 먼저 와야 bare 규칙에 먹히지 않습니다.
       // packages/ui 의 exports 맵이 다른 이름을 쓰면 이 줄도 같이 맞춰 주세요.
-      { find: /^@modul\/ui\/(.*)$/, replacement: resolve(root, 'packages/ui/src/$1/$1') },
-      { find: '@modul/ui', replacement: resolve(root, 'packages/ui/src/index.ts') },
-      { find: '@modul/motion', replacement: resolve(root, 'packages/motion/src/index.ts') },
-      { find: '@modul/icons', replacement: resolve(root, 'packages/icons/src/index.tsx') },
-      { find: '@malt/ui-web-next', replacement: resolve(root, 'packages/malt-ui/src/index.ts') },
+      { find: /^@gook-lab\/ui\/(.*)$/, replacement: resolve(root, 'packages/ui/src/$1/$1') },
+      { find: '@gook-lab/ui', replacement: resolve(root, 'packages/ui/src/index.ts') },
+      { find: '@gook-lab/motion', replacement: resolve(root, 'packages/motion/src/index.ts') },
+      { find: '@gook-lab/icons', replacement: resolve(root, 'packages/icons/src/index.tsx') },
+      { find: '@gook-lab/malt-ui', replacement: resolve(root, 'packages/malt-ui/src/index.ts') },
     ];
     return cfg;
   },

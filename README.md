@@ -5,12 +5,16 @@
 헤드리스 React 컴포넌트 라이브러리입니다. 값은 전부 CSS 변수로 나가고, 컴포넌트는 네이티브 속성을 막지 않으며, 앱 CSS 가 항상 이깁니다.
 
 ```bash
-pnpm add @modul/ui @modul/tokens
+# @gook-lab/* 는 GitHub Packages 에 있습니다. 소비자 저장소에 .npmrc 한 줄이 필요합니다.
+echo '@gook-lab:registry=https://npm.pkg.github.com' >> .npmrc
+pnpm add @gook-lab/ui @gook-lab/tokens
 ```
 
+`@modul` 스코프는 다른 조직(ModulBank)이 쓰고 있어 그 이름으로는 배포할 수 없습니다. 설치에는 `read:packages` 권한이 있는 GitHub 토큰이 필요합니다.
+
 ```tsx
-import { Button } from '@modul/ui';
-import '@modul/tokens/styles.css';
+import { Button } from '@gook-lab/ui';
+import '@gook-lab/tokens/styles.css';
 
 <Button variant="primary" type="submit" form="contact" data-testid="cta">
   보내기
@@ -23,11 +27,11 @@ import '@modul/tokens/styles.css';
 
 | 패키지 | 무엇 | 규모 |
 | --- | --- | --- |
-| `@modul/tokens` | `theme.json` 에서 생성되는 CSS 변수. light · dark · malt 3 테마 | css 6.7 KB (gzip) |
-| `@modul/ui` | 헤드리스 컴포넌트. export 51개 | 27.4 KB (gzip, 전부) |
-| `@modul/motion` | 모션 훅·컴포넌트 19종 + 프리셋 8종 | 1.54 KB (gzip, 훅 + Marquee/Reveal) |
-| `@modul/icons` | Lucide 재export + 크기 규격 | — |
-| `@malt/ui-web-next` | 위스키 앱 전용 프리미티브 7종. 코어로 승격하지 않습니다 | — |
+| `@gook-lab/tokens` | `theme.json` 에서 생성되는 CSS 변수. light · dark · malt 3 테마 | css 6.7 KB (gzip) |
+| `@gook-lab/ui` | 헤드리스 컴포넌트. export 51개 | 27.4 KB (gzip, 전부) |
+| `@gook-lab/motion` | 모션 훅·컴포넌트 19종 + 프리셋 8종 | 1.54 KB (gzip, 훅 + Marquee/Reveal) |
+| `@gook-lab/icons` | Lucide 재export + 크기 규격 | — |
+| `@gook-lab/malt-ui` | 위스키 앱 전용 프리미티브 7종. 코어로 승격하지 않습니다 | — |
 
 수치는 `npx size-limit` 실측값이고 예산은 [`.size-limit.json`](./.size-limit.json) 에 있습니다.
 
@@ -61,8 +65,8 @@ cx('btn', 'btn-primary', 'btn-sm', '!btn-ghost')  → 'btn btn-sm btn-ghost'
 | 측정 | 예산 | 실측 |
 | --- | --- | --- |
 | `{ Button, Input, Tag, Card }` | 4 KB | 1.83 KB |
-| `@modul/ui` 전부 (MODUL 코드) | 30 KB | 27.4 KB |
-| `@modul/ui` 전부 (Radix 포함) | 74 KB | 71.42 KB |
+| `@gook-lab/ui` 전부 (MODUL 코드) | 30 KB | 27.4 KB |
+| `@gook-lab/ui` 전부 (Radix 포함) | 74 KB | 71.42 KB |
 
 배럴 하나로 번들하면 `dist/index.js` 최상단에 `import * as RTabs from '@radix-ui/react-tabs'` 같은 문장이 전부 모입니다. Radix · cmdk · react-day-picker 는 `sideEffects: false` 를 선언하지 않아 번들러가 이 문장을 지우지 못하고, 그러면 `Button` 만 써도 47 KB 가 딸려옵니다. 그래서 `tsup` 엔트리를 컴포넌트별로 나눠 배럴이 재수출만 하게 했습니다.
 
@@ -87,8 +91,8 @@ cx('btn', 'btn-primary', 'btn-sm', '!btn-ghost')  → 'btn btn-sm btn-ghost'
 라이브러리를 실제로 붙였을 때 무엇이 비는지 보는 용도입니다. 워크스페이스 소스를 바로 참조하므로 라이브러리를 고치면 새로고침만 하면 됩니다.
 
 ```bash
-pnpm --filter @modul/app-admin dev        # 폼 11종 조립 · Table · 서버 오류 흐름
-pnpm --filter @modul/app-portfolio dev    # 모션 래퍼 · Reveal · Marquee
+pnpm --filter @gook-lab/app-admin dev        # 폼 11종 조립 · Table · 서버 오류 흐름
+pnpm --filter @gook-lab/app-portfolio dev    # 모션 래퍼 · Reveal · Marquee
 ```
 
 Malt 앱의 두 화면(F4 피드 · F5 매장 상세)은 스토리북의 `Domain/Malt 화면` 에 있습니다. 새 컴포넌트 없이 코어와 도메인 프리미티브만으로 조립한 것이고, 이 조립에서 `.card-body` 의 투명도 문제가 드러났습니다.
@@ -97,8 +101,8 @@ Malt 앱의 두 화면(F4 피드 · F5 매장 상세)은 스토리북의 `Domain
 
 ```bash
 pnpm install
-pnpm --filter @modul/tokens build          # theme.json ↔ CSS 대조 + tokens.ts
-pnpm --filter @modul/storybook dev         # localhost:6006, 3 테마 토글
+pnpm --filter @gook-lab/tokens build          # theme.json ↔ CSS 대조 + tokens.ts
+pnpm --filter @gook-lab/storybook dev         # localhost:6006, 3 테마 토글
 ```
 
 ```bash
@@ -107,13 +111,13 @@ pnpm lint                                  # 0 errors
 pnpm -r test                               # 148 passed (ui 121 · tokens 23 · motion 4)
 pnpm -r build                              # 4 패키지
 npx size-limit                             # 예산 내
-pnpm --filter @modul/storybook build
-pnpm --filter @modul/storybook test:a11y   # 스토리 92개, axe 위반 0
-pnpm --filter @modul/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
+pnpm --filter @gook-lab/storybook build
+pnpm --filter @gook-lab/storybook test:a11y   # 스토리 92개, axe 위반 0
+pnpm --filter @gook-lab/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
 ```
 
 ```bash
-pnpm --filter @modul/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
+pnpm --filter @gook-lab/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
 ```
 
 마지막 실측은 2026-09-04 이고 전 항목 통과입니다. 두 게이트 모두 Storybook 10 의 vitest 브라우저 모드에서 스토리를 실제로 렌더해 검사합니다. 시각 회귀는 CI 필수 게이트에 넣지 않았습니다 — 폰트 래스터라이즈가 OS 마다 달라 macOS 기준선을 리눅스 러너에 그대로 쓸 수 없어서, 배포 전 로컬 확인용입니다. axe 만으로 부족하다는 근거는 실측에 있습니다: `--space-4` 를 16px → 40px 로 바꿔도 a11y 92/92 는 그대로 통과하고 시각 스냅샷만 잡았습니다. 두 게이트 모두 Storybook 10 의 vitest 브라우저 모드에서 스토리를 실제로 렌더해 검사합니다. 시각 회귀는 CI 필수 게이트에 넣지 않았습니다 — 폰트 래스터라이즈가 OS 마다 달라 macOS 기준선을 리눅스 러너에 그대로 쓸 수 없어서, 배포 전 로컬 확인용입니다. axe 만으로는 부족하다는 근거는 실측에 있습니다: `--space-4` 를 16px → 40px 로 바꿔도 a11y 92/92 는 그대로 통과하고 시각 스냅샷만 잡았습니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 16개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.

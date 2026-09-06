@@ -83,16 +83,16 @@ importers:
 
   apps/admin:
     dependencies:
-      '@modul/icons':
+      '@gook-lab/icons':
         specifier: workspace:*
         version: link:../../packages/icons
-      '@modul/motion':
+      '@gook-lab/motion':
         specifier: workspace:*
         version: link:../../packages/motion
-      '@modul/tokens':
+      '@gook-lab/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
-      '@modul/ui':
+      '@gook-lab/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       react:
@@ -111,16 +111,16 @@ importers:
 
   apps/portfolio:
     dependencies:
-      '@modul/icons':
+      '@gook-lab/icons':
         specifier: workspace:*
         version: link:../../packages/icons
-      '@modul/motion':
+      '@gook-lab/motion':
         specifier: workspace:*
         version: link:../../packages/motion
-      '@modul/tokens':
+      '@gook-lab/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
-      '@modul/ui':
+      '@gook-lab/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       react:
@@ -197,10 +197,10 @@ importers:
 
   packages/malt-ui:
     dependencies:
-      '@modul/tokens':
+      '@gook-lab/tokens':
         specifier: workspace:*
         version: link:../tokens
-      '@modul/ui':
+      '@gook-lab/ui':
         specifier: workspace:*
         version: link:../ui
       react:
@@ -219,7 +219,7 @@ importers:
 
   packages/motion:
     dependencies:
-      '@modul/tokens':
+      '@gook-lab/tokens':
         specifier: workspace:*
         version: link:../tokens
       react:
@@ -259,7 +259,7 @@ importers:
 
   packages/ui:
     dependencies:
-      '@modul/tokens':
+      '@gook-lab/tokens':
         specifier: workspace:*
         version: link:../tokens
       '@radix-ui/react-accordion':

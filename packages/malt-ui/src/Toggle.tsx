@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { cx } from '@modul/ui';
-import type { NativeProps } from '@modul/ui';
+import { cx } from '@gook-lab/ui';
+import type { NativeProps } from '@gook-lab/ui';
 
 export type ToggleProps = NativeProps<'button', { on: boolean; onChange: () => void; label: string }>;
 /** role=switch. 보이는 44×24, 히트 영역은 CSS ::after 로 44px. */

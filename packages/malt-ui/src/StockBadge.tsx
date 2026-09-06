@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { cx } from '@modul/ui';
-import type { NativeProps } from '@modul/ui';
+import { cx } from '@gook-lab/ui';
+import type { NativeProps } from '@gook-lab/ui';
 
 export type StockStatus = 'IN_STOCK' | 'LOW' | 'SOLD_OUT' | 'PRICE_ONLY';
 export type StockBadgeProps = NativeProps<'span', { status: StockStatus; label: string }>;

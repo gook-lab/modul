@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@modul/tokens/components.css';
+import '@gook-lab/tokens/components.css';
 import App from './App';
 
 createRoot(document.getElementById('root')!).render(

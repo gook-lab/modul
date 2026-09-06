@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { cx } from '../utils/cx';
-import { Skeleton } from '@modul/motion';
+import { Skeleton } from '@gook-lab/motion';
 import type { NativeProps } from '../utils/polymorphic';
 import { useLabels } from '../utils/labels';
 

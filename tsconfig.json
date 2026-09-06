@@ -15,13 +15,13 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@modul/ui": ["./packages/ui/src/index.ts"],
-      "@modul/ui/*": ["./packages/ui/src/*"],
-      "@modul/motion": ["./packages/motion/src/index.ts"],
-      "@modul/motion/*": ["./packages/motion/src/*"],
-      "@modul/icons": ["./packages/icons/src/index.tsx"],
-      "@modul/tokens": ["./packages/tokens/tokens.ts"],
-      "@malt/ui-web-next": ["./packages/malt-ui/src/index.ts"]
+      "@gook-lab/ui": ["./packages/ui/src/index.ts"],
+      "@gook-lab/ui/*": ["./packages/ui/src/*"],
+      "@gook-lab/motion": ["./packages/motion/src/index.ts"],
+      "@gook-lab/motion/*": ["./packages/motion/src/*"],
+      "@gook-lab/icons": ["./packages/icons/src/index.tsx"],
+      "@gook-lab/tokens": ["./packages/tokens/tokens.ts"],
+      "@gook-lab/malt-ui": ["./packages/malt-ui/src/index.ts"]
     }
   },
   "include": ["packages", "apps", "scripts"],

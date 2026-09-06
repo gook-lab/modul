@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { cx } from '@modul/ui';
-import type { NativeProps } from '@modul/ui';
-import { useLabels } from '@modul/ui';
+import { cx } from '@gook-lab/ui';
+import type { NativeProps } from '@gook-lab/ui';
+import { useLabels } from '@gook-lab/ui';
 
 export type StepBarProps = NativeProps<'div', { step: number; total: number }>;
 /** 상단 2px 진행 바. 페이지 전환 표시도 이것 — 와이프 없음. */

@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useRef, useState, type ComponentPropsWithoutRef } from 'react';
-import { cx, mergeRefs } from '@modul/ui';
+import { cx, mergeRefs } from '@gook-lab/ui';
 
 export function useInView<T extends Element>({ once = true, threshold = 0.2 } = {}) {
   const ref = useRef<T>(null);
