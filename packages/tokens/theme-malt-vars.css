@@ -3,6 +3,15 @@
    theme-malt.css 전체를 들이면 [data-theme=malt] h2 의 weight 400 이 앱의
    .stub__h2(500) 를 누릅니다(2026-09-06 스크린샷 실측). */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono&display=swap');
+/* 모션·이징 — styles.css 의 :root 와 같은 값입니다(SSOT theme.json).
+   토큰만 들이는 소비자(bottling 0단계)는 styles.css 를 안 받으므로 여기에도
+   둡니다. 전체 MODUL 소비자는 같은 값이 두 번 정의될 뿐이라 무해합니다.
+   malt 의 --motion-page 재정의(180ms)가 이겨야 하므로 이 블록이 먼저 옵니다 —
+   :root 와 [data-theme=malt] 는 명시도가 같아 순서가 승부를 정합니다. */
+:root{
+  --motion-fast:120ms;--motion-base:200ms;--motion-slow:320ms;--motion-page:720ms;
+  --ease-out:cubic-bezier(0,0,.2,1);--ease-decel:cubic-bezier(.2,.8,.2,1);--ease-inout:cubic-bezier(.76,0,.24,1);
+}
 [data-theme=malt]{
   --color-bg:#F7F3EA;--color-surface:#FFFDF8;--color-text:#2B2622;--color-accent:#B5731F;--color-divider:#E4DDD1;
   --color-neutral-100:#FFFDF8;--color-neutral-200:#F2EDE3;--color-neutral-300:#E4DDD1;--color-neutral-400:#CFC7B9;--color-neutral-500:#ADA49A;--color-neutral-600:#9C9289;--color-neutral-700:#6E655D;--color-neutral-800:#3A342E;--color-neutral-900:#2B2622;
