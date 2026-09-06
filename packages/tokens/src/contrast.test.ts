@@ -25,7 +25,7 @@ export const contrast = (a: string, b: string) => {
 
 const theme = parseThemeFile(themeJson);
 const styles = readVars('../styles.css');
-const malt = readVars('../theme-malt.css');
+const malt = readVars('../theme-malt-vars.css');
 
 /** 배포 CSS 에서 실제 값을 읽습니다 — theme.json 에 없는 램프도 검사 대상입니다. */
 const varOf = (block: Record<string, string> | undefined, name: string) => {

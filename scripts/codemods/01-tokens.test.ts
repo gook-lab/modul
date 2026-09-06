@@ -21,7 +21,7 @@ const norm = (v: string) => v.trim().toLowerCase().replace(/\s+/g, '').replace(/
 
 const MODUL = {
   ...vars(readFileSync(new URL('../../packages/tokens/styles.css', import.meta.url), 'utf8')),
-  ...vars(readFileSync(new URL('../../packages/tokens/theme-malt.css', import.meta.url), 'utf8')),
+  ...vars(readFileSync(new URL('../../packages/tokens/theme-malt-vars.css', import.meta.url), 'utf8')),
 };
 
 /** bottling 은 이 저장소 밖입니다. 없으면 대조 테스트는 건너뜁니다. */

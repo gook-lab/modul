@@ -3,7 +3,11 @@
 순서: 토큰 → 프리미티브 → 셸 → 앱 화면. 각 단계는 독립 PR, 화면은 F 번호 순서.
 
 ## 0. 준비
-- `@gook-lab/tokens` 설치, `theme-malt.css` 링크, `<html data-theme="malt">`
+- `@gook-lab/tokens` 설치, `theme-malt-vars.css` 링크, `<html data-theme="malt">`.
+  `styles.css` 나 `theme-malt.css` 전체를 들이지 않습니다 — 베이스 요소 규칙
+  (body 15px/1.55, `h2{font-weight:400}`)이 앱 타이포를 밀어냅니다. 실측:
+  styles.css 를 들이면 랜딩에서 다른 픽셀 11.9%, theme-malt.css 는 `.stub__h2`
+  weight 500→400. vars 파일이면 0%(2026-09-06 스크린샷 대조)
 - bottling `build-css.ts` 출력 → `styles.css` · `theme-malt.css` 로 대체(값 동일, 이름만 MODUL). 하루 동안 두 스타일시트 병행 후 옛 것 제거
 
 ## 1. codemod 목록 (jscodeshift, `scripts/codemods/`)

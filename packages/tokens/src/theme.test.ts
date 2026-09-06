@@ -29,7 +29,7 @@ describe('theme.json 스키마', () => {
 
 describe('배포 CSS 대조', () => {
   const styles = readVars('../styles.css');
-  const malt = readVars('../theme-malt.css');
+  const malt = readVars('../theme-malt-vars.css');
   const theme = parseThemeFile(themeJson);
 
   it('세 테마 블록이 배포 CSS 에 있다', () => {
@@ -49,7 +49,7 @@ describe('배포 CSS 대조', () => {
 
   it('malt 의 extra 토큰도 일치한다', () => {
     const extra = theme.themes.malt.extra ?? {};
-    expect(compare('theme-malt.css [malt]', extra, malt['[data-theme=malt]'])).toEqual([]);
+    expect(compare('theme-malt-vars.css [malt]', extra, malt['[data-theme=malt]'])).toEqual([]);
   });
 
   it('어긋나면 어느 변수가 왜 다른지 돌려준다', () => {

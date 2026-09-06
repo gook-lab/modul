@@ -1,0 +1,16 @@
+/* Malt 테마 — 변수와 폰트만. 요소·컴포넌트 규칙이 없어서 기존 앱에 토큰 단계로
+   들여도 앱 CSS 를 건드리지 않습니다. bottling 이전 0단계는 이 파일을 씁니다 —
+   theme-malt.css 전체를 들이면 [data-theme=malt] h2 의 weight 400 이 앱의
+   .stub__h2(500) 를 누릅니다(2026-09-06 스크린샷 실측). */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono&display=swap');
+[data-theme=malt]{
+  --color-bg:#F7F3EA;--color-surface:#FFFDF8;--color-text:#2B2622;--color-accent:#B5731F;--color-divider:#E4DDD1;
+  --color-neutral-100:#FFFDF8;--color-neutral-200:#F2EDE3;--color-neutral-300:#E4DDD1;--color-neutral-400:#CFC7B9;--color-neutral-500:#ADA49A;--color-neutral-600:#9C9289;--color-neutral-700:#6E655D;--color-neutral-800:#3A342E;--color-neutral-900:#2B2622;
+  --color-accent-100:#F2E6D2;--color-accent-200:#EAD7B8;--color-accent-300:#DDBF8E;--color-accent-400:#C99553;--color-accent-500:#B5731F;--color-accent-600:#96601A;--color-accent-700:#7A4E14;--color-accent-800:#5A3F1C;--color-accent-900:#3D2A12;
+  --font-heading:'Instrument Serif',ui-serif,Georgia,serif;--font-heading-weight:400;--font-body:'IBM Plex Sans KR',system-ui,sans-serif;--font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --radius-sm:2px;--radius-md:2px;--radius-lg:2px;
+  /* bottling 전용 — MODUL 에는 없는 역할 */
+  --malt-clay:#A33B2E;--malt-stock-in:#2A7049;--malt-stock-low:#7A5610;
+  --motion-page:180ms; /* 목록→상세 밀어넣기. 와이프 전환은 쓰지 않는다 */
+  --shadow-sm:0 1px 2px rgba(43,38,34,.08);--shadow-md:0 6px 20px rgba(0,0,0,.12);--shadow-lg:0 12px 32px rgba(43,38,34,.18);
+}

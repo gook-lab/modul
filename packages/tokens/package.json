@@ -7,7 +7,8 @@
     "components.css",
     "theme-malt.css",
     "theme.json",
-    "tokens.ts"
+    "tokens.ts",
+    "theme-malt-vars.css"
   ],
   "scripts": {
     "build": "tsx src/build-tokens.ts",
@@ -26,6 +27,7 @@
     "./styles.css": "./styles.css",
     "./components.css": "./components.css",
     "./theme-malt.css": "./theme-malt.css",
+    "./theme-malt-vars.css": "./theme-malt-vars.css",
     ".": "./tokens.ts"
   },
   "license": "MIT",

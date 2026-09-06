@@ -1,7 +1,7 @@
 // theme.json 검증 + tokens.ts 생성.
 //
 // theme.json 은 **base 값의 SSOT** 입니다 — 테마별 bg · surface · text · accent · divider,
-// 폰트, 반경, 간격, 모션, 이징. 배포되는 CSS(styles.css · theme-malt.css)가 이 값과
+// 폰트, 반경, 간격, 모션, 이징. 배포되는 CSS(styles.css · theme-malt-vars.css)가 이 값과
 // 어긋나면 여기서 실패합니다.
 //
 // 램프(neutral-100..900 · accent-100..900)는 생성하지 않습니다. 배포 팔레트의 램프는
@@ -17,13 +17,13 @@ import { compare, readVars, type Mismatch } from './verify-tokens';
 const theme = parseThemeFile(themeJson);
 
 const styles = readVars('../styles.css');
-const malt = readVars('../theme-malt.css');
+const malt = readVars('../theme-malt-vars.css');
 
 /** 테마 블록 → 그 값이 실제로 실려 나가는 셀렉터 */
 const WHERE = {
   light: { file: 'styles.css', vars: styles[':root'] },
   dark: { file: 'styles.css', vars: styles['[data-theme=dark]'] },
-  malt: { file: 'theme-malt.css', vars: malt['[data-theme=malt]'] },
+  malt: { file: 'theme-malt-vars.css', vars: malt['[data-theme=malt]'] },
 } as const;
 
 const problems: Mismatch[] = [];
