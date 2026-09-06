@@ -41,7 +41,7 @@
    - Modal 스토리는 트리거 버튼만 렌더해서 axe 가 모달 내용을 한 번도 검사하지 않고 있었습니다. `Open` 스토리를 추가해 실제로 검사합니다.
    - 진입 애니메이션(`mdl-fadeup`) 도중에 axe 가 샘플링하면 opacity 가 0 에 가까워 그 안의 텍스트가 전부 color-contrast 위반으로 잡힙니다. 타이밍에 달린 문제라 로컬은 통과하고 CI 만 실패합니다. `test-runner.ts` 의 `postVisit` 에서 애니메이션을 끄고 잽니다. 애니메이션이 끝나기를 기다리는 방법은 Marquee · Skeleton 이 무한 반복이라 쓸 수 없었습니다.
 
-9. **Malt 도메인 프리미티브 — 첫 검수 (2026-09-04).** `@malt/ui-web-next` 는 스토리가 없어 axe 가 한 번도 본 적이 없었습니다. 스토리를 붙이자 넷이 나왔습니다.
+9. **Malt 도메인 프리미티브 — 첫 검수 (2026-09-04).** `@gook-lab/malt-ui` 는 스토리가 없어 axe 가 한 번도 본 적이 없었습니다. 스토리를 붙이자 넷이 나왔습니다.
    - `.malt-index-row__no`(12px) · `.malt-numberfield__suffix`(10.5px) 가 `--color-neutral-600`(2.75 · 2.99)이었습니다. 규칙 1 그대로라 `--color-neutral-700`(5.15 · 5.61)로 올렸습니다.
    - `.malt-stock--low` 가 `--malt-stock-low`(#D8A33F, 2.05)였습니다. 이 토큰은 배지 텍스트에만 쓰이므로 `#7A5610`(5.99)으로 어둡게 했습니다. `theme.json` 과 `theme-malt.css` 를 같이 고쳤고, 이참에 빌드 검증기가 `extra` 토큰까지 대조하도록 넓혔습니다. 그전에는 base 색만 보고 있어 이 불일치를 잡지 못했습니다.
    - `StepBar` 의 `role=progressbar` 에 접근성 이름이 없어 `aria-label` 과 `aria-valuetext` 를 붙였습니다.

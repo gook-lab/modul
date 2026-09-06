@@ -1,6 +1,6 @@
 import type { StoryObj } from '@storybook/react-vite';
-import * as Icons from '@modul/icons';
-import { presets, DURATIONS, EASINGS, transition, type PresetName } from '@modul/motion';
+import * as Icons from '@gook-lab/icons';
+import { presets, DURATIONS, EASINGS, transition, type PresetName } from '@gook-lab/motion';
 import { Button } from './Button/Button';
 import { Tag } from './Tag/Tag';
 
@@ -39,13 +39,13 @@ export const Install: StoryObj = {
     <>
       <Section title="설치" note="토큰 CSS 한 줄과 컴포넌트 import 만으로 동작합니다. Tailwind 는 소비자 앱의 선택이고 라이브러리는 요구하지 않습니다.">
         <pre style={{ background: 'var(--color-neutral-900)', color: 'var(--color-neutral-100)', padding: 16, overflowX: 'auto', fontSize: 12, lineHeight: 1.7, margin: 0 }}>
-{`pnpm add @modul/ui @modul/tokens
+{`pnpm add @gook-lab/ui @gook-lab/tokens
 
 // app 진입점에서 한 번
-import '@modul/tokens/styles.css';
-import '@modul/tokens/components.css';
+import '@gook-lab/tokens/styles.css';
+import '@gook-lab/tokens/components.css';
 
-import { Button } from '@modul/ui';
+import { Button } from '@gook-lab/ui';
 <Button variant="primary" type="submit" form="contact">보내기</Button>`}
         </pre>
       </Section>
@@ -319,7 +319,7 @@ export const Print: StoryObj = {
   name: '인쇄 / PDF',
   render: () => (
     <>
-      <Section title="print.css" note="@modul/tokens/print.css 를 함께 넣으면 인쇄 시 잉크와 레이아웃이 정리됩니다. 화면 전용 요소는 빠지고 링크는 URL 이 붙습니다.">
+      <Section title="print.css" note="@gook-lab/tokens/print.css 를 함께 넣으면 인쇄 시 잉크와 레이아웃이 정리됩니다. 화면 전용 요소는 빠지고 링크는 URL 이 붙습니다.">
         <Table
           head={['규칙', '이유']}
           rows={[
@@ -347,11 +347,11 @@ export const Budget: StoryObj = {
         <Table
           head={['측정', '예산']}
           rows={[
-            ['@modul/tokens css', '8 KB'],
-            ['@modul/ui — Button+Input+Tag+Card', '4 KB'],
-            ['@modul/ui — 전부 (MODUL 코드)', '30 KB'],
-            ['@modul/ui — 전부 (Radix 포함)', '74 KB'],
-            ['@modul/motion — 훅 + Marquee/Reveal', '3 KB'],
+            ['@gook-lab/tokens css', '8 KB'],
+            ['@gook-lab/ui — Button+Input+Tag+Card', '4 KB'],
+            ['@gook-lab/ui — 전부 (MODUL 코드)', '30 KB'],
+            ['@gook-lab/ui — 전부 (Radix 포함)', '74 KB'],
+            ['@gook-lab/motion — 훅 + Marquee/Reveal', '3 KB'],
           ]}
         />
         <p style={{ fontSize: 13, color: 'var(--color-neutral-700)', marginTop: 12, maxWidth: '62ch' }}>

@@ -1,5 +1,5 @@
 {
-  "name": "@modul/storybook",
+  "name": "@gook-lab/storybook",
   "private": true,
   "type": "module",
   "scripts": {

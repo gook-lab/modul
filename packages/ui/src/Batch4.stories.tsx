@@ -15,7 +15,7 @@ import { Form, createField, SubmitButton } from './Form/Form';
 import { FieldArray } from './Form/FieldArray';
 import { Input } from './Input/Input';
 import { Button } from './Button/Button';
-import { Skeleton } from '@modul/motion';
+import { Skeleton } from '@gook-lab/motion';
 
 /**
  * 생성기가 채울 수 없는 컴포넌트들 — 필수 props 가 배열·객체·콜백이라

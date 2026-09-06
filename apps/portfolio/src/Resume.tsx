@@ -1,4 +1,4 @@
-import { RichText } from '@modul/ui';
+import { RichText } from '@gook-lab/ui';
 /** 이력서 — 화면과 인쇄가 같은 마크업. 인쇄 시 print.css 의 .resume 규칙(10pt, 1.45, 섹션 분할 금지). window.print() 버튼은 data-print=hide */
 export function Resume({ me, roles, projects }: { me: { name: string; title: string; email: string; site: string; summary: string }; roles: { org: string; role: string; period: string; body: string }[]; projects: { name: string; oneLiner: string; year: string }[] }) {
   return (

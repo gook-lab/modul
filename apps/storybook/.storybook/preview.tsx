@@ -1,9 +1,9 @@
 import type { Preview } from '@storybook/react-vite';
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
-import { Tooltip } from '@modul/ui';
-import '@modul/tokens/styles.css';
-import '@modul/tokens/components.css';
-import '@modul/tokens/theme-malt.css';
+import { Tooltip } from '@gook-lab/ui';
+import '@gook-lab/tokens/styles.css';
+import '@gook-lab/tokens/components.css';
+import '@gook-lab/tokens/theme-malt.css';
 
 const preview: Preview = {
   parameters: {

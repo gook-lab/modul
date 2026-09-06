@@ -74,7 +74,7 @@
       "react",
       "react-dom",
       "react/jsx-runtime",
-      "@modul/ui"
+      "@gook-lab/ui"
     ],
     "limit": "3 KB",
     "import": "{ useReducedMotion, useSpring, useCountUp, Marquee, Reveal }"

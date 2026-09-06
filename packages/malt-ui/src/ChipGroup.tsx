@@ -1,5 +1,5 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react';
-import { cx } from '@modul/ui';
+import { cx } from '@gook-lab/ui';
 
 export type ChipOption<V extends string> = { value: V; label: string };
 export type ChipGroupProps<V extends string> = {

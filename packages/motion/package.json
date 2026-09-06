@@ -1,10 +1,10 @@
 {
-  "name": "@modul/motion",
+  "name": "@gook-lab/motion",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.cjs",
   "peerDependencies": {
-    "@modul/tokens": "workspace:*",
+    "@gook-lab/tokens": "workspace:*",
     "react": ">=18"
   },
   "devDependencies": {
@@ -55,6 +55,7 @@
     "directory": "packages/motion"
   },
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
   }
 }

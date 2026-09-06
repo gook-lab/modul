@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { cx } from '@modul/ui';
-import type { NativeProps } from '@modul/ui';
+import { cx } from '@gook-lab/ui';
+import type { NativeProps } from '@gook-lab/ui';
 
 export type AmountBarProps = NativeProps<'span', { percent: number; low?: boolean; label: string }>;
 /** 잔량. low(1/4 이하) 는 clay, 그 외 중립. 판정은 @malt/domain 이 한다. */

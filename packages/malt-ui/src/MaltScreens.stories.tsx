@@ -3,10 +3,10 @@ import type { StoryObj } from '@storybook/react-vite';
 import {
   AppBar, Alert, Avatar, AvatarGroup, Breadcrumb, Button, Card, EmptyState,
   Input, Sheet, Tag, ToastProvider, useToast, type ViewState,
-} from '@modul/ui';
-import { ScrollTabs } from '@modul/ui';
+} from '@gook-lab/ui';
+import { ScrollTabs } from '@gook-lab/ui';
 import * as RTabs from '@radix-ui/react-tabs';
-import { Skeleton } from '@modul/motion';
+import { Skeleton } from '@gook-lab/motion';
 import { StockBadge, type StockStatus } from './StockBadge';
 import { IndexRow } from './IndexRow';
 import { ChipGroup } from './ChipGroup';

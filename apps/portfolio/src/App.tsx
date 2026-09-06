@@ -1,6 +1,6 @@
-import '@modul/tokens/styles.css';
-import { Button, Card } from '@modul/ui';
-import { Reveal, Marquee, InView, CursorProvider } from '@modul/motion';
+import '@gook-lab/tokens/styles.css';
+import { Button, Card } from '@gook-lab/ui';
+import { Reveal, Marquee, InView, CursorProvider } from '@gook-lab/motion';
 
 const works = [
   { k: '어드민', t: 'Console 리디자인', d: '데이터 밀도와 룰의 구조' },

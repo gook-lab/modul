@@ -1,6 +1,6 @@
 import { Children, type ElementType } from 'react';
-import { polyForwardRef } from '@modul/ui';
-import type { PolymorphicProps, PolymorphicRef } from '@modul/ui';
+import { polyForwardRef } from '@gook-lab/ui';
+import type { PolymorphicProps, PolymorphicRef } from '@gook-lab/ui';
 
 export type RevealOwnProps = {
   split?: 'none' | 'char' | 'word' | 'line';

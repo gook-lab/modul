@@ -1,6 +1,6 @@
-import '@modul/tokens/styles.css';
-import { Button, Input, Table, Tag, type Column, type TagOwnProps } from '@modul/ui';
-import { useCountUp } from '@modul/motion';
+import '@gook-lab/tokens/styles.css';
+import { Button, Input, Table, Tag, type Column, type TagOwnProps } from '@gook-lab/ui';
+import { useCountUp } from '@gook-lab/motion';
 
 type Row = { name: string; owner: string; status: '진행중' | '검토' | '완료'; date: string };
 const tone = (s: Row['status']): NonNullable<TagOwnProps['variant']> =>

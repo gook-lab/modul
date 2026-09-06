@@ -25,7 +25,7 @@ export const MAP: Record<string, string> = {
   '--color-amber-hover': '--color-accent-600',
   '--color-amber-soft': '--color-accent-100',
   '--color-amber-soft-text': '--color-accent-700',
-  // 도메인 색 — @malt/ui-web-next 가 쓰는 이름으로
+  // 도메인 색 — @gook-lab/malt-ui 가 쓰는 이름으로
   '--color-clay': '--malt-clay',
   '--stock-in-stock': '--malt-stock-in',
   '--stock-low': '--malt-stock-low',

@@ -4,9 +4,9 @@
   "commit": false,
   "fixed": [
     [
-      "@modul/ui",
-      "@modul/motion",
-      "@modul/tokens"
+      "@gook-lab/ui",
+      "@gook-lab/motion",
+      "@gook-lab/tokens"
     ]
   ],
   "access": "public",

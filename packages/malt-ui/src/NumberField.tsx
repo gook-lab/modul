@@ -1,5 +1,5 @@
 import { forwardRef, useId, type ComponentPropsWithoutRef } from 'react';
-import { cx } from '@modul/ui';
+import { cx } from '@gook-lab/ui';
 
 export type NumberFieldProps = {
   value: number | '';

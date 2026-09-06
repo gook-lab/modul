@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Form, createField, FieldArray, SubmitButton, Input, Textarea, Select, Combobox, DatePicker, RadioGroup, Checkbox, Switch, ImageGallery, Alert } from '@modul/ui';
+import { Form, createField, FieldArray, SubmitButton, Input, Textarea, Select, Combobox, DatePicker, RadioGroup, Checkbox, Switch, ImageGallery, Alert } from '@gook-lab/ui';
 import type { Path } from 'react-hook-form';
-import { useToast } from '@modul/ui';
+import { useToast } from '@gook-lab/ui';
 
 /** 한 폼에 MODUL 폼 컴포넌트 전부. 검증 zod, 상태 RHF, 표시 MODUL. 서버 오류는 폼 상단 Alert + 필드 setError */
 const schema = z.object({

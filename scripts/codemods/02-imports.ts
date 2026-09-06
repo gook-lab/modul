@@ -7,7 +7,7 @@ export default function transform(file: FileInfo, api: API) {
     const specs = p.node.specifiers ?? [];
     const malt = specs.filter(s => s.type === 'ImportSpecifier' && KEEP_IN_MALT.has(s.imported.name));
     const modul = specs.filter(s => !malt.includes(s)).map(s => { if (s.type === 'ImportSpecifier' && RENAME[s.imported.name]) { const local = s.local?.name ?? s.imported.name; return j.importSpecifier(j.identifier(RENAME[s.imported.name]), j.identifier(local === s.imported.name ? RENAME[s.imported.name] : local)); } return s; });
-    const out = []; if (modul.length) out.push(j.importDeclaration(modul, j.literal('@modul/ui'))); if (malt.length) out.push(j.importDeclaration(malt, j.literal('@malt/ui-web-next')));
+    const out = []; if (modul.length) out.push(j.importDeclaration(modul, j.literal('@gook-lab/ui'))); if (malt.length) out.push(j.importDeclaration(malt, j.literal('@gook-lab/malt-ui')));
     j(p).replaceWith(out);
   });
   // Toggle props: on → checked, onChange → onCheckedChange

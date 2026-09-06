@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@modul/tokens/components.css';
+import '@gook-lab/tokens/components.css';
 import App from './App';
 
 /** 앱이 데이터를 소유합니다 — 컴포넌트는 fetch 를 모릅니다(PROMPT 1.5). */

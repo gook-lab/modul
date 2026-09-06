@@ -1,5 +1,5 @@
 {
-  "name": "@modul/icons",
+  "name": "@gook-lab/icons",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -43,6 +43,7 @@
     "directory": "packages/icons"
   },
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
   }
 }

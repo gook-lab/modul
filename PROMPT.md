@@ -9,11 +9,11 @@
 당신은 이 디자인 시스템을 실제 npm 배포 가능한 React + TypeScript 컴포넌트 라이브러리로 완성하는 프론트엔드 엔지니어입니다.
 
 **최종 산출물**
-- `@modul/tokens` — CSS 변수 + `theme.json` 에서 생성되는 토큰 (light / dark / malt 3 테마)
-- `@modul/ui` — headless 컴포넌트 40여 종 (React 18+, Radix 기반 일부)
-- `@modul/motion` — 모션 훅·컴포넌트 18종 + 프리셋
-- `@modul/icons` — Lucide 재export
-- `@malt/ui-web-next` — 도메인 프리미티브 7종 (위스키 앱 전용, 코어에 넣지 않음)
+- `@gook-lab/tokens` — CSS 변수 + `theme.json` 에서 생성되는 토큰 (light / dark / malt 3 테마)
+- `@gook-lab/ui` — headless 컴포넌트 40여 종 (React 18+, Radix 기반 일부)
+- `@gook-lab/motion` — 모션 훅·컴포넌트 18종 + 프리셋
+- `@gook-lab/icons` — Lucide 재export
+- `@gook-lab/malt-ui` — 도메인 프리미티브 7종 (위스키 앱 전용, 코어에 넣지 않음)
 - `apps/storybook` — Storybook 8, 전 컴포넌트 스토리 + autodocs
 - 전부 `pnpm build` → `pnpm verify` 통과, CI 초록
 
@@ -61,7 +61,7 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 - `eslint.config.js` 가 `no-restricted-syntax` 로 이를 강제합니다(색 리터럴 · fontFamily 리터럴 · `dangerouslySetInnerHTML` · 판매/구매/배송/결제 문구). **lint 를 끄지 말고 코드를 고치세요.**
 - 예외: `apps/**` 는 레이아웃 px 허용(이미 설정됨).
 - 토큰 SSOT 는 `packages/tokens/theme.json` — 단, **base 값의 SSOT** 입니다. 테마별 bg · surface · text · accent · divider, 폰트, 반경, 간격, 모션, 이징이 여기서 정해집니다.
-- `pnpm --filter @modul/tokens build` 는 theme.json 과 배포 CSS(`styles.css` · `theme-malt.css`)를 대조하고 어긋나면 실패합니다. `tokens.ts`(RN/JS 소비용)도 여기서 나옵니다.
+- `pnpm --filter @gook-lab/tokens build` 는 theme.json 과 배포 CSS(`styles.css` · `theme-malt.css`)를 대조하고 어긋나면 실패합니다. `tokens.ts`(RN/JS 소비용)도 여기서 나옵니다.
 - **램프(neutral-100..900 · accent-100..900)는 생성하지 않습니다.** 손으로 튜닝한 값이고 `docs/contrast-audit.md` 의 실측 대비값과 스토리북 axe 통과가 그 값에 걸려 있습니다. 알고리즘으로 다시 뽑으면 테마당 18개 값이 달라져 검수가 무효가 됩니다.
 - base 값을 바꿀 때는 theme.json 과 CSS 를 같이 고칩니다. 램프를 바꿀 때는 CSS 를 고치고 대비 검수를 다시 하세요.
 
@@ -91,11 +91,11 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 2. 각 패키지에 빌드 설정 추가 — **tsup 권장**(ESM + CJS + d.ts, `external: ['react', 'react-dom', '@radix-ui/*']`). `package.json` 의 `exports`/`main`/`module`/`types` 를 실제 산출물에 맞게 정리.
 3. `tsconfig.json` 확인: `jsx: react-jsx`, `strict: true`, `moduleResolution: bundler`, `paths` 로 워크스페이스 참조.
 4. Radix 의존성 실제 버전 설치 후 **API 차이 수정**: 이 코드는 `@radix-ui/react-*` 1.x 기준으로 작성되었습니다. `Tabs` · `Accordion` · `Popover` · `DropdownMenu` · `Tooltip` · `Checkbox` · `RadioGroup` · `Switch` · `Slider` · `Dialog`. `cmdk` · `react-day-picker`(v9 API) 도 확인.
-5. `pnpm --filter @modul/tokens build` → theme.json 과 배포 CSS 가 3 테마 모두 일치하는지 확인. 어긋나면 어느 변수가 왜 다른지 찍고 실패합니다.
+5. `pnpm --filter @gook-lab/tokens build` → theme.json 과 배포 CSS 가 3 테마 모두 일치하는지 확인. 어긋나면 어느 변수가 왜 다른지 찍고 실패합니다.
 6. `pnpm typecheck` → 오류 0. **타입을 `any` 로 덮지 말고** 실제 시그니처를 맞추세요.
 
 ### 단계 2 — 테스트 통과
-`pnpm --filter @modul/ui test`. 이미 작성된 테스트:
+`pnpm --filter @gook-lab/ui test`. 이미 작성된 테스트:
 - `Select.test.tsx` — ↑↓ Enter Esc, 타입어헤드, 포커스 복귀, `...rest` 도달
 - `Combobox.test.tsx` — 필터, keywords, multiple Backspace, creatable, **stale 응답 폐기**
 - `Modal.test.tsx` · `Drawer.test.tsx` — Esc, 백드롭, 내부 클릭 무시
@@ -106,10 +106,10 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 `test/setup.ts` 에 jsdom 폴리필(`showModal`, `matchMedia`)이 있습니다. **테스트가 잘못되었다고 판단되면 테스트를 지우지 말고**, 그 계약이 왜 틀렸는지 근거를 적고 RADIO 문서와 함께 고치세요.
 
 ### 단계 3 — Storybook
-1. `pnpm --filter @modul/storybook dev` 기동. `.storybook/main.ts` 는 `../../../packages/**/*.stories.@(ts|tsx)` 를 봅니다.
+1. `pnpm --filter @gook-lab/storybook dev` 기동. `.storybook/main.ts` 는 `../../../packages/**/*.stories.@(ts|tsx)` 를 봅니다.
 2. `preview.tsx` 가 3 테마를 `data-theme` 로 토글합니다(`@storybook/addon-themes`).
 3. `pnpm gen:stories` — RADIO md + props 타입에서 스토리를 생성합니다. 손으로 쓴 스토리는 건너뜁니다. CI 가 `git diff --exit-code` 로 검사합니다.
-4. `pnpm --filter @modul/storybook build` + `test:a11y`(test-runner + axe). **color-contrast 위반 0** 이어야 합니다.
+4. `pnpm --filter @gook-lab/storybook build` + `test:a11y`(test-runner + axe). **color-contrast 위반 0** 이어야 합니다.
 
 ### 단계 4 — 배포 준비
 1. `changesets` 로 버전 — `ui`/`motion`/`tokens` 는 fixed 그룹(같은 버전).
@@ -149,10 +149,10 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 - `components.css` 의 `@layer modul` 제거
 - 새 색·폰트·duration 값 도입(theme.json 을 거치지 않고)
 - Tailwind 도입(선택은 소비자 앱의 몫 — 라이브러리는 CSS 변수 + 클래스)
-- 애니메이션 라이브러리(framer-motion 등) 추가 — 현재 0 의존. 정말 필요하면 `@modul/motion` **밖**에서, 이유를 문서화
+- 애니메이션 라이브러리(framer-motion 등) 추가 — 현재 0 의존. 정말 필요하면 `@gook-lab/motion` **밖**에서, 이유를 문서화
 - 차트 확장(현재 SVG 3종은 "보이는 수준"만) — 그 이상은 visx 를 별 패키지로, 토큰만 공유
 - 테스트·lint 규칙을 끄는 것
-- 도메인 프리미티브(`@malt/ui-web-next` 의 StockBadge · AmountBar 등)를 `@modul/ui` 로 승격 — 위스키 앱 전용입니다
+- 도메인 프리미티브(`@gook-lab/malt-ui` 의 StockBadge · AmountBar 등)를 `@gook-lab/ui` 로 승격 — 위스키 앱 전용입니다
 
 ---
 
@@ -160,20 +160,20 @@ cx('btn', 'btn-primary', '!btn-ghost')  →  'btn btn-ghost'
 
 ```
 pnpm install
-pnpm --filter @modul/tokens build     # theme.json ↔ CSS 대조 + tokens.ts
+pnpm --filter @gook-lab/tokens build     # theme.json ↔ CSS 대조 + tokens.ts
 pnpm typecheck                        # 0 errors
 pnpm lint                             # 0 errors (규칙 유지)
 pnpm -r test                          # 전부 통과
 pnpm gen:stories && git diff --exit-code
 pnpm -r build && npx size-limit       # 예산 내
-pnpm --filter @modul/storybook build
-pnpm --filter @modul/storybook test:a11y   # axe 위반 0
+pnpm --filter @gook-lab/storybook build
+pnpm --filter @gook-lab/storybook test:a11y   # axe 위반 0
 ```
 
 추가로:
 - 3 테마(light/dark/malt) 각각에서 Storybook 전 스토리가 깨지지 않음
 - `prefers-reduced-motion: reduce` 를 켠 상태에서 모션 스토리 전부가 `presets[x].reduced` 대로 동작
-- 새 앱에서 `import { Button } from '@modul/ui'` + `import '@modul/tokens/styles.css'` 만으로 동작
+- 새 앱에서 `import { Button } from '@gook-lab/ui'` + `import '@gook-lab/tokens/styles.css'` 만으로 동작
 
 ---
 

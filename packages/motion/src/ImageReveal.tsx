@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ComponentPropsWithoutRef } from 'react';
-import { mergeRefs } from '@modul/ui';
+import { mergeRefs } from '@gook-lab/ui';
 import { useReducedMotion } from './useReducedMotion';
 import { useInView } from './InView';
 /** clip-path 리빌 + scale + 스크롤 패럴랙스 + 호버 확대. grayscale 은 .grayscale 래퍼 규칙 */

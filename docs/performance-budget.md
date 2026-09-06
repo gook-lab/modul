@@ -1,14 +1,14 @@
 # 성능 예산
 
-측정: `pnpm --filter @modul/ui build && npx size-limit`, 스토리북 test-runner 의 `page.evaluate(() => document.querySelectorAll('*').length)`.
+측정: `pnpm --filter @gook-lab/ui build && npx size-limit`, 스토리북 test-runner 의 `page.evaluate(() => document.querySelectorAll('*').length)`.
 
 ## 번들 (gzip, 트리셰이킹 후 소비자가 실제 import 한 것만)
 | 패키지 | 예산 | 근거 |
 | --- | --- | --- |
-| @modul/tokens (css) | 8 KB | styles + components + theme-malt 합. 초과 시 components.css 분할 |
-| @modul/ui — Button+Input+Tag+Card | 4 KB | 기본 폼 화면 |
-| @modul/ui — 전부 | 38 KB | Radix 12종 포함(≈ 22 KB). cmdk · react-day-picker 는 lazy 라 제외 |
-| @modul/motion | 3 KB | 훅 + Marquee/Reveal |
+| @gook-lab/tokens (css) | 8 KB | styles + components + theme-malt 합. 초과 시 components.css 분할 |
+| @gook-lab/ui — Button+Input+Tag+Card | 4 KB | 기본 폼 화면 |
+| @gook-lab/ui — 전부 | 38 KB | Radix 12종 포함(≈ 22 KB). cmdk · react-day-picker 는 lazy 라 제외 |
+| @gook-lab/motion | 3 KB | 훅 + Marquee/Reveal |
 | lazy 청크 | DatePicker 18 KB · CommandPalette 9 KB | 첫 상호작용 시 로드 |
 
 ## 컴포넌트별 DOM 노드 (기본 props)
