@@ -104,7 +104,7 @@ pnpm --filter @modul/storybook dev         # localhost:6006, 3 테마 토글
 ```bash
 pnpm typecheck                             # 0 errors
 pnpm lint                                  # 0 errors
-pnpm -r test                               # 134 passed (ui 121 · tokens 9 · motion 4)
+pnpm -r test                               # 148 passed (ui 121 · tokens 23 · motion 4)
 pnpm -r build                              # 4 패키지
 npx size-limit                             # 예산 내
 pnpm --filter @modul/storybook build

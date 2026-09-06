@@ -104,7 +104,7 @@ pnpm --filter @modul/storybook dev         # localhost:6006, three-theme toggle
 ```bash
 pnpm typecheck                             # 0 errors
 pnpm lint                                  # 0 errors
-pnpm -r test                               # 134 passed (ui 121 · tokens 9 · motion 4)
+pnpm -r test                               # 148 passed (ui 121 · tokens 23 · motion 4)
 pnpm -r build                              # 4 packages
 npx size-limit                             # within budget
 pnpm --filter @modul/storybook build
