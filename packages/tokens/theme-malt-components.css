@@ -20,8 +20,14 @@
 [data-theme=malt] .malt-stock__dot{width:6px;height:6px;border-radius:50%;flex:none;background:currentColor}
 [data-theme=malt] .malt-stock--in{color:var(--malt-stock-in)} [data-theme=malt] .malt-stock--low{color:var(--malt-stock-low)} [data-theme=malt] .malt-stock--out{color:var(--malt-clay)} [data-theme=malt] .malt-stock--price{color:var(--color-neutral-700)}
 [data-theme=malt] .malt-amount-bar{display:flex;align-items:center;gap:10px}
-[data-theme=malt] .malt-amount-bar__track{flex:1;height:4px;background:var(--color-neutral-300);border-radius:2px;overflow:hidden;display:block}
-[data-theme=malt] .malt-amount-bar__fill{display:block;height:100%;background:var(--color-neutral-700)} [data-theme=malt] .malt-amount-bar__fill--low{background:var(--malt-clay)}
+/* 잔량 막대 — 자 눈금(시안 B, bottling #62·#71). "얼마나 남았나" 를 눈대중이 아니라
+   칸으로 읽습니다. 1/4 마다 긴 눈금, 사이에 짧은 눈금 — 자를 읽는 방식 그대로.
+   처음 포팅은 4px 납작한 막대였는데, 시안 B 가 승인한 모양은 이쪽입니다.
+   bottling 이 앱 CSS 로 덮으며 "MODUL 이 눈금 변형을 갖게 되면 지운다" 고 적어 둔
+   블록을 여기로 올렸습니다(2026-09-07). */
+[data-theme=malt] .malt-amount-bar__track{flex:1;display:block;position:relative;height:10px;background-color:transparent;border-radius:0;background-image:repeating-linear-gradient(to right,var(--color-neutral-700) 0 1px,transparent 1px 25%),repeating-linear-gradient(to right,var(--color-neutral-400) 0 1px,transparent 1px 12.5%);background-position:bottom left,bottom left;background-size:100% 8px,100% 5px;background-repeat:repeat-x,repeat-x;border-bottom:1px solid var(--color-neutral-900)}
+[data-theme=malt] .malt-amount-bar__fill{position:absolute;inset:auto auto 0 0;display:block;height:3px;background:var(--color-neutral-900)}
+[data-theme=malt] .malt-amount-bar__fill--low{background:var(--malt-clay)}
 [data-theme=malt] .malt-amount-bar__label{font-family:var(--font-mono);font-size:10.5px;color:var(--color-neutral-700)}
 [data-theme=malt] .malt-index-row{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:10px 0;border:0;background:none;text-align:left;font-family:var(--font-body);font-size:15px;color:var(--color-neutral-800)}
 [data-theme=malt] .malt-index-row--tappable{cursor:pointer}
