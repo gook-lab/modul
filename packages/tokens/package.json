@@ -1,6 +1,6 @@
 {
   "name": "@gook-lab/tokens",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "main": "styles.css",
   "files": [
     "styles.css",
@@ -9,7 +9,9 @@
     "theme.json",
     "tokens.ts",
     "theme-malt-vars.css",
-    "theme-malt-components.css"
+    "theme-malt-components.css",
+    "base-elements.css",
+    "base-components.css"
   ],
   "scripts": {
     "build": "tsx src/build-tokens.ts",
@@ -26,6 +28,8 @@
   },
   "exports": {
     "./styles.css": "./styles.css",
+    "./base-elements.css": "./base-elements.css",
+    "./base-components.css": "./base-components.css",
     "./components.css": "./components.css",
     "./theme-malt.css": "./theme-malt.css",
     "./theme-malt-vars.css": "./theme-malt-vars.css",

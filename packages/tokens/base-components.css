@@ -1,0 +1,175 @@
+/* MODUL 컴포넌트 기본 스타일 — .btn · .card · .input · .sheet … (modul.components).
+   기존 앱이 컴포넌트만 들일 때의 진입점입니다. 상태 확장(components.css,
+   @layer modul)과 테마 조정(theme-malt-components.css, @layer modul)이 이 위에
+   얹힙니다. */
+@layer modul.components {
+.grayscale{filter:grayscale(1) contrast(1.08)}
+.text-muted { color: var(--color-neutral-700); }
+/* — rules — */
+.hr {
+  height: 2px; border: 0; margin: var(--space-4) 0;
+  background: var(--color-divider);
+}
+/* — buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text); /* matches the .input's 14px —
+     the pair sits side by side in sign-up rows */
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+.btn svg { display: block; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: var(--color-bg); }
+.btn-primary:hover { background: var(--color-accent-600); }
+.btn-primary:active { background: var(--color-accent-700); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-ghost { color: var(--color-accent-700); padding-inline: var(--space-1); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.btn-icon { width: 36px; height: 36px; padding: 0; }
+.btn-block { width: 100%; margin-top: var(--space-2); justify-content: flex-start; text-align: left; }
+/* — forms — */
+.field > label {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+textarea.input { min-height: 90px; resize: vertical; }
+.radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
+.radio input, .seg-opt input {
+  position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+}
+.radio .dot {
+  width: 16px; height: 16px; flex: none; border-radius: 50%;
+  border: 1.5px solid var(--color-divider);
+}
+.radio:hover .dot { border-color: var(--color-accent); }
+.radio input:checked + .dot {
+  border-color: var(--color-accent); background: var(--color-accent);
+  box-shadow: inset 0 0 0 4px var(--color-bg);
+}
+.radio input:focus-visible + .dot { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.seg {
+  display: inline-flex; overflow: hidden;
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.seg-opt {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; font-size: 13px; cursor: pointer;
+}
+.seg-opt + .seg-opt { border-left: 1px solid var(--color-divider); }
+.seg-opt:has(input:checked) { background: var(--color-accent); color: var(--color-bg); }
+.seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+/* — cards — */
+.card {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-surface);
+}
+.card-kicker { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-700); }
+.card-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 17px; line-height: 1.2;
+}
+.card-body { margin: 0; font-size: 13px; color: var(--color-neutral-700); flex: 1; }
+/* opacity 로 흐리게 하면 안의 텍스트가 4.5:1 아래로 떨어집니다 */
+.card-meta {
+  display: flex; align-items: center; gap: 6px; font-size: 11px;
+  color: var(--color-neutral-700);
+}
+.elev-sm { box-shadow: var(--shadow-sm); }
+.elev-md { box-shadow: var(--shadow-md); }
+.elev-lg { box-shadow: var(--shadow-lg); }
+/* — tags — */
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px;
+  border-radius: calc(var(--radius-md) * 0.75);
+}
+.tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
+.tag-accent-2 { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+.tag-neutral { background: var(--color-neutral-100); color: var(--color-neutral-800); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent-700); }
+/* — navigation — */
+.nav {
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 2px solid var(--color-divider);
+}
+.nav-brand {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 18px; margin-right: auto;
+}
+.nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav a:hover, .nav a[aria-current='page'] { color: var(--color-accent); }
+/* — tables — */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th {
+  text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--color-neutral-700);
+  padding: var(--space-2); border-bottom: 2px solid var(--color-divider);
+}
+.table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--color-divider);
+}
+.table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, transparent); }
+/* — dialog — */
+.dialog-backdrop {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+}
+/* 닫힌 <dialog> 를 다시 숨깁니다. 아래 .dialog 규칙은 @layer 밖 author CSS 라
+   브라우저 기본값인 dialog:not([open]){display:none} 을 이기고, 그 결과
+   open={false} 인 모달의 내용이 화면에 그대로 남습니다. */
+dialog.dialog:not([open]) { display: none; }
+.dialog {
+  width: min(440px, 100%); display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-4); border-radius: var(--radius-lg);
+  background: var(--color-surface); box-shadow: var(--shadow-lg);
+}
+.dialog-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 20px;
+}
+.dialog-body { font-size: 14px; color: var(--color-neutral-700); }
+/* 같은 이유 — 투명도 대신 색 */
+.dialog-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-2); }
+/* — size variants (MODUL 확장) — */
+.btn-sm { font-size: 12px; padding: 5px 10px; }
+.btn-lg { font-size: 17px; padding: 14px 22px; }
+.input-error { border-color: var(--color-accent); }
+.field-error > label { color: var(--color-accent-700); }
+/* — motion keyframes — */
+@keyframes mdl-char{from{opacity:0;transform:translateY(110%) rotate(6deg)}to{opacity:1;transform:none}}
+@keyframes mdl-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes mdl-fadeup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes mdl-reveal{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes mdl-wipe{0%{transform:scaleX(0);transform-origin:left}45%{transform:scaleX(1);transform-origin:left}55%{transform:scaleX(1);transform-origin:right}100%{transform:scaleX(0);transform-origin:right}}
+@keyframes mdl-shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes mdl-spin{to{transform:rotate(360deg)}}
+@keyframes mdl-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mdl-inview{animation:mdl-reveal linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+@supports not (animation-timeline: view()){.mdl-inview{opacity:0;transform:translateY(40px);transition:opacity var(--motion-page) var(--ease-decel),transform var(--motion-page) var(--ease-decel)}.mdl-inview[data-inview]{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.mdl-motion *,.mdl-motion{animation-duration:1ms!important;transition-duration:1ms!important}}
+[data-theme=dark] .btn-primary:hover{background:var(--color-accent-600)}
+@keyframes mdl-drawer-r{from{transform:translateX(100%)}to{transform:none}}
+@keyframes mdl-drawer-l{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes mdl-sheet{from{transform:translateY(100%)}to{transform:none}}
+@keyframes mdl-toast{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+dialog.drawer::backdrop,dialog.sheet::backdrop,dialog.dialog::backdrop{background:color-mix(in srgb,var(--color-neutral-900) 40%,transparent)}
+}
