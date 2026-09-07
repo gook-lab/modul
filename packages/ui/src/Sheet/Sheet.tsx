@@ -14,7 +14,7 @@ export type SheetOwnProps = {
 };
 export type SheetProps = NativeProps<'dialog', SheetOwnProps>;
 
-/** 아래에서 올라오는 시트 (220ms, 딤 40%). 원래 화면을 떠나지 않는 결정에. */
+/** 아래에서 올라오는 시트 (move 프리셋 · 딤 40%). 원래 화면을 떠나지 않는 결정에. */
 export const Sheet = forwardRef<HTMLDialogElement, SheetProps>(
   ({ open, onClose, title, description, grip = true, className, style, children, ...rest }, ref) => {
     const inner = useRef<HTMLDialogElement>(null);
@@ -31,14 +31,17 @@ export const Sheet = forwardRef<HTMLDialogElement, SheetProps>(
         aria-describedby={description ? did : undefined}
         onClose={onClose}
         onClick={e => { if (e.target === e.currentTarget) onClose(); }}
-        style={{ position: 'fixed', inset: 0, margin: 0, border: 0, padding: 0, maxWidth: 'none', maxHeight: 'none', width: '100vw', height: '100vh', background: 'transparent', display: open ? 'flex' : undefined, alignItems: 'flex-end', justifyContent: 'center', ...style }}
+        style={{ position: 'fixed', inset: 0, margin: 0, border: 0, padding: 0, maxWidth: 'none', maxHeight: 'none', width: '100vw', height: '100vh', background: 'transparent', display: open ? 'flex' : undefined, ...style }}
         {...rest}
       >
-        <div style={{ width: 'min(480px, 100%)', background: 'var(--color-surface)', boxShadow: 'var(--shadow-lg)', padding: '12px 20px 20px', display: 'grid', gap: 12, borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0', animation: 'mdl-sheet 220ms var(--ease-decel) both' }}>
-          {grip && <span aria-hidden style={{ width: 36, height: 4, background: 'var(--color-neutral-300)', justifySelf: 'center', borderRadius: 2 }} />}
-          <h2 id={tid} className="dialog-title" style={{ margin: 0, fontSize: 22 }}>{title}</h2>
-          {description && <p id={did} className="dialog-body" style={{ margin: 0 }}>{description}</p>}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 8 }}>{children}</div>
+        {/* 스타일은 base-components.css 의 .sheet 계열 클래스에 있습니다 — 인라인이면
+            테마(malt 의 스크롤 한계 · safe-area · 데스크톱 가운데 세우기)가 손댈 수 없습니다.
+            지속시간도 220ms 하드코딩이 아니라 move 프리셋(var(--motion-slow))입니다. */}
+        <div className="sheet-panel">
+          {grip && <span aria-hidden className="sheet-grip" />}
+          <h2 id={tid} className="dialog-title sheet-title">{title}</h2>
+          {description && <p id={did} className="dialog-body sheet-body">{description}</p>}
+          <div className="sheet-actions">{children}</div>
         </div>
       </dialog>
     );

@@ -4,7 +4,16 @@
    파일입니다 — 요소 수준 규칙(bare h1-h3)은 theme-malt.css 에만 있습니다. */
 @layer modul {
 [data-theme=malt] .card-title,[data-theme=malt] .dialog-title,[data-theme=malt] .nav-brand{font-weight:400;letter-spacing:0}
-[data-theme=malt] .btn{font-weight:400;min-height:44px}   /* 터치 타깃 */
+/* ── 버튼 — bottling .malt-btn 의 실측 결정을 그대로 (2026-09-04 대비 감사) ──
+   primary 는 accent 가 아니라 accent-600: 지면색 글자를 앰버 위에 얹으면 3.80,
+   한 칸 어두우면 5.18 입니다. disabled 는 흐림(opacity)이 아니라 단색 —
+   흐린 글자는 대비 저하입니다. */
+[data-theme=malt] .btn{font-family:var(--font-body);font-weight:400;font-size:15px;min-height:44px;padding:0 16px;background:var(--color-surface);border-color:var(--color-divider);color:var(--color-text)}
+[data-theme=malt] .btn-primary{background:var(--color-accent-600);border-color:var(--color-accent-600);color:var(--color-surface)}
+[data-theme=malt] .btn-primary:hover:not(:disabled){background:var(--color-accent-700);border-color:var(--color-accent-700)}
+[data-theme=malt] .btn-ghost{background:transparent;border-color:transparent;color:var(--color-neutral-700);padding-inline:16px}
+[data-theme=malt] .btn:disabled{opacity:1;background:var(--malt-btn-disabled);border-color:var(--malt-btn-disabled);color:var(--color-surface);cursor:default}
+[data-theme=malt] .btn-ghost:disabled{background:transparent;border-color:transparent;color:var(--color-neutral-500)}
 [data-theme=malt] .tag{border-radius:999px}                 /* 칩·배지만 pill */
 [data-theme=malt] .malt-mono{font-family:var(--font-mono)}
 [data-theme=malt] .malt-stock{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:10.5px;color:var(--color-neutral-700)}
@@ -32,4 +41,21 @@
 [data-theme=malt] .malt-chip--selected{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-700)}
 /* Radix ToggleGroup 이 붙이는 선택 상태 — ChipGroup 은 이걸 씁니다. --selected 는 손으로 조립하는 자리용 */
 [data-theme=malt] .malt-chip[data-state=on]{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-700)}
+/* ── 시트 — bottling .malt-sheet 의 결정: 스크롤 한계 · safe-area · 데스크톱 가운데 ── */
+[data-theme=malt] .sheet-panel{background:var(--color-bg);max-height:82vh;overflow-y:auto;padding:12px 20px calc(18px + env(safe-area-inset-bottom));border-radius:var(--radius-md) var(--radius-md) 0 0}
+[data-theme=malt] .sheet-grip{background:var(--color-neutral-400)}
+[data-theme=malt] .sheet-title{font-size:17px;font-weight:600;letter-spacing:0;color:var(--color-text)}
+[data-theme=malt] .sheet-body{font-size:13px;line-height:1.55;color:var(--color-neutral-800)}
+@media (min-width:768px){
+[data-theme=malt] .sheet{align-items:center}
+[data-theme=malt] .sheet-panel{max-height:76vh;border-radius:var(--radius-md);padding-bottom:20px}
+[data-theme=malt] .sheet-grip{display:none}
+}
+/* ── 토스트 — bottling 결정: 잉크 필 · 탭바 위 가운데 · 닫기/진행선 없이 4초+액션 ── */
+[data-theme=malt] .toast{gap:14px;max-width:min(92%,420px);padding:11px 14px;min-height:0;background:var(--color-text);color:var(--color-bg);box-shadow:0 6px 20px rgb(0 0 0 / 18%);animation:mdl-toast var(--motion-slow) var(--ease-decel) both}
+[data-theme=malt] .toast-msg{font-size:13px;line-height:1.5}
+[data-theme=malt] .toast-action{font-weight:400;color:var(--color-accent-100);min-height:0;padding:0;position:relative}
+[data-theme=malt] .toast-action::after{content:'';position:absolute;left:-10px;right:-10px;top:50%;height:44px;transform:translateY(-50%)}
+[data-theme=malt] .toast-close,[data-theme=malt] .toast-line{display:none}
+
 }

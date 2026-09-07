@@ -36,15 +36,17 @@ export function ToastProvider({ children, duration = 4000, position = 'bottom-le
   return (
     <Ctx.Provider value={api}>
       {children}
-      <div role="status" aria-live="polite" {...containerProps} style={{ position: 'fixed', zIndex: 1000, display: 'grid', gap: 8, width: 'min(380px, calc(100vw - 32px))', ...POS[position], ...containerProps?.style }}>
+      <div role="status" aria-live="polite" className="toast-stack" {...containerProps} style={{ position: 'fixed', zIndex: 1000, display: 'grid', gap: 8, width: 'min(380px, calc(100vw - 32px))', ...POS[position], ...containerProps?.style }}>
         {toasts.map(toast => {
           const err = toast.tone === 'error';
           return (
-            <div key={toast.id} style={{ position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', minHeight: 44, borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-lg)', background: err ? 'var(--color-accent-100)' : 'var(--color-neutral-900)', color: err ? 'var(--color-accent-800)' : 'var(--color-bg)', borderLeft: err ? '2px solid var(--color-accent)' : 0, animation: 'mdl-toast var(--motion-base) var(--ease-decel) both' }}>
-              <span style={{ flex: 1, fontSize: 13.5, lineHeight: 1.45 }}>{toast.message}</span>
-              {toast.action && <button type="button" onClick={() => { toast.action!.run(); dismiss(toast.id); }} style={{ border: 0, background: 'transparent', cursor: 'pointer', font: 'inherit', fontSize: 13, fontWeight: 600, color: err ? 'var(--color-accent-700)' : 'var(--color-toast-action)', padding: '6px 4px', minHeight: 32 }}>{toast.action.label}</button>}
-              <button type="button" aria-label={t('common.close')} onClick={() => dismiss(toast.id)} style={{ border: 0, background: 'transparent', cursor: 'pointer', color: 'inherit', opacity: .6, padding: 6 }}>×</button>
-              <span aria-hidden style={{ position: 'absolute', left: 0, bottom: 0, height: 2, width: '100%', background: err ? 'var(--color-accent)' : 'var(--color-toast-action)', transformOrigin: 'left', animation: `mdl-line ${toast.duration ?? duration}ms linear reverse both` }} />
+            /* 스타일은 base-components.css 의 .toast 계열 클래스에 있습니다 — 인라인이면
+               테마(malt 등)가 손댈 수 없습니다. 수명 진행선의 duration 만 값이라 인라인입니다. */
+            <div key={toast.id} className={err ? 'toast toast-error' : 'toast'}>
+              <span className="toast-msg">{toast.message}</span>
+              {toast.action && <button type="button" className="toast-action" onClick={() => { toast.action!.run(); dismiss(toast.id); }}>{toast.action.label}</button>}
+              <button type="button" className="toast-close" aria-label={t('common.close')} onClick={() => dismiss(toast.id)}>×</button>
+              <span aria-hidden className="toast-line" style={{ animation: `mdl-line ${toast.duration ?? duration}ms linear reverse both` }} />
             </div>
           );
         })}

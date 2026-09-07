@@ -172,4 +172,20 @@ dialog.dialog:not([open]) { display: none; }
 @keyframes mdl-sheet{from{transform:translateY(100%)}to{transform:none}}
 @keyframes mdl-toast{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 dialog.drawer::backdrop,dialog.sheet::backdrop,dialog.dialog::backdrop{background:color-mix(in srgb,var(--color-neutral-900) 40%,transparent)}
+/* — sheet · toast 클래스 (인라인에서 이관, 값 동일 — 테마가 손대는 자리) — */
+.sheet{align-items:flex-end;justify-content:center}
+.sheet-panel{width:min(480px,100%);background:var(--color-surface);box-shadow:var(--shadow-lg);padding:12px 20px 20px;display:grid;gap:12px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;animation:mdl-sheet var(--motion-slow) var(--ease-decel) both}
+.sheet-grip{width:36px;height:4px;background:var(--color-neutral-300);justify-self:center;border-radius:2px}
+.sheet-title{margin:0;font-size:22px}
+.sheet-body{margin:0}
+.sheet-actions{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.toast{position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;padding:12px 14px;min-height:44px;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);background:var(--color-neutral-900);color:var(--color-bg);animation:mdl-toast var(--motion-base) var(--ease-decel) both}
+.toast-error{background:var(--color-accent-100);color:var(--color-accent-800);border-left:2px solid var(--color-accent)}
+.toast-msg{flex:1;font-size:13.5px;line-height:1.45}
+.toast-action{border:0;background:transparent;cursor:pointer;font:inherit;font-size:13px;font-weight:600;color:var(--color-toast-action);padding:6px 4px;min-height:32px}
+.toast-error .toast-action{color:var(--color-accent-700)}
+.toast-close{border:0;background:transparent;cursor:pointer;color:inherit;opacity:.6;padding:6px}
+.toast-line{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--color-toast-action);transform-origin:left}
+.toast-error .toast-line{background:var(--color-accent)}
+
 }

@@ -75,8 +75,13 @@ describe('대비 검수 — Malt 재고 상태색', () => {
   /**
    * 배지는 텍스트와 6px 점(background: currentColor)을 같은 색으로 씁니다.
    * 텍스트 4.5:1 을 넘기면 UI 요소 3:1 은 자동으로 넘습니다.
+   *
+   * 예외: 텍스트가 아니라 **비활성 컨트롤의 채움색**인 토큰. WCAG 1.4.3 이
+   * inactive UI component 를 명시적으로 제외합니다 — 비활성 버튼(#B8B0A5 위
+   * surface 글자)은 bottling 원 디자인 그대로 두들 기준 위반이 아닙니다.
    */
-  it.each(Object.keys(extra))('%s 이 bg 와 surface 위에서 4.5:1', key => {
+  const FILL_ONLY = new Set(['malt-btn-disabled']);
+  it.each(Object.keys(extra).filter(k => !FILL_ONLY.has(k)))('%s 이 bg 와 surface 위에서 4.5:1', key => {
     const v = String(extra[key]);
     expect(contrast(v, bg), `${key} ${v} / bg ${bg}`).toBeGreaterThanOrEqual(4.5);
     expect(contrast(v, surface), `${key} ${v} / surface ${surface}`).toBeGreaterThanOrEqual(4.5);

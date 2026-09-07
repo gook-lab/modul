@@ -31,7 +31,8 @@
       "extra": {
         "malt-clay": "#A33B2E",
         "malt-stock-in": "#2A7049",
-        "malt-stock-low": "#7A5610"
+        "malt-stock-low": "#7A5610",
+        "malt-btn-disabled": "#B8B0A5"
       }
     }
   },
