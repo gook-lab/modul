@@ -179,6 +179,10 @@ dialog.drawer::backdrop,dialog.sheet::backdrop,dialog.dialog::backdrop{backgroun
 .sheet-title{margin:0;font-size:22px}
 .sheet-body{margin:0}
 .sheet-actions{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.toast-stack{position:fixed;z-index:1000;display:grid;gap:8px;width:min(380px,calc(100vw - 32px))}
+.toast-stack--bottom-left{left:16px;bottom:16px}
+.toast-stack--bottom-center{left:50%;bottom:16px;transform:translateX(-50%)}
+.toast-stack--top-right{right:16px;top:16px}
 .toast{position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;padding:12px 14px;min-height:44px;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);background:var(--color-neutral-900);color:var(--color-bg);animation:mdl-toast var(--motion-base) var(--ease-decel) both}
 .toast-error{background:var(--color-accent-100);color:var(--color-accent-800);border-left:2px solid var(--color-accent)}
 .toast-msg{flex:1;font-size:13.5px;line-height:1.45}

@@ -15,9 +15,7 @@ export type ToastProviderProps = {
   /** 스택 컨테이너 div 로 전달 */
   containerProps?: ComponentPropsWithoutRef<'div'>;
 };
-const POS: Record<NonNullable<ToastProviderProps['position']>, React.CSSProperties> = {
-  'bottom-left': { left: 16, bottom: 16 }, 'bottom-center': { left: '50%', bottom: 16, transform: 'translateX(-50%)' }, 'top-right': { right: 16, top: 16 },
-};
+
 
 /** 앱 셸에 하나. role=status + aria-live=polite — 읽는 중을 끊지 않습니다. */
 export function ToastProvider({ children, duration = 4000, position = 'bottom-left', containerProps }: ToastProviderProps) {
@@ -36,7 +34,9 @@ export function ToastProvider({ children, duration = 4000, position = 'bottom-le
   return (
     <Ctx.Provider value={api}>
       {children}
-      <div role="status" aria-live="polite" className="toast-stack" {...containerProps} style={{ position: 'fixed', zIndex: 1000, display: 'grid', gap: 8, width: 'min(380px, calc(100vw - 32px))', ...POS[position], ...containerProps?.style }}>
+      {/* 위치까지 클래스입니다 — 인라인이면 소비자의 미디어 쿼리(데스크톱에서 내비 옆으로 등)가
+          못 이깁니다. containerProps.className 으로 스택 위치를 통째로 소유할 수 있습니다. */}
+      <div role="status" aria-live="polite" className={`toast-stack toast-stack--${position}`} {...containerProps} style={containerProps?.style}>
         {toasts.map(toast => {
           const err = toast.tone === 'error';
           return (
