@@ -58,4 +58,13 @@
 [data-theme=malt] .toast-action::after{content:'';position:absolute;left:-10px;right:-10px;top:50%;height:44px;transform:translateY(-50%)}
 [data-theme=malt] .toast-close,[data-theme=malt] .toast-line{display:none}
 
+/* ── 입력 — bottling .malt-textfield/.malt-textarea 의 값 그대로 ──────────── */
+[data-theme=malt] .input{min-height:44px;padding:6px 13px;font-family:var(--font-body);font-size:14px;caret-color:var(--color-accent-600)}
+[data-theme=malt] .input::placeholder{color:var(--color-neutral-700)}
+[data-theme=malt] .input:focus-visible,[data-theme=malt] .input-affix:focus-within{border-color:var(--color-accent)}
+[data-theme=malt] .input-affix{padding-block:0}
+[data-theme=malt] .input-affix > .input-plain{min-height:42px;padding-block:0}
+[data-theme=malt] .input-prefix,[data-theme=malt] .input-suffix{font-size:10.5px}
+[data-theme=malt] textarea.input{min-height:0;padding:11px 12px;font-size:13.5px;line-height:1.7;resize:none}
+
 }

@@ -24,5 +24,5 @@
 
 ## O — Optimization & Observability
 - 비밀번호 토글은 type 만 변경(리마운트 없음, 커서 유지)
-- prefix/suffix 폭 고정(28/36px) — measure 없음
+- prefix/suffix 는 내용 폭(flex:none) — measure 없음. 표기는 값이 아니라 포커스 대상이 아닙니다
 - aria-invalid + aria-describedby, :focus-visible 링만, axe CI
