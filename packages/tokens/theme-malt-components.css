@@ -67,4 +67,8 @@
 [data-theme=malt] .input-prefix,[data-theme=malt] .input-suffix{font-size:10.5px}
 [data-theme=malt] textarea.input{min-height:0;padding:11px 12px;font-size:13.5px;line-height:1.7;resize:none}
 
+/* ── 괘선 — bottling .malt-rule: 1px 실선, 파선은 한 단 진하게, 여백은 레이아웃 소유 ── */
+[data-theme=malt] .hr{height:0;background:none;border-top:1px solid var(--color-divider);margin:0}
+[data-theme=malt] .hr-dashed{border-top:1px dashed var(--color-neutral-400)}
+
 }

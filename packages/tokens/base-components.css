@@ -10,6 +10,7 @@
   height: 2px; border: 0; margin: var(--space-4) 0;
   background: var(--color-divider);
 }
+.hr-dashed { height: 0; background: none; border-top: 2px dashed var(--color-divider); }
 /* — buttons — */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
