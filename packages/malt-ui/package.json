@@ -1,12 +1,12 @@
 {
   "name": "@gook-lab/malt-ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "main": "./dist/index.cjs",
   "description": "bottling ui-web 프리미티브의 headless 개정안 — 기존 계약 유지 + ...rest",
   "peerDependencies": {
-    "@gook-lab/tokens": "workspace:*",
-    "@gook-lab/ui": "workspace:*",
+    "@gook-lab/tokens": "workspace:^",
+    "@gook-lab/ui": "workspace:^",
     "react": ">=18"
   },
   "module": "./dist/index.js",

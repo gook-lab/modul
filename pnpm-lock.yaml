@@ -198,10 +198,10 @@ importers:
   packages/malt-ui:
     dependencies:
       '@gook-lab/tokens':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../tokens
       '@gook-lab/ui':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../ui
       '@radix-ui/react-toggle-group':
         specifier: ^1.1.19
@@ -277,8 +277,11 @@ importers:
 
   packages/ui:
     dependencies:
+      '@gook-lab/motion':
+        specifier: workspace:^
+        version: link:../motion
       '@gook-lab/tokens':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../tokens
       '@radix-ui/react-accordion':
         specifier: ^1.2.0
