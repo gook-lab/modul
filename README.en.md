@@ -2,7 +2,7 @@
 
 [한국어](README.md) | **English**
 
-A headless React component library. Every value ships as a CSS variable, components never block native attributes, and your app CSS always wins.
+A React component library that separates behavior from presentation so each product can apply its own visual language. Design values ship as CSS variables, while native attributes and application-level styling remain available to consumers.
 
 ```bash
 # @gook-lab/* lives on GitHub Packages. Consumers need one line in .npmrc.
@@ -21,7 +21,7 @@ import '@gook-lab/tokens/styles.css';
 </Button>
 ```
 
-`type`, `form`, `data-*`, `aria-*`, and every event handler reach the root element untouched. That is the premise of this library.
+`type`, `form`, `data-*`, `aria-*`, and event handlers reach the root element. Products can add the behavior and accessibility attributes they need without another wrapper.
 
 ## Packages — four core, one domain
 
@@ -35,7 +35,7 @@ import '@gook-lab/tokens/styles.css';
 
 Sizes come from `npx size-limit`; the budgets live in [`.size-limit.json`](./.size-limit.json).
 
-## Design contracts — the six that define the library
+## Design principles
 
 The originals and their reasoning are in [`PROMPT.md`](./PROMPT.md). In short:
 
@@ -70,7 +70,7 @@ Importing `Button` alone does not pull in Radix.
 
 Bundling through a single barrel collects every `import * as RTabs from '@radix-ui/react-tabs'` at the top of `dist/index.js`. Radix, cmdk, and react-day-picker do not declare `sideEffects: false`, so a bundler cannot drop those statements and `Button` alone costs 47 KB. Splitting the `tsup` entries per component leaves the barrel as re-exports only.
 
-## Documentation — a RADIO doc per component, 44 of them
+## Component design documentation
 
 Read a component's RADIO before changing it: R (requirements with numbers), A (structure and state ownership), D (data model), I (interface), O (performance and observability).
 
@@ -97,7 +97,7 @@ pnpm --filter @gook-lab/app-portfolio dev    # motion wrappers, Reveal, Marquee
 
 The two Malt screens (F4 feed, F5 shop detail) live under `Domain/Malt 화면` in Storybook. They are assembled from core and domain primitives with no new components, and that assembly is what surfaced the `.card-body` opacity problem.
 
-## Development — seven verification gates
+## Development and verification
 
 ```bash
 pnpm install
@@ -119,16 +119,7 @@ pnpm --filter @gook-lab/storybook test:a11y   # 92 stories, 0 axe violations
 pnpm --filter @gook-lab/storybook test:visual # 92 screenshot comparisons (baselines are per-OS)
 ```
 
-Last measured 2026-09-04, all green. Both gates render the stories for real in Storybook 10's vitest browser mode. Visual regression is not a required CI gate — font rasterization differs per OS, so macOS baselines cannot be reused on a Linux runner; it is a pre-release local check. The evidence that axe alone is not enough: changing `--space-4` from 16px to 40px still passes a11y 92/92, and only the screenshot snapshot catches it. Both gates render the stories for real in Storybook 10's vitest browser mode. Visual regression is not a required CI gate — font rasterization differs per OS, so macOS baselines cannot be reused on a Linux runner; it is a pre-release local check. The evidence that axe alone is not enough: changing `--space-4` from 16px to 40px still passes a11y 92/92, and only the screenshot snapshot catches it. `pnpm gen:stories` generates stories from the RADIO docs and prop types, skipping the 16 written by hand. CI runs the same sequence in [`.github/workflows/verify.yml`](./.github/workflows/verify.yml).
-
-## Publishing — pnpm only
-
-```bash
-pnpm changeset      # change summary and version bump
-pnpm release        # version, build, publish
-```
-
-`npm publish` is blocked by a `prepack` guard. Only pnpm rewrites the `workspace:*` in peerDependencies into a real version; published through npm, consumers fail to install with `EUNSUPPORTEDPROTOCOL` (measured). Publishing without a build is blocked by each package's `prepublishOnly` — without it, deleting `dist` and packing shipped a 1-file, 1.8 KB package.
+Last measured on 2026-09-04, all checks passed. Accessibility and visual-regression checks render each story in Storybook 10's Vitest browser mode. Because font rasterization differs by operating system, visual regression remains a local pre-release check rather than a required CI job. `pnpm gen:stories` creates stories from RADIO documents and prop types while preserving hand-written stories. The CI sequence is defined in [`.github/workflows/verify.yml`](./.github/workflows/verify.yml).
 
 ## Publishing — pnpm only
 

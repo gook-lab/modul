@@ -2,7 +2,7 @@
 
 **한국어** | [English](README.en.md)
 
-헤드리스 React 컴포넌트 라이브러리입니다. 값은 전부 CSS 변수로 나가고, 컴포넌트는 네이티브 속성을 막지 않으며, 앱 CSS 가 항상 이깁니다.
+제품마다 다른 스타일을 적용할 수 있도록 표현과 동작을 분리한 React 컴포넌트 라이브러리입니다. 디자인 값은 CSS 변수로 제공하고, 네이티브 속성과 앱의 스타일 확장 지점을 그대로 열어 둡니다.
 
 ```bash
 # @gook-lab/* 는 GitHub Packages 에 있습니다. 소비자 저장소에 .npmrc 한 줄이 필요합니다.
@@ -21,7 +21,7 @@ import '@gook-lab/tokens/styles.css';
 </Button>
 ```
 
-`type` · `form` · `data-*` · `aria-*` · 모든 이벤트 핸들러가 루트 엘리먼트에 그대로 도달합니다. 이게 이 라이브러리의 전제입니다.
+`type` · `form` · `data-*` · `aria-*` · 이벤트 핸들러는 루트 엘리먼트에 전달됩니다. 사용하는 제품이 필요한 동작과 접근성 속성을 별도 래퍼 없이 지정할 수 있습니다.
 
 ## 패키지 구성 — 코어 4종 + 도메인 1종
 
@@ -35,7 +35,7 @@ import '@gook-lab/tokens/styles.css';
 
 수치는 `npx size-limit` 실측값이고 예산은 [`.size-limit.json`](./.size-limit.json) 에 있습니다.
 
-## 설계 계약 — 이 여섯 개가 라이브러리의 정체성
+## 설계 원칙
 
 계약의 원문과 배경은 [`PROMPT.md`](./PROMPT.md) 에 있습니다. 요약하면 다음과 같습니다.
 
@@ -70,7 +70,7 @@ cx('btn', 'btn-primary', 'btn-sm', '!btn-ghost')  → 'btn btn-sm btn-ghost'
 
 배럴 하나로 번들하면 `dist/index.js` 최상단에 `import * as RTabs from '@radix-ui/react-tabs'` 같은 문장이 전부 모입니다. Radix · cmdk · react-day-picker 는 `sideEffects: false` 를 선언하지 않아 번들러가 이 문장을 지우지 못하고, 그러면 `Button` 만 써도 47 KB 가 딸려옵니다. 그래서 `tsup` 엔트리를 컴포넌트별로 나눠 배럴이 재수출만 하게 했습니다.
 
-## 문서 — RADIO 44종이 컴포넌트마다 붙습니다
+## 컴포넌트 설계 문서
 
 컴포넌트를 고치기 전에 그 컴포넌트의 RADIO 를 읽습니다. R(요구사항·수치) A(구조·상태 분류) D(데이터 모델) I(인터페이스) O(성능·관측) 순서입니다.
 
@@ -97,7 +97,7 @@ pnpm --filter @gook-lab/app-portfolio dev    # 모션 래퍼 · Reveal · Marque
 
 Malt 앱의 두 화면(F4 피드 · F5 매장 상세)은 스토리북의 `Domain/Malt 화면` 에 있습니다. 새 컴포넌트 없이 코어와 도메인 프리미티브만으로 조립한 것이고, 이 조립에서 `.card-body` 의 투명도 문제가 드러났습니다.
 
-## 개발 — 검증 게이트 7개
+## 개발과 검증
 
 ```bash
 pnpm install
@@ -116,20 +116,7 @@ pnpm --filter @gook-lab/storybook test:a11y   # 스토리 92개, axe 위반 0
 pnpm --filter @gook-lab/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
 ```
 
-```bash
-pnpm --filter @gook-lab/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
-```
-
-마지막 실측은 2026-09-04 이고 전 항목 통과입니다. 두 게이트 모두 Storybook 10 의 vitest 브라우저 모드에서 스토리를 실제로 렌더해 검사합니다. 시각 회귀는 CI 필수 게이트에 넣지 않았습니다 — 폰트 래스터라이즈가 OS 마다 달라 macOS 기준선을 리눅스 러너에 그대로 쓸 수 없어서, 배포 전 로컬 확인용입니다. axe 만으로 부족하다는 근거는 실측에 있습니다: `--space-4` 를 16px → 40px 로 바꿔도 a11y 92/92 는 그대로 통과하고 시각 스냅샷만 잡았습니다. 두 게이트 모두 Storybook 10 의 vitest 브라우저 모드에서 스토리를 실제로 렌더해 검사합니다. 시각 회귀는 CI 필수 게이트에 넣지 않았습니다 — 폰트 래스터라이즈가 OS 마다 달라 macOS 기준선을 리눅스 러너에 그대로 쓸 수 없어서, 배포 전 로컬 확인용입니다. axe 만으로는 부족하다는 근거는 실측에 있습니다: `--space-4` 를 16px → 40px 로 바꿔도 a11y 92/92 는 그대로 통과하고 시각 스냅샷만 잡았습니다. `pnpm gen:stories` 는 RADIO 문서와 props 타입에서 스토리를 만들고 손으로 쓴 16개는 건너뜁니다. CI 는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml) 에서 같은 순서로 돕니다.
-
-## 배포 — pnpm 으로만
-
-```bash
-pnpm changeset      # 변경 요약과 버전 폭
-pnpm release        # 버전 + 빌드 + publish
-```
-
-`npm publish` 는 쓸 수 없고 `prepack` 가드가 막습니다. peerDependencies 의 `workspace:*` 를 실제 버전으로 치환하는 것이 pnpm 뿐이라, npm 으로 내보내면 소비자가 `EUNSUPPORTEDPROTOCOL` 로 설치에 실패합니다(실측). 빌드를 잊고 배포하는 것은 각 패키지의 `prepublishOnly` 가 막습니다 — 없을 때는 `dist` 를 지우고 pack 하면 1파일 1.8 KB 가 나갔습니다.
+마지막 실측은 2026-09-04이며 전 항목을 통과했습니다. 접근성 검사와 시각 회귀 검사는 Storybook 10의 Vitest 브라우저 모드에서 각 스토리를 렌더한 뒤 수행합니다. 시각 결과는 운영체제의 폰트 렌더링에 영향을 받으므로 CI 필수 항목이 아닌 배포 전 로컬 검사로 사용합니다. `pnpm gen:stories`는 RADIO 문서와 props 타입을 바탕으로 스토리를 생성하며, 직접 작성한 스토리는 유지합니다. CI 실행 순서는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml)에서 확인할 수 있습니다.
 
 ## 배포 — pnpm 으로만
 
