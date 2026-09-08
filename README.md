@@ -4,6 +4,8 @@
 
 제품마다 다른 스타일을 적용할 수 있도록 표현과 동작을 분리한 React 컴포넌트 라이브러리입니다. 디자인 값은 CSS 변수로 제공하고, 네이티브 속성과 앱의 스타일 확장 지점을 그대로 열어 둡니다.
 
+<img src="docs/screenshots/cover.png" alt="MODUL 컴포넌트로 구성한 예시 화면" width="100%">
+
 ```bash
 # @gook-lab/* 는 GitHub Packages 에 있습니다. 소비자 저장소에 .npmrc 한 줄이 필요합니다.
 echo '@gook-lab:registry=https://npm.pkg.github.com' >> .npmrc

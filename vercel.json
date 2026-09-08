@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm --filter @gook-lab/storybook build",
+  "outputDirectory": "apps/storybook/storybook-static",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": null
+}

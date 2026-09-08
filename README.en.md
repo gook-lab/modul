@@ -4,6 +4,8 @@
 
 A React component library that separates behavior from presentation so each product can apply its own visual language. Design values ship as CSS variables, while native attributes and application-level styling remain available to consumers.
 
+<img src="docs/screenshots/cover.png" alt="Example screen composed with MODUL components" width="100%">
+
 ```bash
 # @gook-lab/* lives on GitHub Packages. Consumers need one line in .npmrc.
 echo '@gook-lab:registry=https://npm.pkg.github.com' >> .npmrc
