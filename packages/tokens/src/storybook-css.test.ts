@@ -13,8 +13,8 @@ describe('Storybook syntax highlighting compatibility', () => {
   it('reduces animation and scrolling across every motion surface', () => {
     const css = readFileSync(resolve(__dirname, '../base-components.css'), 'utf8');
 
-    expect(css).toMatch(/prefers-reduced-motion:reduce[\s\S]*?\*,\*::before,\*::after/);
-    expect(css).toContain('animation-iteration-count:1!important');
-    expect(css).toContain('transition-duration:1ms!important');
+    expect(css).toMatch(/prefers-reduced-motion:reduce[\s\S]*?\*,::before,::after/);
+    expect(css).toContain('animation:none!important');
+    expect(css).toContain('transition:none!important');
   });
 });
