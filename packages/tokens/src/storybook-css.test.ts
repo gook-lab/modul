@@ -15,6 +15,6 @@ describe('Storybook syntax highlighting compatibility', () => {
 
     expect(css).toMatch(/prefers-reduced-motion:reduce[\s\S]*?\*,\*::before,\*::after/);
     expect(css).toContain('animation-iteration-count:1!important');
-    expect(css).toContain('transition-duration:.01ms!important');
+    expect(css).toContain('transition-duration:1ms!important');
   });
 });
