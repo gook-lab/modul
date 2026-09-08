@@ -10,10 +10,11 @@ export type MarqueeProps = {
 
 /** 자식을 2회 복제해 -50% translate 무한 루프. */
 export const Marquee = forwardRef<HTMLDivElement, MarqueeProps>(
-  ({ speed = 18, reverse, pauseOnHover, tone = 'ink', style, children, ...rest }, ref) => (
+  ({ speed = 18, reverse, pauseOnHover, tone = 'ink', style, className, children, ...rest }, ref) => (
     <div
       ref={ref}
       aria-hidden
+      className={`marquee mdl-motion${className ? ` ${className}` : ''}`}
       style={{ overflow: 'hidden', background: tone === 'accent' ? 'var(--color-accent-700)' : undefined, color: tone === 'accent' ? 'var(--color-bg)' : undefined, ...style }}
       onMouseEnter={pauseOnHover ? e => ((e.currentTarget.firstChild as HTMLElement).style.animationPlayState = 'paused') : undefined}
       onMouseLeave={pauseOnHover ? e => ((e.currentTarget.firstChild as HTMLElement).style.animationPlayState = 'running') : undefined}
