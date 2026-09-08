@@ -4,6 +4,10 @@
 
 [Storybook 데모](https://modul-storybook.vercel.app) · [GitHub](https://github.com/gook-lab/modul)
 
+[![verify](https://github.com/gook-lab/modul/actions/workflows/verify.yml/badge.svg)](https://github.com/gook-lab/modul/actions/workflows/verify.yml)
+
+검증 Workflow에서 타입·테스트·번들 예산과 함께 Storybook 전 스토리의 axe 접근성 검사를 실행합니다.
+
 제품마다 다른 스타일을 적용할 수 있도록 표현과 동작을 분리한 React 컴포넌트 라이브러리입니다. 디자인 값은 CSS 변수로 제공하고, 네이티브 속성과 앱의 스타일 확장 지점을 그대로 열어 둡니다.
 
 <img src="docs/screenshots/cover.png" alt="MODUL 컴포넌트로 구성한 예시 화면" width="100%">
@@ -112,15 +116,15 @@ pnpm --filter @gook-lab/storybook dev         # localhost:6006, 3 테마 토글
 ```bash
 pnpm typecheck                             # 0 errors
 pnpm lint                                  # 0 errors
-pnpm -r test                               # 148 passed (ui 121 · tokens 23 · motion 4)
+pnpm -r test                               # 패키지 전체 테스트
 pnpm -r build                              # 4 패키지
 npx size-limit                             # 예산 내
 pnpm --filter @gook-lab/storybook build
-pnpm --filter @gook-lab/storybook test:a11y   # 스토리 92개, axe 위반 0
-pnpm --filter @gook-lab/storybook test:visual # 스크린샷 92장 비교 (기준선은 OS 별)
+pnpm --filter @gook-lab/storybook test:a11y   # 전 스토리 axe 검사
+pnpm --filter @gook-lab/storybook test:visual # 전 스토리 스크린샷 비교 (기준선은 OS 별)
 ```
 
-마지막 실측은 2026-09-04이며 전 항목을 통과했습니다. 접근성 검사와 시각 회귀 검사는 Storybook 10의 Vitest 브라우저 모드에서 각 스토리를 렌더한 뒤 수행합니다. 시각 결과는 운영체제의 폰트 렌더링에 영향을 받으므로 CI 필수 항목이 아닌 배포 전 로컬 검사로 사용합니다. `pnpm gen:stories`는 RADIO 문서와 props 타입을 바탕으로 스토리를 생성하며, 직접 작성한 스토리는 유지합니다. CI 실행 순서는 [`.github/workflows/verify.yml`](./.github/workflows/verify.yml)에서 확인할 수 있습니다.
+접근성 검사와 시각 회귀 검사는 Storybook 10의 Vitest 브라우저 모드에서 각 스토리를 렌더한 뒤 수행합니다. 시각 결과는 운영체제의 폰트 렌더링에 영향을 받으므로 CI 필수 항목이 아닌 배포 전 로컬 검사로 사용합니다. `pnpm gen:stories`는 RADIO 문서와 props 타입을 바탕으로 스토리를 생성하며, 직접 작성한 스토리는 유지합니다. 최신 검증 결과와 실행 순서는 [검증 Workflow](./.github/workflows/verify.yml)에서 확인할 수 있습니다.
 
 ## 배포 — pnpm 으로만
 

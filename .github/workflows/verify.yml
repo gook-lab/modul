@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v5
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --prod --audit-level high
       # test:a11y 는 vitest 브라우저 모드(playwright)로 스토리를 실제로 렌더합니다.
       - run: pnpm --filter @gook-lab/storybook exec playwright install --with-deps chromium
       - run: pnpm --filter @gook-lab/tokens build
