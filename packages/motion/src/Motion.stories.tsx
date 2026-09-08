@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Button } from '@gook-lab/ui';
 import { Reveal } from './Reveal';
 import { Marquee } from './Marquee';
 import { RouteTransition } from './RouteTransition';
@@ -11,8 +12,24 @@ import { CursorProvider } from './Cursor';
 const meta: Meta = { title: 'Motion', parameters: { layout: 'padded' } };
 export default meta;
 
+function ReplayDemo({ children }: { children: ReactNode }) {
+  const [run, setRun] = useState(0);
+  return (
+    <div style={{ display: 'grid', gap: 24 }}>
+      <Button variant="secondary" size="sm" style={{ justifySelf: 'start' }} onClick={() => setRun(value => value + 1)}>
+        다시 재생
+      </Button>
+      <div key={run}>{children}</div>
+    </div>
+  );
+}
+
 export const TextReveal: StoryObj = {
-  render: () => <Reveal as="h1" split="char" stagger={30} style={{ fontSize: 88, lineHeight: 1, letterSpacing: '-0.03em', margin: 0 }}>움직임은 구조다.</Reveal>,
+  render: () => (
+    <ReplayDemo>
+      <Reveal as="h1" split="char" stagger={30} style={{ fontSize: 88, lineHeight: 1, letterSpacing: '-0.03em', margin: 0 }}>움직임은 구조다.</Reveal>
+    </ReplayDemo>
+  ),
 };
 export const ScrollTrigger: StoryObj = {
   render: () => (
@@ -82,5 +99,9 @@ export const CountUp: StoryObj = {
   // rAF 로 숫자를 세는 동안 값이 계속 바뀌어 스크린샷이 실행마다 다릅니다(실측 2.16% 차이).
   // 애니메이션을 CSS 로 끄는 것으로는 막을 수 없어 시각 스냅샷에서 뺍니다.
   parameters: { visual: { skip: true } },
-  render: () => <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 48 }}><Stat value={1280} suffix="+" label="완료한 화면" /><Stat value={42} label="프로젝트" /><Stat value={98.6} suffix="%" label="토큰 커버리지" decimals={1} /></div>,
+  render: () => (
+    <ReplayDemo>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 48 }}><Stat value={1280} suffix="+" label="완료한 화면" /><Stat value={42} label="프로젝트" /><Stat value={98.6} suffix="%" label="토큰 커버리지" decimals={1} /></div>
+    </ReplayDemo>
+  ),
 };
