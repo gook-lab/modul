@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/Tag.md?raw';
+import { radioDescription } from '../storybook-radio';
 import { Tag } from './Tag';
-const meta: Meta<typeof Tag> = { title: 'Components/Tag', component: Tag, args: { children: '진행중', variant: 'accent' }, argTypes: { variant: { control: 'inline-radio', options: ['accent', 'neutral', 'outline'] } } };
+const meta: Meta<typeof Tag> = { title: 'Components/Tag', component: Tag, tags: ['autodocs'], args: { children: '진행중', variant: 'accent' }, argTypes: { variant: { control: 'inline-radio', options: ['accent', 'neutral', 'outline'] } }, parameters: { docs: { description: { component: radioDescription(radio) } } } };
 export default meta;
 type S = StoryObj<typeof Tag>;
 export const Accent: S = {};

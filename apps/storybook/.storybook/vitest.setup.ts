@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, expect } from 'vitest';
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 
 declare const __VISUAL__: boolean;
 

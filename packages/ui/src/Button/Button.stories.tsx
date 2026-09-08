@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/Button.md?raw';
+import { radioDescription } from '../storybook-radio';
 import { Button } from './Button';
 
 const ArrowRight = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>;
@@ -6,6 +8,7 @@ const ArrowRight = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="n
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
   args: { children: '시작하기', variant: 'primary', size: 'md' },
   argTypes: {
     variant: { control: 'inline-radio', options: ['primary', 'secondary', 'ghost'] },
@@ -13,7 +16,7 @@ const meta: Meta<typeof Button> = {
     disabled: { control: 'boolean' },
     icon: { control: false },
   },
-  parameters: { docs: { description: { component: '액션. 라벨은 항상 왼쪽 정렬. headless — 고유 props 외 모든 <button> 속성은 ...rest 로 루트에 전달.' } } },
+  parameters: { docs: { description: { component: radioDescription(radio) } } },
 };
 export default meta;
 type S = StoryObj<typeof Button>;

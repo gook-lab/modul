@@ -19,7 +19,15 @@ export function matchesAccept(file: File, accept?: string) {
     : type === rule);
 }
 const metaKey = (f: { name: string; size: number; lastModified?: number }) => `${f.name}|${f.size}|${f.lastModified ?? ''}`;
-export async function sha256(file: File) { const buf = await crypto.subtle.digest('SHA-256', await file.arrayBuffer()); return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join(''); }
+export async function sha256(file: File) {
+  /* jsdom의 File이 반환한 ArrayBuffer는 Node WebCrypto와 realm이 달라
+     그대로 넘기면 BufferSource 판정에 실패합니다. 현재 realm의 view로 복사합니다. */
+  const source = new Uint8Array(await file.arrayBuffer());
+  const input = new Uint8Array(source.byteLength);
+  input.set(source);
+  const digest = await crypto.subtle.digest('SHA-256', input);
+  return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
 
 export function validateFiles(files: File[], o: ValidateOptions = {}): ValidateResult {
   const accepted: File[] = [], rejected: FileReject[] = [];

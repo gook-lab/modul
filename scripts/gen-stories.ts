@@ -1,7 +1,7 @@
 /**
  * docs/radio/<Name>.md + <Name>.tsx 의 props 타입 → <Name>.stories.tsx 생성.
  *  - argTypes: props 타입의 유니언 리터럴 → inline-radio, boolean → boolean, string → text, 함수/ReactNode → control:false
- *  - docs.description.component: RADIO md 의 인용문(> …) + R 절
+ *  - docs.description.component: RADIO md 전체(R/A/D/I/O)
  *  - 기본 스토리 1개 + variant 유니언별 스토리
  * 이미 손으로 쓴 *.stories.tsx 가 있으면 건너뛴다(덮어쓰지 않음). 실행: pnpm gen:stories
  */
@@ -40,9 +40,8 @@ function propsOf(file: string, typeName: string) {
 }
 function radio(name: string) {
   const p = join(RADIO, name + '.md'); if (!existsSync(p)) return '';
-  const md = readFileSync(p, 'utf8'); const intro = (md.match(/^> (.+)$/m) || [])[1] ?? '';
-  const R = (md.split(/^## R[^\n]*$/m)[1] || '').split(/^## /m)[0].trim();
-  return [intro, '', '**Requirements**', R].join('\n').replace(/`/g, '\\`');
+  const md = readFileSync(p, 'utf8').trim();
+  return md.replace(/^#\s+[^\n]+\n+/, '').replace(/^>\s?/gm, '').trim().replace(/`/g, '\\`');
 }
 for (const dir of readdirSync(UI, { withFileTypes: true }).filter(d => d.isDirectory() && /^[A-Z]/.test(d.name))) {
   const name = dir.name, comp = join(UI, name, name + '.tsx'), story = join(UI, name, name + '.stories.tsx');

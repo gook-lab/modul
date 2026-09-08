@@ -1,0 +1,15 @@
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import * as RTabs from '@radix-ui/react-tabs';
+import appBarRadio from '../../../../docs/radio/AppBar.md?raw';
+import bottomActionsRadio from '../../../../docs/radio/BottomActions.md?raw';
+import scrollTabsRadio from '../../../../docs/radio/ScrollTabs.md?raw';
+import { radioDescription } from '../storybook-radio';
+import { Button } from '../Button/Button';
+import { AppBar } from './AppBar';
+import { BottomActions } from './BottomActions';
+import { ScrollTabs } from './ScrollTabs';
+const mobileDocs = [appBarRadio, scrollTabsRadio, bottomActionsRadio].map(radioDescription).join('\n\n---\n\n');
+const meta: Meta<typeof AppBar> = { title: 'Components/Mobile Patterns', component: AppBar, tags: ['autodocs'], parameters: { layout: 'fullscreen', docs: { description: { component: mobileDocs } } } };
+export default meta;
+export const AppShell: StoryObj<typeof AppBar> = { render: () => { const [tab, setTab] = useState('all'); const tabs = ['all', 'open', 'sealed', 'wish', 'gone']; return <div style={{ width: 390, height: 560, position: 'relative', border: '1px solid var(--color-divider)', display: 'flex', flexDirection: 'column' }}><AppBar title="캐비닛" crumbs={['홈', '캐비닛']} onBack={() => {}} actions={<Button variant="ghost" size="sm">편집</Button>} /><ScrollTabs value={tab} onValueChange={setTab} items={tabs.map(value => ({ value, label: value }))}>{tabs.map(value => <RTabs.Content key={value} value={value} style={{ flex: 1, overflow: 'auto', padding: 16 }}>선택한 탭: {value}</RTabs.Content>)}</ScrollTabs><BottomActions><Button variant="secondary" block>나중에</Button><Button block>기록하기</Button></BottomActions></div>; } };

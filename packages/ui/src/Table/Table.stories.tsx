@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/Table.md?raw';
+import { radioDescription } from '../storybook-radio';
 import { Table, type Column } from './Table';
 import type { TagOwnProps } from '../Tag/Tag';
 import { Tag } from '../Tag/Tag';
@@ -17,7 +19,7 @@ const columns: Column<Row>[] = [
   { key: 'status', header: '상태', render: r => <Tag variant={tone(r.status)}>{r.status}</Tag> },
   { key: 'date', header: '업데이트', align: 'right' },
 ];
-const meta: Meta<typeof Table<Row>> = { title: 'Components/Table', component: Table, args: { columns, rows, 'aria-label': '프로젝트' }, parameters: { layout: 'padded' } };
+const meta: Meta<typeof Table<Row>> = { title: 'Components/Table', component: Table, tags: ['autodocs'], args: { columns, rows, 'aria-label': '프로젝트' }, parameters: { layout: 'padded', docs: { description: { component: radioDescription(radio) } } } };
 export default meta;
 type S = StoryObj<typeof Table<Row>>;
 export const Default: S = {};

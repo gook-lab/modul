@@ -1,10 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/Card.md?raw';
+import { radioDescription } from '../storybook-radio';
 import { Card } from './Card';
 const meta: Meta<typeof Card> = {
-  title: 'Components/Card', component: Card,
+  title: 'Components/Card', component: Card, tags: ['autodocs'],
   args: { kicker: '디자인 시스템', title: 'MODUL 컴포넌트 라이브러리', children: '모듈러 그리드 위에서 표면색 하나로 구분되는 카드.', elevation: 'none', meta: '2026.09 · 디자인 시스템' },
   argTypes: { elevation: { control: 'inline-radio', options: ['none', 'sm', 'md', 'lg'] } },
   decorators: [S => <div style={{ width: 300 }}><S /></div>],
+  parameters: { docs: { description: { component: radioDescription(radio) } } },
 };
 export default meta;
 type S = StoryObj<typeof Card>;

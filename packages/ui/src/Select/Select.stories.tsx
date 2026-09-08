@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import selectRadio from '../../../../docs/radio/Select.md?raw';
+import comboboxRadio from '../../../../docs/radio/Combobox.md?raw';
+import { radioDescription } from '../storybook-radio';
 import { Select } from './Select';
 import { Combobox } from '../Combobox/Combobox';
 
-const meta: Meta = { title: 'Components/Select & Combobox', decorators: [S => <div style={{ width: 340, minHeight: 320 }}><S /></div>] };
+const meta: Meta = { title: 'Components/Select & Combobox', tags: ['autodocs'], decorators: [S => <div style={{ width: 340, minHeight: 320 }}><S /></div>], parameters: { docs: { description: { component: `${radioDescription(selectRadio)}\n\n---\n\n${radioDescription(comboboxRadio)}` } } } };
 export default meta;
 type St = 'active' | 'review' | 'done';
 const STATUS = [{ value: 'active' as St, label: '진행중', hint: 4, dot: 'accent' as const }, { value: 'review' as St, label: '검토', hint: 2 }, { value: 'done' as St, label: '완료', hint: 6 }];
