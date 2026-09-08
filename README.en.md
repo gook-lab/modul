@@ -4,6 +4,10 @@
 
 [Storybook demo](https://modul-storybook.vercel.app) · [GitHub](https://github.com/gook-lab/modul)
 
+[![verify](https://github.com/gook-lab/modul/actions/workflows/verify.yml/badge.svg)](https://github.com/gook-lab/modul/actions/workflows/verify.yml)
+
+The verification workflow checks types, tests, bundle budgets, and axe accessibility across every Storybook story.
+
 A React component library that separates behavior from presentation so each product can apply its own visual language. Design values ship as CSS variables, while native attributes and application-level styling remain available to consumers.
 
 <img src="docs/screenshots/cover.png" alt="Example screen composed with MODUL components" width="100%">
@@ -112,18 +116,18 @@ pnpm --filter @gook-lab/storybook dev         # localhost:6006, three-theme togg
 ```bash
 pnpm typecheck                             # 0 errors
 pnpm lint                                  # 0 errors
-pnpm -r test                               # 148 passed (ui 121 · tokens 23 · motion 4)
+pnpm -r test                               # all package tests
 pnpm -r build                              # 4 packages
 npx size-limit                             # within budget
 pnpm --filter @gook-lab/storybook build
-pnpm --filter @gook-lab/storybook test:a11y   # 92 stories, 0 axe violations
+pnpm --filter @gook-lab/storybook test:a11y   # axe across all stories
 ```
 
 ```bash
-pnpm --filter @gook-lab/storybook test:visual # 92 screenshot comparisons (baselines are per-OS)
+pnpm --filter @gook-lab/storybook test:visual # all-story screenshot comparison (baselines are per-OS)
 ```
 
-Last measured on 2026-09-04, all checks passed. Accessibility and visual-regression checks render each story in Storybook 10's Vitest browser mode. Because font rasterization differs by operating system, visual regression remains a local pre-release check rather than a required CI job. `pnpm gen:stories` creates stories from RADIO documents and prop types while preserving hand-written stories. The CI sequence is defined in [`.github/workflows/verify.yml`](./.github/workflows/verify.yml).
+Accessibility and visual-regression checks render each story in Storybook 10's Vitest browser mode. Because font rasterization differs by operating system, visual regression remains a local pre-release check rather than a required CI job. `pnpm gen:stories` creates stories from RADIO documents and prop types while preserving hand-written stories. The latest result and CI sequence live in the [verification workflow](./.github/workflows/verify.yml).
 
 ## Publishing — pnpm only
 
