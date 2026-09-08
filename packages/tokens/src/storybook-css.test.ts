@@ -10,10 +10,11 @@ describe('Storybook syntax highlighting compatibility', () => {
     expect(css).not.toMatch(/(^|[},]\s*)\.tag\s*\{/m);
   });
 
-  it('stops explicit motion surfaces when reduced motion is requested', () => {
+  it('reduces animation and scrolling across every motion surface', () => {
     const css = readFileSync(resolve(__dirname, '../base-components.css'), 'utf8');
 
-    expect(css).toMatch(/prefers-reduced-motion:\s*reduce[\s\S]*?\.mdl-motion[\s\S]*?animation:none!important/);
-    expect(css).toMatch(/prefers-reduced-motion:\s*reduce[\s\S]*?\.mdl-motion[\s\S]*?transition:none!important/);
+    expect(css).toMatch(/prefers-reduced-motion:reduce[\s\S]*?\*,\*::before,\*::after/);
+    expect(css).toContain('animation-iteration-count:1!important');
+    expect(css).toContain('transition-duration:.01ms!important');
   });
 });

@@ -11,7 +11,7 @@ import { external } from '../../tsup.config.base';
  * 파일이 나뉘어 있으면 배럴은 재수출만 하므로 안 쓰는 파일은 따라오지 않습니다.
  */
 const SRC = 'src';
-const SKIP = /\.(test|stories)\.tsx?$/;
+const SKIP = /(?:\.(?:test|stories)|storybook-radio)\.tsx?$/;
 
 function entries(dir = SRC, out: Record<string, string> = {}) {
   for (const name of readdirSync(join(process.cwd(), dir))) {
