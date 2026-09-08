@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/Modal.md?raw';
+import { radioDescription } from '../storybook-radio';
 import { Modal, ModalActions } from './Modal';
 import { Button } from '../Button/Button';
 
-const meta: Meta<typeof Modal> = { title: 'Components/Modal', component: Modal, args: { title: '프로젝트를 삭제할까요?', danger: false } };
+const meta: Meta<typeof Modal> = { title: 'Components/Modal', component: Modal, tags: ['autodocs'], args: { title: '프로젝트를 삭제할까요?', danger: false }, parameters: { docs: { description: { component: radioDescription(radio) } } } };
 export default meta;
 type S = StoryObj<typeof Modal>;
 export const Default: S = {

@@ -1,0 +1,10 @@
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/Stepper.md?raw';
+import { radioDescription } from '../storybook-radio';
+import { Stepper } from './Stepper';
+const steps = [{ id: 'account', label: '계정' }, { id: 'region', label: '지역' }, { id: 'profile', label: '성향' }, { id: 'finish', label: '완료', optional: true }];
+const meta: Meta<typeof Stepper> = { title: 'Components/Stepper', component: Stepper, tags: ['autodocs'], parameters: { layout: 'padded', docs: { description: { component: radioDescription(radio) } } } };
+export default meta;
+export const Progress: StoryObj<typeof Stepper> = { render: () => <Stepper aria-label="가입 진행" steps={steps} current={1} /> };
+export const Interactive: StoryObj<typeof Stepper> = { render: () => { const [current, setCurrent] = useState(1); return <Stepper aria-label="가입 단계 선택" variant="dots" steps={steps} current={current} onStepChange={setCurrent} />; } };

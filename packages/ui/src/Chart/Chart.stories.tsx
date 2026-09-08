@@ -1,0 +1,10 @@
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/Chart.md?raw';
+import { radioDescription } from '../storybook-radio';
+import { BarChart, LineChart, Sparkline } from './Chart';
+const data = [{ label: '4월', value: 12 }, { label: '5월', value: 19 }, { label: '6월', value: 8 }, { label: '7월', value: 24 }, { label: '8월', value: 17 }];
+const meta: Meta<typeof BarChart> = { title: 'Components/Chart', component: BarChart, tags: ['autodocs'], parameters: { layout: 'padded', docs: { description: { component: radioDescription(radio) } } } };
+export default meta;
+export const Bar: StoryObj<typeof BarChart> = { render: () => <BarChart title="월별 입고" data={data} highlight={3} /> };
+export const Line: StoryObj<typeof BarChart> = { render: () => <LineChart title="누적 보틀" data={data} /> };
+export const Spark: StoryObj<typeof BarChart> = { render: () => <Sparkline label="최근 7일 입고 추이" data={[3, 3, 2, 4, 3, 4, 4]} /> };

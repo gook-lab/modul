@@ -9,6 +9,24 @@ const preview: Preview = {
   parameters: {
     layout: 'centered',
     backgrounds: { disabled: true },
+    options: {
+      storySort: {
+        order: [
+          'Foundations',
+          'Components',
+          [
+            'Button', 'Input', 'Textarea', 'Checkbox & Radio', 'Switch', 'Slider',
+            'Select & Combobox', 'DatePicker', 'FileDrop', 'ImageUpload', 'Tag',
+            'Card', 'Stat', 'Table', 'EmptyState', 'Skeleton', 'Alert', 'Avatar',
+            'Kbd & Code', 'Tabs', 'Stepper', 'Breadcrumb', 'Accordion', 'Pagination',
+            'Popover & Menu', 'Tooltip', 'CommandPalette', 'Modal', 'Drawer', 'Sheet',
+            'Toast', 'Sidebar', 'Chart', 'Boundary', 'RichText', 'Mobile Patterns', 'Form',
+          ],
+          'Motion',
+          'Domain',
+        ],
+      },
+    },
     controls: { expanded: true },
     /**
      * axe 는 addon-a11y 가 스토리마다 돌립니다(Storybook 10 부터 vitest 와 직접 연결).

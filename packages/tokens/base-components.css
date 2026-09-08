@@ -100,7 +100,8 @@ textarea.input { min-height: 90px; resize: vertical; }
 .elev-md { box-shadow: var(--shadow-md); }
 .elev-lg { box-shadow: var(--shadow-lg); }
 /* — tags — */
-.tag {
+/* Prism also uses `.tag` for JSX syntax tokens in Storybook Docs. */
+.tag:not(.token) {
   display: inline-flex; align-items: center; font-size: 11px;
   letter-spacing: 0.02em; padding: 3px 10px;
   border-radius: calc(var(--radius-md) * 0.75);
@@ -171,7 +172,7 @@ dialog.dialog:not([open]) { display: none; }
 @keyframes mdl-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .mdl-inview{animation:mdl-reveal linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
 @supports not (animation-timeline: view()){.mdl-inview{opacity:0;transform:translateY(40px);transition:opacity var(--motion-page) var(--ease-decel),transform var(--motion-page) var(--ease-decel)}.mdl-inview[data-inview]{opacity:1;transform:none}}
-@media (prefers-reduced-motion: reduce){.mdl-motion *,.mdl-motion{animation-duration:1ms!important;transition-duration:1ms!important}}
+@media (prefers-reduced-motion: reduce){.mdl-motion *,.mdl-motion{animation:none!important;transition:none!important}}
 [data-theme=dark] .btn-primary:hover{background:var(--color-accent-600)}
 @keyframes mdl-drawer-r{from{transform:translateX(100%)}to{transform:none}}
 @keyframes mdl-drawer-l{from{transform:translateX(-100%)}to{transform:none}}

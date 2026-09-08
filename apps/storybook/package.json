@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "storybook dev -p 6006 --disable-telemetry",
+    "dev": "cross-env REACT_EDITOR=code storybook dev -p 6006 --disable-telemetry",
     "build": "storybook build --disable-telemetry",
     "test:a11y": "vitest run --config vitest.config.ts",
     "test:visual": "cross-env VISUAL=1 vitest run --config vitest.config.ts"

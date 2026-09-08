@@ -1,0 +1,10 @@
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import radio from '../../../../docs/radio/ImageUpload.md?raw';
+import { radioDescription } from '../storybook-radio';
+import { AvatarUpload, ImageGallery, type ImageItem } from './ImageUpload';
+const meta: Meta<typeof ImageGallery> = { title: 'Components/ImageUpload', component: ImageGallery, tags: ['autodocs'], parameters: { layout: 'padded', docs: { description: { component: radioDescription(radio) } } } };
+export default meta;
+const upload = (file: File, onProgress: (progress: number) => void) => { onProgress(100); return Promise.resolve(URL.createObjectURL(file)); };
+export const Avatar: StoryObj<typeof ImageGallery> = { render: () => { const [value, setValue] = useState<string | null>(null); return <AvatarUpload value={value} onChange={setValue} fallback="김" onUpload={upload} />; } };
+export const Gallery: StoryObj<typeof ImageGallery> = { render: () => { const [value, setValue] = useState<ImageItem[]>([]); return <ImageGallery label="목격 사진" value={value} onChange={setValue} max={5} onUpload={upload} />; } };
