@@ -34,6 +34,7 @@ export * from './Switch/Switch';
 export * from './Slider/Slider';
 export * from './Kbd/Kbd';
 export * from './Form/Form';
+export * from './Form/errors';
 export * from './utils/labels';
 export * from './ModulProvider';
 export * from './Mobile';
