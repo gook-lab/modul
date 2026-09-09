@@ -18,6 +18,9 @@ function entries(dir = SRC, out: Record<string, string> = {}) {
     const rel = `${dir}/${name}`;
     if (statSync(join(process.cwd(), rel)).isDirectory()) { entries(rel, out); continue; }
     if (!/\.tsx?$/.test(name) || SKIP.test(name) || name.endsWith('.d.ts')) continue;
+    // 중첩 배럴은 루트 배럴이 이미 재수출한다. 별도 엔트리로 만들면 tsup이
+    // 내용 없는 공유 청크와 bare import를 생성해 소비자 번들러에 경고를 남긴다.
+    if (rel !== `${SRC}/index.ts` && name === 'index.ts') continue;
     out[rel.slice(SRC.length + 1).replace(/\.tsx?$/, '')] = rel;
   }
   return out;
