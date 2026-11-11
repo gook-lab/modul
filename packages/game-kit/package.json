@@ -1,0 +1,25 @@
+{
+  "name": "@gook-lab/game-kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "토이 게임 세 개가 함께 쓰는 난수 · 조사 · 연결 코드 모듈. 빌드 없이 TS 소스를 그대로 낸다.",
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "exports": {
+    "./rng": "./src/rng.ts",
+    "./josa": "./src/josa.ts",
+    "./link": "./src/link/index.ts"
+  },
+  "scripts": {
+    "test": "tsc -p tsconfig.json && vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gook-lab/modul.git",
+    "directory": "packages/game-kit"
+  }
+}

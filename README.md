@@ -40,6 +40,7 @@ import '@gook-lab/tokens/styles.css';
 | `@gook-lab/motion` | 모션 훅·컴포넌트 19종 + 프리셋 8종 | 1.54 KB (gzip, 훅 + Marquee/Reveal) |
 | `@gook-lab/icons` | Lucide 재export + 크기 규격 | — |
 | `@gook-lab/malt-ui` | 위스키 앱 전용 프리미티브 7종. 코어로 승격하지 않습니다 | — |
+| `@gook-lab/game-kit` | 토이 게임 셋이 함께 쓰는 난수 · 조사 · 연결 코드. 빌드 없는 TS 소스라 레지스트리가 아니라 git 태그로 설치합니다 (`private`) | — |
 
 수치는 `npx size-limit` 실측값이고 예산은 [`.size-limit.json`](./.size-limit.json) 에 있습니다.
 
