@@ -44,6 +44,10 @@ import '@gook-lab/tokens/styles.css';
 
 수치는 `npx size-limit` 실측값이고 예산은 [`.size-limit.json`](./.size-limit.json) 에 있습니다.
 
+<img src="docs/diagrams/package-deps.png" alt="패키지 의존 관계: 소비 앱은 icons · ui · motion · tokens 에 기대고, ui 는 motion 에 기대며, ui · motion · malt-ui 는 tokens 를 peer 로 둡니다. malt-ui 는 ui 를 peer 로 둡니다. 순환은 없습니다" width="100%">
+
+그림 원본은 [package-deps.html](docs/diagrams/package-deps.html) 입니다. 점선은 `peerDependencies` 이고, 게임 공용 코드는 레포 안에서 다른 패키지와 의존 관계가 없습니다.
+
 ## 설계 원칙
 
 계약의 원문과 배경은 [`PROMPT.md`](./PROMPT.md) 에 있습니다. 요약하면 다음과 같습니다.
