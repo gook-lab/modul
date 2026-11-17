@@ -13,12 +13,10 @@
 <img src="docs/screenshots/cover.png" alt="MODUL 컴포넌트로 구성한 예시 화면" width="100%">
 
 ```bash
-# @gook-lab/* 는 GitHub Packages 에 있습니다. 소비자 저장소에 .npmrc 한 줄이 필요합니다.
-echo '@gook-lab:registry=https://npm.pkg.github.com' >> .npmrc
 pnpm add @gook-lab/ui @gook-lab/tokens
 ```
 
-`@modul` 스코프는 다른 조직(ModulBank)이 쓰고 있어 그 이름으로는 배포할 수 없습니다. 설치에는 `read:packages` 권한이 있는 GitHub 토큰이 필요합니다.
+패키지는 npm 공개 레지스트리에 있어 토큰 없이 설치됩니다. GitHub Packages 에도 같은 버전이 있습니다. `@modul` 스코프는 다른 조직(ModulBank)이 쓰고 있어 그 이름으로는 배포할 수 없습니다.
 
 ```tsx
 import { Button } from '@gook-lab/ui';
